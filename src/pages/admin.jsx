@@ -133,4 +133,4 @@ const Admin = () => {
   );
 };
 
-// export default useAuth(Admin);
+export default Admin;

@@ -1,11 +1,8 @@
 import { Formik } from "formik";
 import * as Yup from "yup";
 import dayjs from "dayjs";
-import {
-  AdapterDayjs,
-  LocalizationProvider,
-  DatePicker,
-} from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import {
   Box,
   Checkbox,
@@ -13,10 +10,11 @@ import {
   FormHelperText,
   Slider,
   Typography,
-  TextField,
-  Autocomplete,
 } from "@mui/material";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LoadingButton } from "@mui/lab";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 const searchSchema = Yup.object().shape({
   query: Yup.string(),
@@ -139,7 +137,6 @@ export const FilterEvent = ({
                 disabled={isLoading}
                 onChange={(date) => setFieldValue("dateEnd", date)}
               />
-
               <FormHelperText
                 error={Boolean(touched.dateEnd && errors.dateEnd)}
               >
@@ -180,7 +177,6 @@ export const FilterEvent = ({
                   setFieldValue("seatsMin", e.target.value);
                 }}
               />
-
               <TextField
                 label="Seats end"
                 name="seatsMax"
@@ -194,10 +190,9 @@ export const FilterEvent = ({
                 }}
               />
             </Box>
-
             <Slider
               valueLabelDisplay="auto"
-              getAriaLabel={() => "Діапазон місць"}
+              getAriaLabel={() => "Диапазон мест"}
               value={[values.seatsMin, values.seatsMax]}
               min={seatsMin}
               max={seatsMax}
@@ -236,7 +231,6 @@ export const FilterEvent = ({
                 }}
               />
             </Box>
-
             <Slider
               valueLabelDisplay="auto"
               getAriaLabel={() => "Price range"}

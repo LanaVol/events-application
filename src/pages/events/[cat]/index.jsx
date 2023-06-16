@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { CatEvent } from "@/components/Events/categoryEvent";
 import EventService from "@/services/event.service";
+import { Box } from "@mui/system";
+import { MenuNavigation } from "@/components/MenuNavigation";
 import {
-  Box,
   Container,
   FormControl,
   InputLabel,
@@ -12,12 +13,11 @@ import {
   Select,
   Typography,
 } from "@mui/material";
-import { MenuNavigation } from "@/components/MenuNavigation";
-import { FilterEvent } from "@/components/FilterEvent";
 import { LoadingButton } from "@mui/lab";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import { FilterEvent } from "@/components/FilterEvent";
 
-const EventCatPage = ({ data, eventsParams }) => {
+const EventsCatPage = ({ data, eventsParams }) => {
   const [events, setEvents] = useState(data.events);
   const [params, setParams] = useState(eventsParams);
   const [page, setPage] = useState(1);
@@ -58,7 +58,7 @@ const EventCatPage = ({ data, eventsParams }) => {
     fetchDataEvents({ queryParams: {} });
   };
 
-  async function fetchDataevents({ page, isLoadingMore = false, queryParams }) {
+  async function fetchDataEvents({ page, isLoadingMore = false, queryParams }) {
     setIsLoading(true);
     try {
       const { data } = await EventService.getEvent({
@@ -97,6 +97,7 @@ const EventCatPage = ({ data, eventsParams }) => {
                 { title: cityName, path: "", iconName: "city" },
               ]}
             />
+
             <Box
               sx={{
                 display: "flex",
@@ -150,6 +151,7 @@ const EventCatPage = ({ data, eventsParams }) => {
                 isLoading={isLoading}
               />
             ) : null}
+
             {events?.length < params.totalEvents && (
               <LoadingButton
                 variant="text"
@@ -162,6 +164,7 @@ const EventCatPage = ({ data, eventsParams }) => {
                 <span>Load more cities!</span>
               </LoadingButton>
             )}
+
             {events?.length < params.totalEvents && (
               <Box
                 sx={{

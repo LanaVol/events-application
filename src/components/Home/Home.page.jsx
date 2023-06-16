@@ -77,7 +77,9 @@ export const HomePage = ({ data }) => {
                         width={800}
                         height={500}
                         priority={true}
-                        style={{ width: "auto", height: "auto" }}
+                        style={{
+                          objectFit: "contain",
+                        }}
                       />
                     </ImageListItem>
                   </Link>

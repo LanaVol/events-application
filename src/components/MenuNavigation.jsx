@@ -28,7 +28,7 @@ function handleClick(e) {
   e.preventDefault();
 }
 
-export const MenuNavigation = ({}) => {
+export const MenuNavigation = ({ list }) => {
   const getIconByIconName = (iconName) => {
     switch (iconName) {
       case "home":
@@ -44,7 +44,7 @@ export const MenuNavigation = ({}) => {
   return (
     <Box role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
-        {listClasses.map((link) => (
+        {list.map((link) => (
           <Box key={link.path}>
             {link.path ? (
               <Link href={link.path} passHref>

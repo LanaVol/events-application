@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
 import { AllEvents } from "@/components/Events/events-page";
 import EventService from "@/services/event.service";
-import {
-  Box,
-  Pagination,
-  Typography,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-} from "@mui/material";
+import { Box, Pagination, Typography } from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import { LoadingButton } from "@mui/lab";
 import RefreshIcon from "@mui/icons-material/Refresh";
 
@@ -63,8 +59,9 @@ const EvantsPage = ({ data, totalCounts }) => {
     <Box>
       <Box
         sx={{
-          border: "1px solid gray",
+          borderTop: "1px solid gray",
           display: "flex",
+          justifyContent: "center",
           alignItems: "center",
           gap: "1rem",
         }}
@@ -101,7 +98,6 @@ const EvantsPage = ({ data, totalCounts }) => {
           <span>Load more cities!</span>
         </LoadingButton>
       </Box>
-
       <Box
         sx={{
           border: "1px solid gray",
