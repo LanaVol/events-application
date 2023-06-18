@@ -112,6 +112,7 @@ const EvantsPage = ({ data, totalCounts }) => {
           page={page}
           onChange={handleChangePage}
           disabled={isLoading}
+          color="primary"
         />
       </Box>
     </Box>

@@ -83,16 +83,24 @@ export const Header = () => {
             }}
           >
             <ListItem sx={{ display: "flex", justifyContent: "center" }}>
-              <Link href="/">Home</Link>
+              <Link href="/" style={{ textDecoration: "none" }}>
+                Home
+              </Link>
             </ListItem>
             <ListItem sx={{ display: "flex", justifyContent: "center" }}>
-              <Link href="/events">Events</Link>
+              <Link href="/events" style={{ textDecoration: "none" }}>
+                Events
+              </Link>
             </ListItem>
             <ListItem sx={{ display: "flex", justifyContent: "center" }}>
-              <Link href="/about-us">About Us</Link>
+              <Link href="/about-us" style={{ textDecoration: "none" }}>
+                About Us
+              </Link>
             </ListItem>
             <ListItem sx={{ display: "flex", justifyContent: "center" }}>
-              <Link href="/admin">Admin</Link>
+              <Link href="/admin" style={{ textDecoration: "none" }}>
+                Admin
+              </Link>
             </ListItem>
           </List>
         </nav>

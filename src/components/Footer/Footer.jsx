@@ -80,9 +80,9 @@ export const Footer = () => {
               <ListItem>Guest Management</ListItem>
             </List>
             <List>
-              <ListItem>First link</ListItem>
-              <ListItem>Second link</ListItem>
-              <ListItem>Third link</ListItem>
+              <ListItem>Partners</ListItem>
+              <ListItem>Carreers</ListItem>
+              <ListItem>Management team</ListItem>
             </List>
           </Box>
         </Box>
