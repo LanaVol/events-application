@@ -7,17 +7,22 @@ import {
   List,
   ListItem,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { AccountCircle, Logout } from "@mui/icons-material";
 import AuthActions from "@/redux/auth/AuthOperations";
+import { ThemeToggle } from "../ThemeToggle";
 
 export const Header = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
   const dispatch = useDispatch();
+  const theme = useTheme();
+
+  console.log(theme);
 
   return (
     <header>
-      <Box sx={{ backgroundColor: "#BDE7D9" }}>
+      <Box sx={{ backgroundColor: theme.palette.background.main }}>
         <Container>
           <Box
             sx={{
@@ -34,6 +39,7 @@ export const Header = () => {
             >
               Events
             </Typography>
+            <ThemeToggle />
 
             {isLogged ? (
               <Box
@@ -59,7 +65,7 @@ export const Header = () => {
                 <Button
                   onClick={() => dispatch(AuthActions.logout())}
                   startIcon={<Logout />}
-                  sx={{ backgroundColor: "black" }}
+                  // sx={{ backgroundColor: "black" }}
                 >
                   Logout
                 </Button>
