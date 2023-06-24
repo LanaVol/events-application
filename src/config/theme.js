@@ -32,6 +32,7 @@ export const themeSettings = (mode) => {
         light: mode === "dark" ? "#212121" : "#fafafa",
         main: "#26a69a",
         mainHover: "#00796b",
+        headerBg: mode === "light" ? "#BDE7D9" : "#289772",
       },
       text: {
         primary: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)",

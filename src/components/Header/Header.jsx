@@ -22,7 +22,12 @@ export const Header = () => {
 
   return (
     <header>
-      <Box sx={{ backgroundColor: theme.palette.background.main }}>
+      <Box
+        sx={{
+          backgroundColor: theme.palette.background.headerBg,
+          color: theme.palette.text.primary,
+        }}
+      >
         <Container>
           <Box
             sx={{
