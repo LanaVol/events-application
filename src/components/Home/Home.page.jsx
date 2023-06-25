@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Box, Container, Grid, ImageListItem } from "@mui/material";
+import { Box, Container, Grid, ImageListItem, useTheme } from "@mui/material";
 import { GridWrapper } from "../GridWrapper";
 import { ItemBanner } from "../ItemBanner";
 import { ItemSmallCard } from "../ItemSmallCard";
@@ -8,8 +8,15 @@ import banner from "../../image/banner.jpg";
 import letters from "../../image/letters.jpg";
 
 export const HomePage = ({ data }) => {
+  const theme = useTheme();
+
   return (
-    <>
+    <Box
+      sx={{
+        backgroundColor: theme.palette.background.default,
+        paddingBottom: "100px",
+      }}
+    >
       <Box sx={{ height: "400px", overflow: "hidden", position: "relative" }}>
         <Image
           src={banner}
@@ -41,11 +48,7 @@ export const HomePage = ({ data }) => {
           subtitle="Discover the most fascinating events happening worldwide with us!"
         />
 
-        <Grid
-          container
-          rowSpacing={1}
-          sx={{ padding: "20px 0", marginBottom: "100px" }}
-        >
+        <Grid container rowSpacing={1} sx={{ padding: "20px 0" }}>
           {data.cities
             .filter((city) => city.showOnHomePage)
             .map((ev, index) => (
@@ -95,6 +98,6 @@ export const HomePage = ({ data }) => {
             ))}
         </Grid>
       </Container>
-    </>
+    </Box>
   );
 };

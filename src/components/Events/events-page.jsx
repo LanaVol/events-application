@@ -1,11 +1,19 @@
 import { useState } from "react";
-import { Box, Grid, Typography, Container, Button } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Container,
+  Button,
+  useTheme,
+} from "@mui/material";
 import { Place } from "@mui/icons-material";
 import Link from "next/link";
 import Image from "next/image";
 
 export const AllEvents = ({ data }) => {
   const [isHover, setIsHover] = useState(false);
+  const theme = useTheme();
 
   return (
     <Box
@@ -13,23 +21,12 @@ export const AllEvents = ({ data }) => {
         margin: "0 auto",
         // width: "75%",
         padding: "20px 0",
-        // border: "1px solid blue",
-        // background: "rgb(27,10,1)",
-        // background:
-        //   "linear-gradient(180deg, rgba(27,10,1,1) 0%, rgba(255,170,58,0.6250875350140056) 100%)",
+        backgroundColor: theme.palette.background.default,
+        color: theme.palette.text.primary,
       }}
     >
       <Container>
-        <Grid
-          container
-          spacing={1}
-          rowGap={3}
-          sx={
-            {
-              // border: "1px solid blue",
-            }
-          }
-        >
+        <Grid container gap={2}>
           {data?.map(({ _id, city, title, totalEvents, imagePath }) => (
             <Grid
               item
@@ -37,77 +34,98 @@ export const AllEvents = ({ data }) => {
               xs={12}
               sm={6}
               md={4}
-              lg={3.5}
+              lg={3.8}
               sx={{
-                padding: "20px 0",
-                border: "1px solid gray",
-                borderRadius: "10px 0px",
+                borderRadius: "10px",
                 margin: "0 auto",
                 display: "flex",
+                // flexDirection: "column",
                 justifyContent: "center",
-                alignItems: "start",
-                overflow: "hidden",
-                filter: "sepia(70%) grayscale(70%)",
-                transition: "transform 500ms linear, filter 100ms linear",
+                alignItems: "end",
+                // overflow: "hidden",
+                transition: "transform 300ms linear",
+                background: theme.palette.background.gradientCard,
+
                 "&:hover": {
-                  transform: "scale(1.05)",
-                  filter: "sepia(0) grayscale(0)",
+                  transform: "scale(1.03)",
+                  boxShadow: " 0px 1px 7px 0px rgba(36,188,196,0.75)",
                 },
               }}
-              // onMouseEnter={() => setIsHover(true)}
-              // onMouseLeave={() => setIsHover(false)}
             >
               <Link
                 href={`/events/${city.toLowerCase()}`}
-                style={{ textDecoration: "none" }}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
               >
                 <Box
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "1rem",
-                    padding: "20px 0",
+                    border: "1px solid red",
+                    maxHeight: "350px",
+                    width: "100%",
+                    height: "50%",
+                    overflow: "hidden",
                   }}
                 >
-                  <Place fontSize="medium" />
-                  <Typography
-                    variant="h5"
+                  <Image
+                    src={imagePath}
+                    alt={title}
+                    width={400}
+                    height={200}
+                    priority={true}
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      margin: "auto",
+                      display: "block",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Box>
+
+                <Box
+                  sx={{
+                    padding: "20px 16px",
+                    textAlign: "center",
+                    border: "1px solid blue",
+                  }}
+                >
+                  <Box
                     sx={{
-                      textAlign: "center",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "1rem",
                     }}
                   >
-                    {city}
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "0.5rem",
+                        fontSize: "16px",
+                      }}
+                    >
+                      <Place fontSize="medium" />
+                      <Typography variant="h5" sx={{ fontSize: "inherit" }}>
+                        {city}
+                      </Typography>
+                    </Box>
+
+                    <Typography variant="h5" sx={{ fontSize: "inherit" }}>
+                      Events: {totalEvents}
+                    </Typography>
+                  </Box>
+
+                  <Typography
+                    variant="h3"
+                    sx={{ fontSize: "24px", fontWeight: "600" }}
+                  >
+                    {title}
                   </Typography>
                 </Box>
-                <Image
-                  src={imagePath}
-                  alt={title}
-                  width={400}
-                  height={200}
-                  priority={true}
-                  style={{
-                    width: "auto",
-                    height: "auto",
-                    maxHeight: "400px",
-
-                    margin: "auto",
-                    display: "block",
-                  }}
-                />
-
-                <Typography variant="h3" sx={{ textAlign: "center" }}>
-                  {title}
-                </Typography>
-
-                <Typography
-                  variant="h5"
-                  sx={{
-                    textAlign: "center",
-                  }}
-                >
-                  Count events: {totalEvents}
-                </Typography>
               </Link>
             </Grid>
           ))}

@@ -18,8 +18,6 @@ export const Header = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
-  console.log(theme);
-
   return (
     <header>
       <Box
@@ -80,42 +78,57 @@ export const Header = () => {
         </Container>
       </Box>
 
-      <Container>
-        <nav>
-          <List
-            sx={{
-              minHeight: "50px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              fontWeight: "500",
-              fontSize: "20px",
-              padding: "0",
-            }}
-          >
-            <ListItem sx={{ display: "flex", justifyContent: "center" }}>
-              <Link href="/" style={{ textDecoration: "none" }}>
-                Home
-              </Link>
-            </ListItem>
-            <ListItem sx={{ display: "flex", justifyContent: "center" }}>
-              <Link href="/events" style={{ textDecoration: "none" }}>
-                Events
-              </Link>
-            </ListItem>
-            <ListItem sx={{ display: "flex", justifyContent: "center" }}>
-              <Link href="/about-us" style={{ textDecoration: "none" }}>
-                About Us
-              </Link>
-            </ListItem>
-            <ListItem sx={{ display: "flex", justifyContent: "center" }}>
-              <Link href="/admin" style={{ textDecoration: "none" }}>
-                Admin
-              </Link>
-            </ListItem>
-          </List>
-        </nav>
-      </Container>
+      <Box sx={{ backgroundColor: theme.palette.background.default }}>
+        <Container>
+          <nav>
+            <List
+              sx={{
+                minHeight: "50px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontWeight: "500",
+                fontSize: "20px",
+                padding: "0",
+                color: theme.palette.text.primary,
+              }}
+            >
+              <ListItem sx={{ display: "flex", justifyContent: "center" }}>
+                <Link
+                  href="/"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Home
+                </Link>
+              </ListItem>
+              <ListItem sx={{ display: "flex", justifyContent: "center" }}>
+                <Link
+                  href="/events"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Events
+                </Link>
+              </ListItem>
+              <ListItem sx={{ display: "flex", justifyContent: "center" }}>
+                <Link
+                  href="/about-us"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  About Us
+                </Link>
+              </ListItem>
+              <ListItem sx={{ display: "flex", justifyContent: "center" }}>
+                <Link
+                  href="/admin"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Admin
+                </Link>
+              </ListItem>
+            </List>
+          </nav>
+        </Container>
+      </Box>
     </header>
   );
 };
