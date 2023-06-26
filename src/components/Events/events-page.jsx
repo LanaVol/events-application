@@ -36,13 +36,12 @@ export const AllEvents = ({ data }) => {
               md={4}
               lg={3.8}
               sx={{
-                borderRadius: "10px",
                 margin: "0 auto",
                 display: "flex",
-                // flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "end",
-                // overflow: "hidden",
+                borderRadius: "10px",
+                overflow: "hidden",
                 transition: "transform 300ms linear",
                 background: theme.palette.background.gradientCard,
 
@@ -57,29 +56,32 @@ export const AllEvents = ({ data }) => {
                 style={{
                   textDecoration: "none",
                   color: "inherit",
+                  width: "100%",
                 }}
               >
                 <Box
                   sx={{
-                    border: "1px solid red",
-                    maxHeight: "350px",
                     width: "100%",
-                    height: "50%",
+                    height: "400px",
                     overflow: "hidden",
+                    position: "relative",
                   }}
                 >
                   <Image
                     src={imagePath}
                     alt={title}
-                    width={400}
-                    height={200}
+                    fill={true}
+                    // width={400}
+                    // height={200}
                     priority={true}
                     style={{
-                      width: "100%",
-                      height: "auto",
                       margin: "auto",
                       display: "block",
                       objectFit: "cover",
+                      position: "absolute",
+                      top: "100%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
                     }}
                   />
                 </Box>
@@ -88,7 +90,8 @@ export const AllEvents = ({ data }) => {
                   sx={{
                     padding: "20px 16px",
                     textAlign: "center",
-                    border: "1px solid blue",
+                    minHeight: "120px",
+                    width: "100%",
                   }}
                 >
                   <Box

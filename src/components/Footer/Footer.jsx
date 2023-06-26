@@ -16,7 +16,9 @@ import {
   Telegram,
   LinkedIn,
   Facebook,
+  Send,
 } from "@mui/icons-material";
+import { CustomButton } from "../CustomButton";
 
 export const Footer = () => {
   const theme = useTheme();
@@ -49,22 +51,26 @@ export const Footer = () => {
               maxWidth: "500px",
             }}
           />
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: theme.palette.background.blackBtn,
-              marginLeft: "5px",
-              // "&:hover": theme.palette.background.blackBtnHover,
+          <CustomButton
+            text="Send"
+            startIcon={<Send />}
+            styles={{
+              backgroundColor: theme.palette.text.primary,
+              color: theme.palette.background.default,
+              borderRadius: "20px",
+              padding: "7px 24px",
+              "&:hover": {
+                backgroundColor: theme.palette.background.default,
+                color: theme.palette.text.primary,
+              },
             }}
-          >
-            Send
-          </Button>
+          />
         </Container>
       </Box>
 
       <Box
         sx={{
-          backgroundColor: theme.palette.background.default,
+          background: theme.palette.background.gradientHeaderBg,
           color: theme.palette.text.primary,
         }}
       >

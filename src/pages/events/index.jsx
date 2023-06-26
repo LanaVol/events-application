@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import { AllEvents } from "@/components/Events/events-page";
 import EventService from "@/services/event.service";
-import { Box, Pagination, Typography } from "@mui/material";
+import {
+  Box,
+  Pagination,
+  Typography,
+  useTheme,
+  Container,
+} from "@mui/material";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { LoadingButton } from "@mui/lab";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import { CountrySelect } from "../../components/CountrySelect";
 
 const EvantsPage = ({ data, totalCounts }) => {
   const [cities, setCities] = useState(data);
@@ -16,6 +23,7 @@ const EvantsPage = ({ data, totalCounts }) => {
   const [limit, setLimit] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const theme = useTheme();
 
   useEffect(() => {
     fetchDataCity({ page });
@@ -56,33 +64,47 @@ const EvantsPage = ({ data, totalCounts }) => {
   }
 
   return (
-    <Box>
-      <Box
-        sx={{
-          borderTop: "1px solid gray",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "1rem",
-        }}
-      >
-        <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
-          <InputLabel id="demo-select-small-label">Count</InputLabel>
-          <Select
-            labelId="demo-select-small-label"
-            id="demo-select-small"
-            value={limit}
-            label="Count"
-            onChange={(e) => handleChangeLimit(e.target.value)}
-          >
-            <MenuItem value={3}>3</MenuItem>
-            <MenuItem value={5}>5</MenuItem>
-            <MenuItem value={10}>10</MenuItem>
-          </Select>
-        </FormControl>
-        <Typography>All city: {totalCities}</Typography>
-        <Typography>Display: {cities.length}</Typography>
-      </Box>
+    <Box sx={{ backgroundColor: theme.palette.background.default }}>
+      <Container>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "start",
+            alignItems: "center",
+            gap: "2rem",
+            padding: "10px 0",
+          }}
+        >
+          <FormControl sx={{ m: 1, minWidth: 80 }} size="small">
+            <InputLabel id="demo-select-small-label">Count</InputLabel>
+            <Select
+              labelId="demo-select-small-label"
+              id="demo-select-small"
+              value={limit}
+              label="Count"
+              onChange={(e) => handleChangeLimit(e.target.value)}
+            >
+              <MenuItem value={3}>3</MenuItem>
+              <MenuItem value={5}>5</MenuItem>
+              <MenuItem value={10}>10</MenuItem>
+            </Select>
+          </FormControl>
+          <CountrySelect />
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "start",
+            alignItems: "center",
+            gap: "2rem",
+            padding: "10px 0",
+          }}
+        >
+          <Typography>All city: {totalCities}</Typography>
+          <Typography>Display: {cities.length}</Typography>
+        </Box>
+      </Container>
 
       <AllEvents data={cities} />
 

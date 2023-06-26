@@ -12,6 +12,7 @@ import {
 import { AccountCircle, Logout } from "@mui/icons-material";
 import AuthActions from "@/redux/auth/AuthOperations";
 import { ThemeToggle } from "../ThemeToggle";
+import { CustomButton } from "../CustomButton";
 
 export const Header = () => {
   const isLogged = useSelector((state) => state.auth.isLogged);
@@ -22,7 +23,7 @@ export const Header = () => {
     <header>
       <Box
         sx={{
-          backgroundColor: theme.palette.background.headerBg,
+          background: theme.palette.background.gradientHeaderBg,
           color: theme.palette.text.primary,
         }}
       >
@@ -65,25 +66,45 @@ export const Header = () => {
                   <Typography variant="subtitle1">Hello, Admin!</Typography>
                 </Box>
 
-                <Button
+                {/* <Button
                   onClick={() => dispatch(AuthActions.logout())}
                   startIcon={<Logout />}
-                  // sx={{ backgroundColor: "black" }}
                 >
                   Logout
-                </Button>
+                </Button> */}
+                <CustomButton
+                  text="Logout"
+                  onClick={() => dispatch(AuthActions.logout())}
+                  startIcon={<Logout />}
+                  styles={{
+                    backgroundColor: theme.palette.text.primary,
+                    color: theme.palette.background.default,
+                    borderRadius: "20px",
+                    padding: "7px 20px",
+                    "&:hover": {
+                      backgroundColor: theme.palette.background.default,
+                      color: theme.palette.text.primary,
+                    },
+                  }}
+                />
               </Box>
             ) : null}
           </Box>
         </Container>
       </Box>
 
-      <Box sx={{ backgroundColor: theme.palette.background.default }}>
+      <Box
+        sx={{
+          backgroundColor: theme.palette.background.default,
+          // borderTop: `1px solid ${theme.palette.text.primary}`,
+          borderBottom: `1px solid ${theme.palette.background.blackBtnHover}`,
+        }}
+      >
         <Container>
           <nav>
             <List
               sx={{
-                minHeight: "50px",
+                minHeight: "40px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -93,15 +114,34 @@ export const Header = () => {
                 color: theme.palette.text.primary,
               }}
             >
-              <ListItem sx={{ display: "flex", justifyContent: "center" }}>
+              <ListItem
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  "&:hover": {
+                    textShadow: `-4px 4px 7px ${theme.palette.primary.light}`,
+                  },
+                }}
+              >
                 <Link
                   href="/"
-                  style={{ textDecoration: "none", color: "inherit" }}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
                 >
                   Home
                 </Link>
               </ListItem>
-              <ListItem sx={{ display: "flex", justifyContent: "center" }}>
+              <ListItem
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  "&:hover": {
+                    textShadow: `-4px 4px 7px ${theme.palette.primary.light}`,
+                  },
+                }}
+              >
                 <Link
                   href="/events"
                   style={{ textDecoration: "none", color: "inherit" }}
@@ -109,7 +149,15 @@ export const Header = () => {
                   Events
                 </Link>
               </ListItem>
-              <ListItem sx={{ display: "flex", justifyContent: "center" }}>
+              <ListItem
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  "&:hover": {
+                    textShadow: `-4px 4px 7px ${theme.palette.primary.light}`,
+                  },
+                }}
+              >
                 <Link
                   href="/about-us"
                   style={{ textDecoration: "none", color: "inherit" }}
@@ -117,7 +165,15 @@ export const Header = () => {
                   About Us
                 </Link>
               </ListItem>
-              <ListItem sx={{ display: "flex", justifyContent: "center" }}>
+              <ListItem
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  "&:hover": {
+                    textShadow: `-4px 4px 7px ${theme.palette.primary.light}`,
+                  },
+                }}
+              >
                 <Link
                   href="/admin"
                   style={{ textDecoration: "none", color: "inherit" }}

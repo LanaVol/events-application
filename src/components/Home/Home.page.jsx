@@ -61,15 +61,21 @@ export const HomePage = ({ data }) => {
                     overflow: "hidden",
                     backgroundColor: "red",
                     display: "flex",
-                    justifyContent: "center",
+                    // justifyContent: "center",
                   }}
                   alignItems={`${index % 2 === 0 ? "end" : "start"}`}
+                  justifyContent={`${index % 2 === 0 ? "start" : "end"}`}
                 >
-                  <Link href={`/events/${ev.city.toLowerCase()}`}>
+                  <Link
+                    href={`/events/${ev.city.toLowerCase()}`}
+                    sx={{ width: "100%" }}
+                  >
                     <ImageListItem
                       sx={{
-                        width: "80%",
-                        height: "auto",
+                        display: "block",
+                        width: "50%",
+                        height: "300px",
+
                         transition: "transform 500ms linear",
                         "&:hover": { transform: "scale(1.1)" },
                       }}
@@ -77,11 +83,12 @@ export const HomePage = ({ data }) => {
                       <Image
                         src={ev.imagePath}
                         alt={ev.title}
-                        width={800}
-                        height={500}
+                        width={600}
+                        height={400}
                         priority={true}
                         style={{
-                          objectFit: "contain",
+                          objectFit: "cover",
+                          display: "block",
                         }}
                       />
                     </ImageListItem>
