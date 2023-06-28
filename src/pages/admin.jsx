@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import CityOperations from "@/redux/cities/city.operations";
+import CityOperations from "@/redux/event/event.operations";
 import { useGetCity } from "@/hooks/useCity";
 import { useAuth } from "@/hooks/useAuth";
 

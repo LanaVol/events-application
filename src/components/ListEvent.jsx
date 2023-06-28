@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CityOperations from "@/redux/cities/city.operations";
+import CityOperations from "@/redux/event/event.operations";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";

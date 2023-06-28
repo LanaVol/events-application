@@ -12,7 +12,7 @@ import {
 import { FormValidation } from "@/config/form.validation";
 import dayjs from "dayjs";
 import { DropzoneUpload } from "./DropzoneUpload";
-import CityOperations from "@/redux/cities/city.operations";
+import CityOperations from "@/redux/event/event.operations";
 
 const eventCategories = [
   { id: 1, name: "Music" },

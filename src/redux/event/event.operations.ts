@@ -1,14 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import EventService from "@/services/event.service.js";
+import { EventService } from "../../services";
 
-class CityOperations {
+export class EventOperations {
   static getCity = createAsyncThunk(
     "city/getCity",
-    async ({ limit = 10 }, { rejectWithValue }) => {
+    async ({ limit = 10 }: any, { rejectWithValue }) => {
       try {
         const { data } = await EventService.getCity({ limit });
         return data;
-      } catch (err) {
+      } catch (err : any) {
         return rejectWithValue(err.message);
       }
     }
@@ -16,11 +16,11 @@ class CityOperations {
 
   static addCity = createAsyncThunk(
     "city/addCity",
-    async (formData, { rejectWithValue }) => {
+    async (formData: any, { rejectWithValue }) => {
       try {
         const { data } = await EventService.addCity(formData);
         return data;
-      } catch (err) {
+      } catch (err: any) {
         return rejectWithValue(err.message);
       }
     }
@@ -28,11 +28,11 @@ class CityOperations {
 
   static updateCity = createAsyncThunk(
     "city/updateCity",
-    async (formData, { rejectWithValue }) => {
+    async (formData: any, { rejectWithValue }) => {
       try {
         const { data } = await EventService.updateCity(formData);
         return data;
-      } catch (err) {
+      } catch (err: any) {
         return rejectWithValue(err.message);
       }
     }
@@ -40,11 +40,11 @@ class CityOperations {
 
   static deleteCity = createAsyncThunk(
     "city/deleteCity",
-    async (cityId, { rejectWithValue }) => {
+    async (cityId:string, { rejectWithValue }) => {
       try {
         const { data } = await EventService.deleteCity(cityId);
         return data;
-      } catch (err) {
+      } catch (err: any) {
         return rejectWithValue(err.message);
       }
     }
@@ -52,11 +52,11 @@ class CityOperations {
 
   static getEvent = createAsyncThunk(
     "city/getEvent",
-    async (cityId, { rejectWithValue }) => {
+    async (cityName:string, { rejectWithValue }) => {
       try {
-        const { data } = await EventService.getEvent(cityId);
+        const { data } = await EventService.getEvent(cityName);
         return data;
-      } catch (err) {
+      } catch (err: any) {
         return rejectWithValue(err.message);
       }
     }
@@ -64,11 +64,11 @@ class CityOperations {
 
   static addEvent = createAsyncThunk(
     "city/addEvent",
-    async (formData, { rejectWithValue }) => {
+    async (formData: any, { rejectWithValue }) => {
       try {
         const { data } = await EventService.addEvent(formData);
         return data;
-      } catch (err) {
+      } catch (err: any) {
         return rejectWithValue(err.message);
       }
     }
@@ -76,11 +76,11 @@ class CityOperations {
 
   static updateEvent = createAsyncThunk(
     "city/updateEvent",
-    async (formData, { rejectWithValue }) => {
+    async (formData: any, { rejectWithValue }) => {
       try {
         const { data } = await EventService.updateEvent(formData);
         return data;
-      } catch (err) {
+      } catch (err: any) {
         return rejectWithValue(err.message);
       }
     }
@@ -88,15 +88,15 @@ class CityOperations {
 
   static deleteEvent = createAsyncThunk(
     "city/deleteEvent",
-    async ({ cityId, eventId }, { rejectWithValue }) => {
+    async ({ cityId, eventId }: any, { rejectWithValue }) => {
       try {
         const { data } = await EventService.deleteEvent({ cityId, eventId });
         return data;
-      } catch (err) {
+      } catch (err: any) {
         return rejectWithValue(err.message);
       }
     }
   );
 }
 
-export default CityOperations;
+

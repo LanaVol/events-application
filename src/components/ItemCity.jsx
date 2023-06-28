@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ListEvent } from "./ListEvent";
 import EventService from "@/services/event.service";
-import CityOperations from "@/redux/cities/city.operations";
+import CityOperations from "@/redux/event/event.operations";
 import { Box, IconButton, Typography } from "@mui/material";
 import { List, Delete, Edit, Add } from "@mui/icons-material";
 

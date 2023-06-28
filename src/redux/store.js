@@ -11,7 +11,7 @@ import {
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authSlice from "./auth/auth.slice";
-import eventSlice from "./cities/event.slice";
+import eventSlice from "./event/event.slice";
 import themeSlice from "./theme/themeSlice";
 
 const persistAuthConfig = {

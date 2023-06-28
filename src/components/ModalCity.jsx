@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Formik } from "formik";
 import { DropzoneUpload } from "./DropzoneUpload";
 import { Box, Button, FormControlLabel, Checkbox } from "@mui/material";
-import CityOperations from "@/redux/cities/city.operations";
+import CityOperations from "@/redux/event/event.operations";
 import { FormValidation } from "@/config/form.validation";
 import { ImageCity } from "./ImageCity";
 
