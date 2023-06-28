@@ -1,7 +1,14 @@
-import { Box, Breadcrumbs, Chip } from "@mui/material";
-import { Home, LocationCity, Event } from "@mui/icons-material";
-import { emphasize, styled } from "@mui/material/styles";
 import Link from "next/link";
+import { Box, Chip, Breadcrumbs } from "@mui/material";
+import { emphasize, styled } from "@mui/material/styles";
+import {
+  Home as HomeIcon,
+  Apartment as ApartmentIcon,
+  Event as EventIcon,
+  LocationCity as LocationCityIcon,
+  Info as InfoIcon,
+  AdminPanelSettings as AdminPanelSettingsIcon,
+} from "@mui/icons-material";
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
@@ -24,19 +31,35 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   };
 });
 
-function handleClick(e) {
-  e.preventDefault();
+function handleClick(event: any) {
+  event.preventDefault();
 }
 
-export const MenuNavigation = ({ list }) => {
-  const getIconByIconName = (iconName) => {
+interface IMenuItem {
+  title: string | null;
+  path: string;
+  iconName: string;
+}
+
+interface IMenuNavigationProps {
+  list: IMenuItem[];
+}
+
+export const MenuNavigation = ({ list }: IMenuNavigationProps) => {
+  const getIconByIconName = (iconName: any) => {
     switch (iconName) {
       case "home":
-        return <Home fontSize="small" />;
-      case "city":
-        return <LocationCity fontSize="small" />;
+        return <HomeIcon fontSize="small" />;
+      case "about":
+        return <InfoIcon fontSize="small" />;
       case "event":
-        return <Event fontSize="small" />;
+        return <EventIcon fontSize="small" />;
+      case "city":
+        return <ApartmentIcon fontSize="small" />;
+      case "cities":
+        return <LocationCityIcon fontSize="small" />;
+      case "admin":
+        return <AdminPanelSettingsIcon fontSize="small" />;
       default:
         return null;
     }
@@ -44,13 +67,14 @@ export const MenuNavigation = ({ list }) => {
   return (
     <Box role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb">
-        {list.map((link) => (
+        {list.map((link: any) => (
           <Box key={link.path}>
             {link.path ? (
               <Link href={link.path} passHref>
                 <StyledBreadcrumb
                   component="span"
                   label={link.title}
+                  // @ts-ignore
                   icon={getIconByIconName(link.iconName)}
                 />
               </Link>
@@ -59,6 +83,7 @@ export const MenuNavigation = ({ list }) => {
                 component="a"
                 href="/"
                 label={link.title}
+                // @ts-ignore
                 icon={getIconByIconName(link.iconName)}
               />
             )}

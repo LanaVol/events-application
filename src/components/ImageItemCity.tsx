@@ -1,8 +1,19 @@
 import { useState } from "react";
 import { Box, Skeleton } from "@mui/material";
-import FlexBetween from "./FlexBetween";
 
-export const ImageCity = ({ imagePath, size = "80px" }) => {
+interface IImageItemCityProps {
+  imagePath: string;
+  size?: string;
+  alt?: string;
+  borderRadius: string | null;
+}
+
+export const ImageItemCity = ({
+  imagePath,
+  size = "80px",
+  alt = "Current Photo",
+  borderRadius = null,
+}: IImageItemCityProps): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -15,27 +26,36 @@ export const ImageCity = ({ imagePath, size = "80px" }) => {
 
   return (
     <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      position="relative"
-      width={size}
-      height={size}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative",
+        width: size,
+        height: size,
+        borderRadius: borderRadius ? borderRadius : null,
+        overflow: "hidden",
+      }}
     >
       <img
-        style={{ objectFit: "cover", opacity: isLoading ? 0 : 1 }}
+        style={{
+          objectFit: "cover",
+          opacity: isLoading ? 0 : 1,
+        }}
         width={size}
         height={size}
-        alt="user"
+        alt={alt}
         src={imagePath}
         onLoad={handleImageLoaded}
         onError={handleImageError}
       />
+
       {isLoading && (
-        <Box position="absolute">
-          <Skeleton width={size} height={size} animation="wave" />
+        <Box sx={{ position: "absolute" }}>
+          <Skeleton sx={{ width: size, height: size }} animation="wave" />
         </Box>
       )}
+
       {error && (
         <Box position="absolute">
           <Skeleton
