@@ -1,27 +1,28 @@
 import { PaletteMode, createTheme } from "@mui/material";
 
-// declare module "@mui/material" {
-//   interface TypeBackground {
-//     light: string;
-//     main: string;
-//     mainHover: string;
-//   }
-//   interface TypeText {
-//     light: string;
-//     main: string;
-//   }
-// }
+declare module "@mui/material" {
+  interface TypeBackground {
+    light: string;
+    main: string;
+    mainHover: string;
+    blackBtnHover: string;
+    gradientHeaderBg: string;
+    gradientCard: string;
+  }
+  interface TypeText {
+    light: string;
+    main: string;
+    dark: string;
+  }
+}
 
-export const themeSettings = (mode) => {
+export const themeSettings = (mode: PaletteMode) => {
   return createTheme({
     palette: {
       mode: mode,
       primary: {
-        // main: "#00838f",
-        // light: "#00acc1",
-        // dark: "#006064",
-        main: "#00838f",
-        light: "#a7ffeb",
+        main: "#26a69a",
+        light: "#00acc1",
         dark: "#006064",
       },
       secondary: {
@@ -35,7 +36,6 @@ export const themeSettings = (mode) => {
         light: mode === "dark" ? "#212121" : "#fafafa",
         main: "#26a69a",
         mainHover: "#00796b",
-        // headerBg: mode === "light" ? "#95E1D3" : "#025345",
         blackBtnHover: "#bdbdbd",
         gradientHeaderBg:
           mode === "light"
@@ -45,15 +45,16 @@ export const themeSettings = (mode) => {
           mode === "light"
             ? "linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)"
             : "linear-gradient(-20deg, #616161 0%, #9bc5c3 100%)",
-        // gradient:
-        //   "radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%)",
-        // linear-gradient(to top, #d5d4d0 0%, #d5d4d0 1%, #eeeeec 31%, #efeeec 75%, #e9e9e7 100%)
       },
       text: {
+        main: mode === "dark" ? "#26a69a" : "#26a69a",
         primary: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)",
         light: mode === "dark" ? "#fff" : "#fff",
-        main: mode === "dark" ? "#26a69a" : "#26a69a",
+        dark: mode === "dark" ? "#616161" : "#757575",
       },
+    },
+    typography: {
+      fontFamily: "Roboto, Arial, sans-serif",
     },
     breakpoints: {
       values: {
