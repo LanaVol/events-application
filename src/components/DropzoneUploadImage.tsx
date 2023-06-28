@@ -1,21 +1,22 @@
 import { useState } from "react";
 import Dropzone from "react-dropzone";
 import FlexBetween from "./FlexBetween";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import {
   Box,
   Typography,
-  useTheme,
   IconButton,
   Button,
   Tooltip,
+  useTheme,
 } from "@mui/material";
-import { EditOutlined, DeleteOutlined, CloudUpload } from "@mui/icons-material";
+import { EditOutlined, DeleteOutlined } from "@mui/icons-material";
 
-export const DropzoneUpload = ({ image, setImage }) => {
-  const [error, setError] = useState(null);
-  const { palette } = useTheme();
+export const DropzoneUploadImage = ({ image, setImage }: any) => {
+  const [error, setError] = useState<string | null>(null);
+  const theme = useTheme();
 
-  const handleDrop = (acceptedFiles) => {
+  const handleDrop = (acceptedFiles: any) => {
     const file = acceptedFiles[0];
     const fileType = file.type;
     const fileName = file.name;
@@ -30,7 +31,6 @@ export const DropzoneUpload = ({ image, setImage }) => {
       );
       return;
     }
-
     setImage(file);
     setError(null);
   };
@@ -44,7 +44,10 @@ export const DropzoneUpload = ({ image, setImage }) => {
           <FlexBetween>
             <Box
               {...getRootProps()}
-              sx={{ width: "100%", "&:hover": { cursor: "pointer" } }}
+              sx={{
+                width: "100%",
+                "&:hover": { cursor: "pointer" },
+              }}
             >
               <input {...getInputProps()} />
               {!image ? (
@@ -55,29 +58,38 @@ export const DropzoneUpload = ({ image, setImage }) => {
                     justifyContent: "center",
                     alignItems: "center",
                     gap: "0.5rem",
-                    width: "100%",
                     backgroundColor: "whiteGray",
-                    border: "1ps dashed tomato",
+                    border: `1px dashed ${theme.palette.primary.main}`,
                     borderRadius: "0.5rem",
-                    padding: "0.75rem",
+                    p: "0.75rem",
                   }}
                 >
-                  <CloudUpload
-                    style={{ fontSize: "2.5rem", color: "GrayText" }}
+                  <CloudUploadIcon
+                    style={{
+                      fontSize: "2.5rem",
+                      color: theme.palette.primary.main,
+                    }}
                   />
-                  <Typography>
-                    Drag and drop your files here. Only .jpg, .jpeg or .png
-                    files are accepted
+                  <Typography sx={{ color: theme.palette.text.primary }}>
+                    Drag and drop your files here. Only .jpg, .jpeg, or .png
+                    files are accepted.
                   </Typography>
-                  <Button variant="outlined" sx={{ textTransform: "none" }}>
-                    Or click to Select
+                  <Button
+                    sx={{
+                      padding: "0.25rem 2rem",
+                      textTransform: "none",
+                    }}
+                  >
+                    Or Click to Select
                   </Button>
                 </Box>
               ) : (
                 <FlexBetween>
-                  <Typography>{image.name}</Typography>
+                  <Typography sx={{ color: theme.palette.text.primary }}>
+                    {image.name}
+                  </Typography>
                   <Tooltip title="Change the selected file" placement="top">
-                    <IconButton sx={{ marginLeft: "1rem" }}>
+                    <IconButton sx={{ ml: "1rem" }}>
                       <EditOutlined />
                     </IconButton>
                   </Tooltip>
@@ -96,6 +108,7 @@ export const DropzoneUpload = ({ image, setImage }) => {
               </Tooltip>
             )}
           </FlexBetween>
+
           {error && (
             <Typography
               color="error"

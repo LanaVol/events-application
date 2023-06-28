@@ -1,28 +1,28 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik } from "formik";
-import { FormConfig } from "@/config/form.login";
+import { FormConfig } from "../../config/form.login";
 import {
-  TextField,
-  FormHelperText,
   Box,
   Typography,
+  TextField,
   FormControl,
   InputLabel,
   OutlinedInput,
+  FormHelperText,
   IconButton,
   InputAdornment,
 } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
-import LoadingButton from "@mui/lab/LoadingButton";
-import AuthOperations from "@/redux/auth/auth.operations";
+import { LoadingButton } from "@mui/lab";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
+import { AuthOperations } from "../../redux/auth/auth.operations";
+import { RootState, AppDispatch } from "../../redux/store";
 
 export const FormLogin = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const isLoading = useSelector((state) => state.auth.isLoading);
-  const isErrorAuth = useSelector((state) => state.auth.error);
-  const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const isLoading = useSelector((state: RootState) => state.auth.isLoading);
+  const isErrorAuth = useSelector((state: RootState) => state.auth.error);
+  const dispatch: AppDispatch = useDispatch();
 
   return (
     <Box>
@@ -127,7 +127,7 @@ export const FormLogin = () => {
             {isErrorAuth}
           </Typography>
         )}
-        <Typography mt="1rem">User for test:</Typography>
+        <Typography mt="1rem">User to test:</Typography>
         <Typography>email: user-test@mail.com</Typography>
         <Typography>password: eiYo9eeMu</Typography>
       </Box>
