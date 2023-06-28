@@ -3,7 +3,7 @@ import { setModeTheme } from "../redux/theme/theme.slice";
 import { IconButton, useTheme } from "@mui/material";
 import { DarkMode, LightMode } from "@mui/icons-material";
 
-export const ThemeToggle = () => {
+export const ThemeToggle = (): JSX.Element => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
