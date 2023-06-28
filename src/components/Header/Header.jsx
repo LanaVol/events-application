@@ -10,7 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { AccountCircle, Logout } from "@mui/icons-material";
-import AuthActions from "@/redux/auth/AuthOperations";
+import AuthActions from "@/redux/auth/auth.operations";
 import { ThemeToggle } from "../ThemeToggle";
 import { CustomButton } from "../CustomButton";
 

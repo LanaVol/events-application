@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import {
   persistStore,
   FLUSH,
@@ -10,7 +10,7 @@ import {
 } from "redux-persist";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import authSlice from "./auth/authSlice";
+import authSlice from "./auth/auth.slice";
 import eventSlice from "./cities/event.slice";
 import themeSlice from "./theme/themeSlice";
 

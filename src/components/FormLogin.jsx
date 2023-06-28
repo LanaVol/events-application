@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import LoadingButton from "@mui/lab/LoadingButton";
-import AuthOperations from "@/redux/auth/AuthOperations";
+import AuthOperations from "@/redux/auth/auth.operations";
 
 export const FormLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
