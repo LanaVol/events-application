@@ -39,12 +39,14 @@ export const themeSettings = (mode: PaletteMode) => {
         blackBtnHover: "#bdbdbd",
         gradientHeaderBg:
           mode === "light"
-            ? "radial-gradient(circle at 10% 20%, rgb(166, 226, 229) 0%, rgb(198, 232, 221) 100.2%)"
-            : "linear-gradient(109.6deg, rgb(0, 0, 0) 11.2%, rgb(11, 132, 145) 91.1%)",
+            ? "radial-gradient(circle at 10% 20%, rgb(166, 226, 229) 0%, rgb(198, 232, 221) 100%)"
+            : "linear-gradient(109.6deg, rgb(23, 32, 34) 11.2%, rgb(11, 132, 145) 91.1%)",
+        
         gradientCard:
           mode === "light"
-            ? "linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%)"
-            : "linear-gradient(-20deg, #616161 0%, #9bc5c3 100%)",
+            ? "linear-gradient(to top, #c4c5c790 0%, #dcdddf90 52%, #ebebeb 100%)"
+            : "linear-gradient(-20deg, #61616190 0%, #9bc5c390 50%)",
+        
       },
       text: {
         main: mode === "dark" ? "#26a69a" : "#26a69a",

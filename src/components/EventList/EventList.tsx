@@ -7,7 +7,9 @@ import {
   Container,
   LinearProgress,
   Typography,
+  Grid,
 } from "@mui/material";
+import { CardItem } from "../CardItem";
 
 export const EventList = ({
   data,
@@ -17,13 +19,13 @@ export const EventList = ({
   const theme = useTheme();
 
   return (
-    <Container maxWidth="xl">
-      <Box
+    <Container maxWidth="xl" sx={{ border: "1px solid green" }}>
+      <Grid
+        container
         sx={{
           position: "relative",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "1rem",
+          width: "100%",
+          color: theme.palette.text.primary,
         }}
       >
         {data?.map(
@@ -36,18 +38,35 @@ export const EventList = ({
             seats,
             categories,
           }: any) => (
-            <Box
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={4}
               sx={{
+                padding: "1rem",
                 width: "25%",
-                backgroundColor: theme.palette.background.light,
               }}
             >
               <Link
                 key={id}
                 href={`/cities/${cityNameLink.toLowerCase()}/${title}`}
-                style={{ border: "1px solid red", textDecoration: "none" }}
+                style={{
+                  border: "1px solid red",
+                  textDecoration: "none",
+                  color: "inherit",
+                }}
               >
-                <Image
+                <CardItem
+                  imagePath={imagePath}
+                  title={title}
+                  description={description}
+                  mainTitle={title}
+                  leftPoint={date}
+                  rightPoint={`Seats: ${seats}`}
+                />
+                {/* <Image
                   src={imagePath}
                   alt={title}
                   width={300}
@@ -63,14 +82,14 @@ export const EventList = ({
                   <Box
                     sx={{ display: "flex", flexWrap: "wrap", gap: "0.25rem" }}
                   >
-                    {/* {categories &&
+                    {categories &&
                       categories?.map((cat: any, index: number) => (
                         <Chip key={index} label={cat} variant="outlined" />
-                      ))} */}
+                      ))}
                   </Box>
-                </Box>
+                </Box> */}
               </Link>
-            </Box>
+            </Grid>
           )
         )}
         {isLoading && (
@@ -78,7 +97,7 @@ export const EventList = ({
             <LinearProgress />
           </Box>
         )}
-      </Box>
+      </Grid>
     </Container>
   );
 };

@@ -129,7 +129,7 @@ const EvantsPage = (): JSX.Element => {
         </Box>
       </Box>
 
-      <Box>
+      <Box sx={{ padding: "0 1rem" }}>
         <MenuNavigation
           list={[
             { title: "Home", path: "/", iconName: "home" },

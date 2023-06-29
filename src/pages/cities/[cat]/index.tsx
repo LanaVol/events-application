@@ -168,6 +168,7 @@ const EventsCatPage = (): JSX.Element => {
             flexDirection: "column",
             justifyContent: "center",
             border: "1px solid red",
+            width: "100%",
           }}
         >
           {events?.length > 0 ? (

@@ -11,22 +11,27 @@ import {
 } from "@mui/icons-material";
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
-  const backgroundColor =
-    theme.palette.mode === "light"
-      ? theme.palette.grey[100]
-      : theme.palette.grey[800];
+  const background = theme.palette.background.gradientHeaderBg;
+  // const backgroundColor =
+  //   theme.palette.mode === "light"
+  //     ? theme.palette.grey[100]
+  //     : theme.palette.grey[800];
+
   return {
-    backgroundColor,
+    padding: "16px",
+    fontSize: "16px",
+    background,
     height: theme.spacing(3),
     color: theme.palette.text.primary,
     fontWeight: theme.typography.fontWeightRegular,
     "&:hover, &:focus": {
-      backgroundColor: emphasize(backgroundColor, 0.06),
+      // backgroundColor: emphasize(backgroundColor, 0.06),
+      background: theme.palette.primary.light,
       cursor: "pointer",
     },
     "&:active": {
       boxShadow: theme.shadows[1],
-      backgroundColor: emphasize(backgroundColor, 0.12),
+      // backgroundColor: emphasize(backgroundColor, 0.12),
     },
   };
 });

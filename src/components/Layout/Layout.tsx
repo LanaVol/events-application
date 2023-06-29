@@ -4,6 +4,7 @@ import { themeSettings } from "../../config/theme";
 import { Header } from "../Header/Header";
 import { Footer } from "../Footer/Footer";
 import { Box, Container, ThemeProvider, createTheme } from "@mui/material";
+import CanvasBackground from "../Cursor";
 
 export const Layout = ({ children }: any) => {
   const mode = useSelector((state: any) => state.theme.mode);
@@ -13,6 +14,7 @@ export const Layout = ({ children }: any) => {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
+          // position: "absolute",
           display: "flex",
           flexDirection: "column",
           minHeight: "100vh",
@@ -20,6 +22,7 @@ export const Layout = ({ children }: any) => {
         }}
       >
         <Header />
+
         <Container
           maxWidth="xl"
           sx={{ flexGrow: 1, border: "1px solid green" }}
@@ -27,6 +30,7 @@ export const Layout = ({ children }: any) => {
           {children}
         </Container>
         <Footer />
+        {/* <CanvasBackground /> */}
       </Box>
     </ThemeProvider>
   );

@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import images22 from "../image/banner/banner.jpg";
+import image3 from "../image/banner/image3.jpg";
 
 export class BannerHero extends Component {
   render() {
@@ -32,7 +33,7 @@ export class BannerHero extends Component {
           </Box>
           <Box>
             <Image
-              src={images22}
+              src={image3}
               alt="adfsfd"
               width={1600}
               height={400}

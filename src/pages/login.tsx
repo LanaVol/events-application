@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Box, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { FormLogin } from "../components/FormLogin/FormLogin";
-import { useAuth } from "../hooks/useAuth";
+// import { useAuth } from "../hooks/useAuth";
 import { ThemeToggle } from "../components";
 
 const Login = () => {
@@ -44,4 +44,4 @@ const Login = () => {
   );
 };
 
-export default useAuth(Login);
+export default Login;
