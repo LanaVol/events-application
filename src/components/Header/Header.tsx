@@ -24,6 +24,10 @@ export const Header = (): JSX.Element => {
         sx={{
           background: theme.palette.background.gradientHeaderBg,
           color: theme.palette.text.primary,
+          boxShadow: "0px 5px 2.9px rgba(12, 12, 12, 0.197)",
+          // position: "fixed",
+          // zIndex: 20,
+          // width: "100%",
         }}
       >
         <Container maxWidth="xl">
@@ -36,59 +40,63 @@ export const Header = (): JSX.Element => {
           >
             <Typography
               variant="h2"
-              fontSize="42px"
+              fontSize="50px"
               fontWeight="700"
-              sx={{ textTransform: "uppercase", padding: "20px 0px" }}
+              sx={{
+                textTransform: "uppercase",
+                padding: "10px 0px",
+                letterSpacing: "0.5rem",
+              }}
             >
               Events
             </Typography>
 
-            <ThemeToggle />
+            <Box
+              sx={{
+                width: "30%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "2rem",
+              }}
+            >
+              <ThemeToggle />
 
-            {isLogged ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  gap: "2rem",
-                }}
-              >
+              {isLogged ? (
                 <Box
                   sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: "0.5rem",
+                    gap: "2rem",
                   }}
                 >
-                  <AccountCircle fontSize="large" />
-                  <Typography variant="subtitle1">Hello, Admin!</Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "0.5rem",
+                    }}
+                  >
+                    <AccountCircle fontSize="large" />
+                    <Typography variant="subtitle1">Hello, Admin!</Typography>
+                  </Box>
+
+                  <IconButton onClick={() => dispatch(AuthOperations.logout())}>
+                    <Logout />
+                  </IconButton>
+
+                  <CustomButton
+                    text="Log Out"
+                    onClick={() => {
+                      dispatch(AuthOperations.logout());
+                    }}
+                    startIcon={<Logout />}
+                  />
                 </Box>
-
-                <IconButton onClick={() => dispatch(AuthOperations.logout())}>
-                  <Logout />
-                </IconButton>
-
-                <CustomButton
-                  text="Logout"
-                  onClick={() => {
-                    dispatch(AuthOperations.logout());
-                  }}
-                  startIcon={<Logout />}
-                  styles={{
-                    backgroundColor: theme.palette.text.primary,
-                    color: theme.palette.background.default,
-                    borderRadius: "20px",
-                    padding: "7px 20px",
-                    "&:hover": {
-                      backgroundColor: theme.palette.background.default,
-                      color: theme.palette.text.primary,
-                    },
-                  }}
-                />
-              </Box>
-            ) : null}
+              ) : null}
+            </Box>
           </Box>
         </Container>
       </Box>

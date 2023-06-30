@@ -8,6 +8,8 @@ declare module "@mui/material" {
     blackBtnHover: string;
     gradientHeaderBg: string;
     gradientCard: string;
+    blueGreyBg: string,
+    glassBg: string,
   }
   interface TypeText {
     light: string;
@@ -37,6 +39,8 @@ export const themeSettings = (mode: PaletteMode) => {
         main: "#26a69a",
         mainHover: "#00796b",
         blackBtnHover: "#bdbdbd",
+        blueGreyBg: "#455a64",
+        glassBg:'linear-gradient(135deg. rgba(255, 255, 0.1), rgba(255, 255, 0))',
         gradientHeaderBg:
           mode === "light"
             ? "radial-gradient(circle at 10% 20%, rgb(166, 226, 229) 0%, rgb(198, 232, 221) 100%)"

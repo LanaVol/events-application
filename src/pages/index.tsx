@@ -5,16 +5,20 @@ import { Typography } from "@mui/material";
 import { useFetchHomeEvent } from "../hooks";
 import { IUseFetchHomeEvent } from "../hooks/useFetchHomeEvent";
 import { MenuNavigationLink } from "../components/MenuNavigationLink";
+import { Box, useTheme } from "@mui/material";
 
 export default function Home(): JSX.Element {
   const { data, isLoading, error }: IUseFetchHomeEvent = useFetchHomeEvent();
+  const theme = useTheme();
 
   return (
     <>
       <MenuNavigationLink />
       <BannerHero />
       <MainTitle />
+      {/* <Box sx={{ background: theme.palette.background.gradientHeaderBg }}> */}
       {data.length > 0 && <HomeCityList data={data} />}
+      {/* </Box> */}
 
       {error && !isLoading && <Typography>{error}</Typography>}
     </>

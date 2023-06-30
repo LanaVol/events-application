@@ -41,7 +41,7 @@ export const Footer = (): JSX.Element => {
           }}
         >
           <Typography variant="h4" fontWeight="700">
-            Join to new events
+            Want to know the latest events
           </Typography>
           <TextField
             fullWidth
@@ -53,20 +53,7 @@ export const Footer = (): JSX.Element => {
               maxWidth: "500px",
             }}
           />
-          <CustomButton
-            text="Send"
-            startIcon={<Send />}
-            styles={{
-              backgroundColor: theme.palette.text.primary,
-              color: theme.palette.background.default,
-              borderRadius: "20px",
-              padding: "7px 24px",
-              "&:hover": {
-                backgroundColor: theme.palette.background.default,
-                color: theme.palette.text.primary,
-              },
-            }}
-          />
+          <CustomButton text="Join" startIcon={<Send />} />
         </Container>
       </Box>
 
