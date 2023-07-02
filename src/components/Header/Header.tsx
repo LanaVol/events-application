@@ -88,7 +88,7 @@ export const Header = (): JSX.Element => {
                   </IconButton>
 
                   <CustomButton
-                    text="Log Out"
+                    text="Logout"
                     onClick={() => {
                       dispatch(AuthOperations.logout());
                     }}

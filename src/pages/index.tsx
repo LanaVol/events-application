@@ -16,9 +16,8 @@ export default function Home(): JSX.Element {
       <MenuNavigationLink />
       <BannerHero />
       <MainTitle />
-      {/* <Box sx={{ background: theme.palette.background.gradientHeaderBg }}> */}
+
       {data.length > 0 && <HomeCityList data={data} />}
-      {/* </Box> */}
 
       {error && !isLoading && <Typography>{error}</Typography>}
     </>

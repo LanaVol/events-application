@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import images22 from "../image/banner/banner.jpg";
 import image3 from "../image/banner/image3.jpg";
+// import videoBg from "../video/videoBg.mp4";
 
 export class BannerHero extends Component {
   render() {
@@ -30,6 +31,7 @@ export class BannerHero extends Component {
               height={400}
               style={{ width: "100%" }}
             />
+            {/* <video src={videoBg} autoPlay loop muted /> */}
           </Box>
           <Box>
             <Image

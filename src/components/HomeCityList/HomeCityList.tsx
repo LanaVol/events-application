@@ -15,9 +15,14 @@ export const HomeCityList = ({ data }: IHomeCityListProps): JSX.Element => {
   }, []);
 
   return (
-    <Grid container rowSpacing={1} sx={{ paddingBottom: "5rem" }}>
+    <Grid container rowSpacing={1} gap={6} sx={{ paddingBottom: "5rem" }}>
       {data.map((data: IEventItem, index: number) => (
-        <Box key={index} data-aos="fade-up" data-aos-duration="2000">
+        <Box
+          key={index}
+          data-aos="fade-up"
+          data-aos-duration="2000"
+          sx={{ width: "100%" }}
+        >
           <HomeCItyItem data={data} index={index} />
         </Box>
       ))}
