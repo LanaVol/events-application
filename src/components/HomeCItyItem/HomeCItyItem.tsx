@@ -47,8 +47,9 @@ export const HomeCItyItem = ({
         flexWrap: "wrap",
         gap: "1rem",
         background: theme.palette.background.gradientBg1,
-        border: "1px solid green",
         width: "100%",
+        padding: "36px",
+        borderRadius: "10px",
       }}
     >
       <Box
@@ -56,7 +57,7 @@ export const HomeCItyItem = ({
           width: "45%",
           height: "500px",
           overflow: "hidden",
-          // border: "1px solid green",
+
           position: "relative",
         }}
       >
@@ -248,7 +249,14 @@ export const HomeCItyItem = ({
             </Typography>
           </Box>
 
-          <Button sx={{ padding: "0.5rem 2rem", textDecoration: "none" }}>
+          <Button
+            sx={{
+              padding: "0.5rem 2rem",
+              textDecoration: "none",
+              borderRadius: "20px",
+            }}
+            variant="outlined"
+          >
             Read More
           </Button>
         </Box>

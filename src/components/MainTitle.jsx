@@ -60,7 +60,6 @@ export const MainTitle = () => {
         sx={{
           width: "100px",
           height: "100px",
-          // border: "1px solid lightgrey",
           margin: "0 auto",
           position: "relative",
           "&::before, &::after": {
@@ -68,10 +67,8 @@ export const MainTitle = () => {
             position: "absolute",
             top: "50%",
             left: "50%",
-
             width: "70px",
             height: "70px",
-            // background: "grey",
             borderBottom: `15px solid ${theme.palette.text.primary}`,
             borderRight: `15px solid ${theme.palette.text.primary}`,
             transform: "rotate(45deg) translate(-50%, -50%)",
