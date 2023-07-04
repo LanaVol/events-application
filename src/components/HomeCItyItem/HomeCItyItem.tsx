@@ -100,13 +100,13 @@ export const HomeCItyItem = ({
           >
             {index < 10 ? `0${index + 1}` : `${index + 1}`}
           </Typography>
-          <Typography
+          {/* <Typography
             sx={{
               transform: isHovered ? "translateY(0%)" : "translateY(-100%)",
             }}
           >
             {description}
-          </Typography>
+          </Typography> */}
         </Link>
       </Box>
 
@@ -242,10 +242,7 @@ export const HomeCItyItem = ({
                 padding: "1rem",
               }}
             >
-              {description} Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit. Aperiam amet, exercitationem dolorem iure, corrupti maxime
-              magni voluptatem fugit perspiciatis quis ut modi consectetur, esse
-              eveniet consequatur. Eum neque eius soluta.
+              {description}
             </Typography>
           </Box>
 

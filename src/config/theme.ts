@@ -13,6 +13,7 @@ declare module "@mui/material" {
     gradientBg1: string,
     blueGrey100: string,
     gradientGlass: string,
+    lightBlue:string,
 
   }
   interface TypeText {
@@ -44,7 +45,8 @@ export const themeSettings = (mode: PaletteMode) => {
         mainHover: "#00796b",
         blackBtnHover: "#bdbdbd",
         blueGreyBg: "#455a64",
-        blueGrey100:'#eceff170',
+        blueGrey100: '#eceff170',
+        lightBlue:'#CCF8FA70',
         // glassBg:'linear-gradient(135deg. rgba(255, 255, 0.1), rgba(255, 255, 0))',
         gradientHeaderBg:
           mode === "light"
