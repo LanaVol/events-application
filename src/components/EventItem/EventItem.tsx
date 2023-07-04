@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Box, Typography, useTheme } from "@mui/material";
 import { SpeakersLine } from "../SpeakersLine";
+import { SpeakerItem } from "../SpeakerItem";
 
 export const EventItem = ({ data }: any) => {
   const inputEmail = useRef();
@@ -48,6 +49,28 @@ export const EventItem = ({ data }: any) => {
       </Box>
 
       <SpeakersLine speakers={data.speakers} />
+
+      <Box
+        sx={{
+          display: "flex",
+          width: "70%",
+          margin: "0 auto",
+          gap: "1.5rem",
+          padding: "2rem 0",
+        }}
+      >
+        {data.speakers &&
+          data.speakers.map((speaker: any) => (
+            <SpeakerItem
+              id={speaker.id}
+              firstname={speaker.firstname}
+              lastname={speaker.lastname}
+              age={speaker.age}
+              topic={speaker.topic}
+              about={speaker.about}
+            />
+          ))}
+      </Box>
     </Box>
   );
 };
