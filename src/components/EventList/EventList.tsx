@@ -66,28 +66,6 @@ export const EventList = ({
                   leftPoint={date}
                   rightPoint={`Seats: ${seats}`}
                 />
-                {/* <Image
-                  src={imagePath}
-                  alt={title}
-                  width={300}
-                  height={300}
-                  priority={true}
-                  style={{ width: "100%", height: "auto" }}
-                />
-                <Box sx={{ color: theme.palette.text.primary }}>
-                  <Typography variant="h4">Title: {title}</Typography>
-                  <Typography>Descrition: {description}</Typography>
-                  <Typography>Data: {date}</Typography>
-                  <Typography>Seats: {seats}</Typography>
-                  <Box
-                    sx={{ display: "flex", flexWrap: "wrap", gap: "0.25rem" }}
-                  >
-                    {categories &&
-                      categories?.map((cat: any, index: number) => (
-                        <Chip key={index} label={cat} variant="outlined" />
-                      ))}
-                  </Box>
-                </Box> */}
               </Link>
             </Grid>
           )
