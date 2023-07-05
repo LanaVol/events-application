@@ -8,15 +8,46 @@ export const SpeakersLine = ({ speakers }) => {
   const settings = {
     infinite: true,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
     autoplay: true,
-    speed: 3000,
+    speed: 4000,
     autoplaySpeed: 0,
     cssEase: "linear",
+    arrows: false,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          infinite: true,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   return (
-    <Box sx={{ width: "100%", padding: "2rem" }}>
+    <Box
+      sx={{
+        width: "100%",
+      }}
+    >
       <Slider {...settings}>
         {speakers &&
           speakers.map((speaker) => (
@@ -25,6 +56,8 @@ export const SpeakersLine = ({ speakers }) => {
               firstname={speaker.firstname}
               lastname={speaker.lastname}
               age={speaker.age}
+              topic={speaker.topic}
+              about={speaker.about}
             />
           ))}
       </Slider>
