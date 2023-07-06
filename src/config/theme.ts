@@ -11,6 +11,8 @@ declare module "@mui/material" {
     blueGreyBg: string,
     glassBg: string,
     gradientBg1: string,
+    gradientBg2: string,
+    gradientBtn: string,
     blueGrey100: string,
     gradientGlass: string,
     lightBlue:string,
@@ -20,6 +22,8 @@ declare module "@mui/material" {
     light: string;
     main: string;
     dark: string;
+    white: string;
+    grey: string;
   }
 }
 
@@ -60,6 +64,13 @@ export const themeSettings = (mode: PaletteMode) => {
         gradientBg1: mode === "light"
             ? "linear-gradient(108.1deg, rgb(167, 220, 225) 11.2%, rgb(217, 239, 242) 88.9%)"
           : "linear-gradient(79.8deg, rgb(101, 132, 154) 3.2%, rgb(160, 197, 201) 89.1%)",
+        gradientBg2:mode === "light"
+            ? "linear-gradient(108.1deg, rgb(167, 220, 225) 11.2%, rgb(217, 239, 242) 88.9%)"
+          : "linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(74, 98, 110) 131%)",
+        gradientBtn: 'radial-gradient(circle at 10% 20%, rgb(0, 93, 133) 0%, rgb(0, 181, 149) 90%)',
+        // gradientBg2:mode === "light"
+        //     ? "linear-gradient(108.1deg, rgba(44, 100, 118, 1) 11.2%, rgb(217, 239, 242) 88.9%)"
+        //   : "linear-gradient(79.8deg, rgba(35, 53, 70, 1) 3.2%, rgb(160, 197, 201) 89.1%)",
         gradientGlass: 'radial-gradient(circle at 10% 20%, rgb(239, 246, 249) 0%, rgb(206, 239, 253) 90%)'
         
       },
@@ -68,6 +79,8 @@ export const themeSettings = (mode: PaletteMode) => {
         primary: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)",
         light: mode === "dark" ? "#fff" : "#5f6769",
         dark: mode === "dark" ? "#616161" : "#757575",
+        white: '#fff',
+        grey:'#bdbdbd'
       },
     },
     typography: {
