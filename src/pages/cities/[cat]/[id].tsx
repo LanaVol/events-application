@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { MenuNavigation } from "../../../components/MenuNavigation";
 import { EventItem } from "../../../components/EventItem/EventItem";
+import { FormSend } from "@/src/components/FormSend/FormSend";
 
 const EventPage = () => {
   const [data, setData] = useState([]);
@@ -38,6 +39,12 @@ const EventPage = () => {
       </Box>
 
       <EventItem data={data} />
+
+      <Box
+        sx={{ display: "flex", justifyContent: "center", padding: "1rem 0" }}
+      >
+        <FormSend />
+      </Box>
     </Box>
   );
 };
