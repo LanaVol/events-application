@@ -10,7 +10,7 @@ export const SpeakersLine = ({ speakers }) => {
     slidesToShow: 3,
     slidesToScroll: 3,
     autoplay: true,
-    speed: 4000,
+    speed: 6000,
     autoplaySpeed: 0,
     cssEase: "linear",
     arrows: false,
@@ -21,7 +21,6 @@ export const SpeakersLine = ({ speakers }) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          infinite: true,
         },
       },
       {

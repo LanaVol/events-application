@@ -25,13 +25,13 @@ export const SpeakerItem = ({ id, firstname, lastname, age, topic, about }) => {
           justifyContent: "start",
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239C92AC' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E")`,
           flexWrap: "wrap",
-          boxShadow: `2px 2px 2px ${theme.palette.text.primary}`,
+          boxShadow: `2px 2px 5px ${theme.palette.text.primary}`,
         }}
       >
         <Box
           key={id}
           sx={{
-            background: theme.palette.background.gradientHeaderBg,
+            background: theme.palette.background.gradientBg2,
             padding: "10px 15px",
             borderRadius: "0 20px 0 20px",
             color: theme.palette.text.primary,
@@ -147,7 +147,6 @@ export const SpeakerItem = ({ id, firstname, lastname, age, topic, about }) => {
                   fontWeight: "300",
                   padding: "10px",
                   maxWidth: "300px",
-                  // border: `1px solid ${theme.palette.primary.light}`,
                   borderRadius: "0 20px 0 20px",
                   backgroundColor: theme.palette.background.light,
                 }}

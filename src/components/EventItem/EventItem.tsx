@@ -1,11 +1,30 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { Box, Chip, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Chip,
+  Typography,
+  useTheme,
+  Grid,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import { SpeakersLine } from "../SpeakersLine";
-import { SpeakerItem } from "../SpeakerItem";
-import { EventInfoCard } from "../EventInfoCard";
-import { Event, Chair, Sell } from "@mui/icons-material";
+import { EventInfoItem } from "../EventInfoItem";
+import {
+  Event,
+  Chair,
+  Sell,
+  LabelImportant,
+  Timelapse,
+  InterpreterMode,
+  AutoAwesome,
+  Description,
+  GTranslate,
+  Public,
+  Place,
+} from "@mui/icons-material";
 
 export const EventItem = ({ data }: any) => {
   const inputEmail = useRef();
@@ -13,10 +32,12 @@ export const EventItem = ({ data }: any) => {
   const [message, setMessage] = useState("");
   const theme = useTheme();
 
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+
   return (
     <Box sx={{ overflow: "hidden", marginBottom: "100px" }}>
       <Typography
-        variant="h4"
+        variant="h1"
         sx={{
           fontSize: "60px",
           fontWeight: "800",
@@ -24,131 +45,286 @@ export const EventItem = ({ data }: any) => {
           letterSpacing: "0.5rem",
           padding: "10px 0",
           color: theme.palette.text.primary,
+          textAlign: isMobile ? "center" : "left",
         }}
       >
         {data.title}
       </Typography>
 
-      <Box
+      <Grid
+        container
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          // border: "1px solid green",
-          gap: "1rem",
-          marginBottom: "40px",
+          marginBottom: "30px",
         }}
       >
         {data.imagePath ? (
-          <Box sx={{ width: "50%" }}>
+          <Grid item lg={6} md={12} sm={12} sx={{ padding: "1rem 0" }}>
             <Image
               src={data.imagePath}
               width={400}
               height={300}
               alt={data.title}
-              style={{ width: "100%", height: "auto" }}
+              style={{
+                width: "100%",
+                height: "auto",
+                margin: "0 auto",
+                display: "block",
+              }}
               priority={true}
             />
-          </Box>
+          </Grid>
         ) : null}
 
-        <Box
+        <Grid
+          item
+          lg={6}
+          md={12}
+          sm={12}
           sx={{
-            padding: "1rem",
-            width: "50%",
+            padding: "1rem 2rem",
             color: theme.palette.text.light,
             margin: "0 auto",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              gap: "1rem",
-              alignItems: "center",
-              padding: "10px 3px",
-            }}
-          >
-            <Event
-              fontSize="large"
-              sx={{ color: theme.palette.primary.main }}
-            />
-            <Typography variant="h5">When: {data.date}</Typography>
-          </Box>
+          <EventInfoItem
+            text="Country: "
+            info="Warsaw"
+            ComponentIcon={
+              <Place
+                fontSize="medium"
+                sx={{ color: theme.palette.primary.main }}
+              />
+            }
+          />
 
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "start",
-              alignItems: "center",
-              padding: "10px 3px",
-              gap: "4rem",
-              flexWrap: "wrap",
-              borderBottom: "1px solid black",
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                gap: "1rem",
-                alignItems: "center",
+          <EventInfoItem
+            text="City: "
+            info="Poland"
+            ComponentIcon={
+              <Public
+                fontSize="medium"
+                sx={{ color: theme.palette.primary.main }}
+              />
+            }
+          />
 
-                padding: "7px 14px",
-              }}
-            >
+          <EventInfoItem
+            text="When: "
+            info={data.date}
+            ComponentIcon={
+              <Event
+                fontSize="medium"
+                sx={{ color: theme.palette.primary.main }}
+              />
+            }
+          />
+
+          <EventInfoItem
+            text="Seats: "
+            info={data.seats}
+            ComponentIcon={
               <Chair
-                fontSize="large"
+                fontSize="medium"
                 sx={{ color: theme.palette.primary.main }}
               />
-              <Typography variant="h5">Seats: {data.seats}</Typography>
-            </Box>
+            }
+          />
 
-            <Box
+          <EventInfoItem
+            text="Price: "
+            info={data.price}
+            ComponentIcon={
+              <Sell
+                fontSize="medium"
+                sx={{ color: theme.palette.primary.main }}
+              />
+            }
+          />
+
+          <EventInfoItem
+            text="Time: "
+            info="180 min"
+            ComponentIcon={
+              <Timelapse
+                fontSize="medium"
+                sx={{ color: theme.palette.primary.main }}
+              />
+            }
+          />
+
+          <EventInfoItem
+            text="Speakers: "
+            info={
+              data.speakers
+                ? data.speakers.map((speaker: any) => (
+                    <Typography
+                      variant="subtitle2"
+                      sx={{
+                        margin: "0",
+                        padding: "0",
+                        fontSize: "inherit",
+                        fontWeight: "inherit",
+                        width: "fit-content",
+                        display: "inline-block",
+                      }}
+                    >
+                      {` ${speaker.firstname} ${speaker.lastname} / `}
+                    </Typography>
+                  ))
+                : null
+            }
+            ComponentIcon={
+              <InterpreterMode
+                fontSize="medium"
+                sx={{ color: theme.palette.primary.main }}
+              />
+            }
+          />
+
+          <EventInfoItem
+            text="Language: "
+            info="Polish, English"
+            ComponentIcon={
+              <GTranslate
+                fontSize="medium"
+                sx={{ color: theme.palette.primary.main }}
+              />
+            }
+          />
+
+          <EventInfoItem
+            text="Age: "
+            info="10+"
+            ComponentIcon={
+              <AutoAwesome
+                fontSize="medium"
+                sx={{ color: theme.palette.primary.main }}
+              />
+            }
+          />
+
+          <Grid container>
+            <Grid
+              item
+              lg={4}
+              md={4}
+              sm={4}
               sx={{
                 display: "flex",
                 gap: "1rem",
                 alignItems: "center",
               }}
             >
-              <Sell
-                fontSize="large"
+              <LabelImportant
+                fontSize="medium"
                 sx={{ color: theme.palette.primary.main }}
               />
-              <Typography variant="h5">Price: {data.price}</Typography>
-            </Box>
-          </Box>
+              <Typography
+                variant="subtitle1"
+                sx={{ fontSize: "20px", fontWeight: "300" }}
+              >
+                Category:
+              </Typography>
+            </Grid>
 
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              gap: "1rem",
-              padding: "40px 3px",
-            }}
-          >
-            <Typography variant="h5">Category: </Typography>
-            {data.categories
-              ? data.categories.map((cat: any) => (
-                  <Chip
-                    label={cat.label}
-                    sx={{
-                      backgroundColor: cat.color,
-                      minWidth: "100px",
-                      padding: "10px",
-                    }}
-                  />
-                ))
-              : null}
-          </Box>
+            <Grid
+              item
+              lg={8}
+              md={8}
+              sm={8}
+              sx={{
+                padding: "0.2rem 1rem",
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "3px 7px",
+              }}
+            >
+              {data.categories
+                ? data.categories.map((cat: any) => (
+                    <Chip
+                      label={cat.label}
+                      sx={{
+                        backgroundColor: cat.color,
+                        minWidth: "100px",
+                        padding: "10px",
+                        color: theme.palette.text.white,
+                        fontSize: "16px",
+                      }}
+                    />
+                  ))
+                : null}
+            </Grid>
+          </Grid>
+          <Grid item lg={12} md={12} sm={12}>
+            <EventInfoItem
+              text="Description: "
+              info={""}
+              ComponentIcon={
+                <Description
+                  fontSize="medium"
+                  sx={{ color: theme.palette.primary.main }}
+                />
+              }
+            />
+            <Typography
+              variant="subtitle1"
+              sx={{
+                padding: "0.5rem",
+                fontSize: "18px",
+                fontWeight: "400",
+                color: theme.palette.text.grey,
+                textAlign: "justify",
+                // lineHeight: "1.5rem",
+              }}
+            >
+              {data.description +
+                "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore possimus incidunt similique voluptates ipsum aperiam saepe minima consequatur deleniti sunt adipisci nulla repudiandae laborum, consequuntur itaque neque a. Minus, facilis."}
+            </Typography>
+          </Grid>
+          {/* <Box>
+            <Button
+              variant="contained"
+              sx={{
+                borderRadius: "24px",
+                margin: "0 auto",
+                display: "block",
+                padding: "10px 24px",
+              }}
+            >
+              Register On Event
+            </Button>
+          </Box> */}
+        </Grid>
+      </Grid>
 
-          <Typography variant="h5">
-            Description: {data.description} Lorem ipsum dolor sit amet
-            consectetur, adipisicing elit. Labore possimus incidunt similique
-            voluptates ipsum aperiam saepe minima consequatur deleniti sunt
-            adipisci nulla repudiandae laborum, consequuntur itaque neque a.
-            Minus, facilis.
-          </Typography>
-        </Box>
+      <Box>
+        <Button
+          variant="outlined"
+          sx={{
+            borderRadius: "32px",
+            margin: "0 auto",
+            display: "block",
+            padding: "14px 42px",
+            fontSize: "28px",
+            marginBottom: "40px",
+            background: theme.palette.background.gradientBtn,
+            color: theme.palette.text.white,
+          }}
+        >
+          Register On Event
+        </Button>
       </Box>
+
+      <Typography
+        variant="h3"
+        sx={{
+          padding: "2rem 1rem",
+          marginBottom: "10px",
+          color: theme.palette.text.primary,
+        }}
+      >
+        Speakers and hosts of this event:
+      </Typography>
 
       <SpeakersLine speakers={data.speakers} />
     </Box>
