@@ -1,21 +1,35 @@
 import API from "../config/axios.api.js";
+import { IQueryParams, ICityItem } from "../interfaces/index.js";
+import { AxiosResponse } from "axios";
 
-interface IParamsRequest {
-  page: number;
-  limit: number;
+interface IGetEvents {
+  cityName: string;
+  params: IQueryParams;
+}
+
+interface IGetSingleEvent {
+  cityName: string;
+  eventName: string;
+}
+
+interface IGetCitiesResponse {
+  cities: ICityItem[];
+  searchParams: any;
+  totalCities: number;
 }
 
 export class EventService {
-  static async getCitiesToHomePage() {
-    return API.get("/events/cities");
+  
+
+  static async getCities(
+    params: IQueryParams
+  ): Promise<AxiosResponse<IGetCitiesResponse>> {
+    return API.get("/events/cities/list", { params });
   }
 
-  static async getCities({ page, limit }: IParamsRequest) {
-    return API.get("/events/cities/list", { params: { page, limit } });
-  }
-
-  static async addCity(formData: any) {
+  static async addCity({ formData, params }: any) {
     return API.post("/events/city", formData, {
+      params,
       headers: { "Content-Type": "multipart/form-data" },
     });
   }
@@ -26,18 +40,29 @@ export class EventService {
     });
   }
 
-  static async deleteCity(cityId: string) {
-    return API.delete(`/events/city/${cityId}`);
+  static async deleteCity({ cityId, params }: any) {
+    return API.delete(`/events/city/${cityId}`, { params });
+  }
+
+  static async getEvents({ cityName, params }: IGetEvents): Promise<any> {
+    return API.get(`/events/event/${cityName}`, { params });
+  }
+
+  static async getSingleEvent({
+    cityName,
+    eventName,
+  }: IGetSingleEvent): Promise<any> {
+    return API.get(`/events/event/${cityName}/${eventName}`);
+  }
+
+  static async getAllEvents(params: any) {
+    return API.get("/events/events", { params });
   }
 
   static async addEvent(formData: any) {
     return API.post("/events/event", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-  }
-
-  static async getEvent({ cityName, params }: any) {
-    return API.get(`/events/event/${cityName}`, { params });
   }
 
   static async updateEvent(formData: any) {
@@ -50,7 +75,7 @@ export class EventService {
     return API.delete(`/events/event/${cityId}/${eventId}`);
   }
 
-  static async getCity({ page = 1, limit = 5 }) {
-    return API.get("/events/city", { params: { page, limit } });
+  static async getCity({ params }: any) {
+    return API.get("/events/city", { params});
   }
 }

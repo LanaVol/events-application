@@ -15,6 +15,7 @@ export const FormikTextField = ({
 }: IFormikTextFieldProps): JSX.Element => {
   return (
     <TextField
+      sx={{ backgroundColor: "#ffffff30", borderRadius: "5px" }}
       fullWidth
       multiline
       label={label}
