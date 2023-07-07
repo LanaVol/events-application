@@ -1,8 +1,17 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import texture from "../image/texture.jpg";
 
-export const MainTitle = () => {
+interface IMainTitleProps {
+  title: string;
+  showArrow?: boolean;
+}
+
+export const MainTitle = ({
+  title,
+  showArrow = true,
+}: IMainTitleProps): JSX.Element => {
   const theme = useTheme();
+
   return (
     <Box
       sx={{
@@ -17,15 +26,10 @@ export const MainTitle = () => {
           fontSize: "120px",
           marginBottom: "46px",
           textTransform: "uppercase",
-          // letterSpacing: "0.5rem",
           color: "transparent",
           WebkitTextStroke: `1px ${theme.palette.text.primary}`,
-          // backgroundImage:
-          // "url('https://w.forfun.com/fetch/85/8562501cc50d4c3ee07d9d5b6a840eda.jpeg')",
           backgroundImage:
             "url('https://www.fonstola.ru/images/201202/fonstola.ru_74847.jpg')",
-          // backgroundImage:
-          //   "url('https://gamerwall.pro/uploads/posts/2021-11/1637274315_1-gamerwall-pro-p-diagonalnie-linii-tekstura-oboi-na-zastavk-1.jpg')",
           WebkitBackgroundClip: "text",
           backgroundPosition: "0 0",
           animation: "back 30s linear infinite",
@@ -35,7 +39,7 @@ export const MainTitle = () => {
           },
         }}
       >
-        Join the World of Events
+        {title}
       </Typography>
       <Typography
         variant="subtitle1"
@@ -56,40 +60,42 @@ export const MainTitle = () => {
         experiences that will leave a lasting impression.
       </Typography>
 
-      <Box
-        sx={{
-          width: "100px",
-          height: "100px",
-          margin: "0 auto",
-          position: "relative",
-          "&::before, &::after": {
-            content: '""',
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            width: "70px",
-            height: "70px",
-            borderBottom: `15px solid ${theme.palette.text.primary}`,
-            borderRight: `15px solid ${theme.palette.text.primary}`,
-            transform: "rotate(45deg) translate(-50%, -50%)",
-            animation: "arrow 2s linear infinite",
+      {showArrow && (
+        <Box
+          sx={{
+            width: "100px",
+            height: "100px",
+            margin: "0 auto",
+            position: "relative",
+            "&::before, &::after": {
+              content: '""',
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              width: "70px",
+              height: "70px",
+              borderBottom: `15px solid ${theme.palette.text.primary}`,
+              borderRight: `15px solid ${theme.palette.text.primary}`,
+              transform: "rotate(45deg) translate(-50%, -50%)",
+              animation: "arrow 2s linear infinite",
 
-            "@keyframes arrow": {
-              "0%": {
-                top: "10px",
-                opacity: "0",
-              },
-              "50%": {
-                opacity: "1",
-              },
-              "100%": {
-                top: "50px",
-                opacity: "0",
+              "@keyframes arrow": {
+                "0%": {
+                  top: "10px",
+                  opacity: "0",
+                },
+                "50%": {
+                  opacity: "1",
+                },
+                "100%": {
+                  top: "50px",
+                  opacity: "0",
+                },
               },
             },
-          },
-        }}
-      ></Box>
+          }}
+        ></Box>
+      )}
     </Box>
   );
 };
