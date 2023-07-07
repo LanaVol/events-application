@@ -1,25 +1,70 @@
+import { useEffect } from "react";
+import { useFetchCities } from "../hooks";
+import { useFetchEvents } from "../hooks/useFetchEvents";
+import { TypeFetchCitiesResult } from "../hooks/useFetchCities";
+import { TypeFetchEventsResult } from "../hooks/useFetchEvents";
 import { BannerHero } from "../components/BannerHero";
 import { MainTitle } from "../components/MainTitle";
+import { MessageError } from "../components/MessageError";
 import { HomeCityList } from "../components/HomeCityList/HomeCityList";
-import { Typography } from "@mui/material";
-import { useFetchHomeEvent } from "../hooks";
-import { IUseFetchHomeEvent } from "../hooks/useFetchHomeEvent";
-import { MenuNavigationLink } from "../components/MenuNavigationLink";
-import { Box, useTheme } from "@mui/material";
+import { HomeEventList } from "../components/HomeEventList/HomeEventList";
+import { Box, Container } from "@mui/material";
 
 export default function Home(): JSX.Element {
-  const { data, isLoading, error }: IUseFetchHomeEvent = useFetchHomeEvent();
-  const theme = useTheme();
+  const [citiesResult, citiesIsLoading, citiesError]: TypeFetchCitiesResult =
+    useFetchCities({ params: { showOnHomePage: true, showInCityHome: true } });
+
+  const [
+    eventsResult,
+    eventsIsLoading,
+    eventsError,
+    fetchData,
+  ]: TypeFetchEventsResult = useFetchEvents();
+
+  useEffect(() => {
+    fetchData({ params: { showOnHomePage: true } });
+  }, []);
 
   return (
-    <>
-      <MenuNavigationLink />
+    <Box sx={{ flex: 1 }}>
       <BannerHero />
-      <MainTitle />
 
-      {data.length > 0 && <HomeCityList data={data} />}
+      <Container maxWidth="xl">
+        <MainTitle title="Join the World of Events" showArrow={true} />
 
-      {error && !isLoading && <Typography>{error}</Typography>}
-    </>
+        {citiesResult && !citiesIsLoading && !!citiesResult.cities.length && (
+          <HomeCityList cities={citiesResult.cities} />
+        )}
+
+        {!citiesIsLoading && citiesResult?.cities.length === 0 && (
+          <MessageError
+            text={
+              citiesError
+                ? citiesError
+                : "Sorry, There Are Currently No Cities With Events!"
+            }
+            errorMessage={!!citiesError}
+          />
+        )}
+
+        {eventsResult && !eventsIsLoading && eventsResult.events.length > 0 && (
+          <>
+            <MainTitle title="This Es Best Events" showArrow={false} />
+            <HomeEventList events={eventsResult.events} />
+          </>
+        )}
+
+        {!eventsIsLoading && eventsResult?.events.length === 0 && (
+          <MessageError
+            text={
+              eventsError
+                ? eventsError
+                : "Sorry, There Are Currently No Cities With Events!"
+            }
+            errorMessage={!!eventsError}
+          />
+        )}
+      </Container>
+    </Box>
   );
 }
