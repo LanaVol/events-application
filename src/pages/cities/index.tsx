@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { CityList } from "@/src/components/CityList/CityList";
 import { useFetchCities } from "../../hooks";
-import { FetchCitiesResult } from "../../hooks/useFetchCities";
+import { TypeFetchCitiesResult } from "../../hooks/useFetchCities";
 import {
   Box,
   Pagination,
@@ -11,62 +11,82 @@ import {
   MenuItem,
   InputLabel,
   useTheme,
+  Container,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
+import { MenuNavigation } from "@/src/components/MenuNavigation";
 import { Refresh as RefreshIcon } from "@mui/icons-material";
 import { CustomAutocompleteOfCountries } from "@/src/components/CustomAutocompleteOfCountries";
-import { DataConfigInformation } from "../../data";
+import { DataConfigInformation as Data } from "../../data";
 import { CustomAutocompleteOfCities } from "@/src/components/CustomAutocompleteOfCities";
-import { MenuNavigation } from "@/src/components/MenuNavigation";
-import { ICountry, ICity } from "../../interfaces";
+import { ICountry, ICity, IQueryParams } from "../../interfaces";
+import { LoaderLinearProgress } from "@/src/components";
+
+const arrToStr = (items: ICountry[] | ICity[]) => {
+  return items.map(({ label }) => label).join(",");
+};
 
 const EvantsPage = (): JSX.Element => {
+  const [allCities, setAllCities] = useState<ICity[]>(Data.listCities);
   const [countriesFilter, setCountriesFilter] = useState<ICountry[] | []>([]);
   const [citiesFilter, setCitiesFilter] = useState<ICity[] | []>([]);
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(5);
-  const [data, isLoading, error, fetchData]: FetchCitiesResult = useFetchCities(
-    { page, limit }
-  );
+  const allCountries = Data.listCountries;
   const theme = useTheme();
 
-  let allCountries = DataConfigInformation.listCountries;
-  let allCities = DataConfigInformation.listCities;
+  const params: IQueryParams = { page, limit };
+  if (countriesFilter.length > 0) params.countries = arrToStr(countriesFilter);
+  if (citiesFilter.length > 0) params.cities = arrToStr(citiesFilter);
+
+  const [data, isLoading, error, fetchData]: TypeFetchCitiesResult =
+    useFetchCities({ params });
 
   const handleChangeLimit = (nevLimit: number) => {
     setPage(1);
     setLimit(nevLimit);
-    fetchData({ page: 1, limit: nevLimit });
+    fetchData({ ...params, page: 1, limit: nevLimit });
   };
 
   const handleChangePage = (_: any, newPageValue: number) => {
     setPage(newPageValue);
-    fetchData({ page: newPageValue, limit });
+    fetchData({ params: { ...params, page: newPageValue } });
   };
 
   const handleLoadMore = () => {
     const newPageValue = page + 1;
     setPage(newPageValue);
-    fetchData({ page: newPageValue, limit });
+    fetchData({ params: { ...params, page: newPageValue }, loadMore: true });
   };
 
   useEffect(() => {
-    setCitiesFilter([]);
-  }, [countriesFilter]);
+    const countries = countriesFilter.map(({ label }) => label);
 
-  console.log("allCities", allCities);
+    const updatedCitiesList =
+      countries.length > 0
+        ? Data.listCities.filter((city) => countries.includes(city.country))
+        : Data.listCities;
+
+    setCitiesFilter([]);
+
+    setAllCities(updatedCitiesList);
+
+    if (countries.length > 0) {
+      setPage(1);
+      fetchData({ params: { ...params, page: 1 } });
+    }
+    fetchData({ params });
+  }, [countriesFilter]);
 
   return (
     <Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "start",
-          alignItems: "center",
-          gap: "2rem",
-          padding: "10px 0",
-        }}
-      >
+      <Container maxWidth="xl">
+        {isLoading && (
+          <Box>
+            <LoaderLinearProgress />
+          </Box>
+        )}
+
         <Box
           sx={{
             display: "flex",
@@ -76,73 +96,89 @@ const EvantsPage = (): JSX.Element => {
             padding: "10px 0",
           }}
         >
-          <FormControl
-            size="small"
-            sx={{ m: 1, minWidth: 80, color: theme.palette.text.primary }}
-          >
-            <InputLabel>Count</InputLabel>
-            <Select
-              label="Count"
-              value={limit}
-              onChange={(e) => handleChangeLimit(Number(e.target.value))}
+          {data && (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "center",
+                gap: "2rem",
+                padding: "10px 0",
+              }}
             >
-              <MenuItem value={3}>3</MenuItem>
-              <MenuItem value={5}>5</MenuItem>
-              <MenuItem value={10}>10</MenuItem>
-              <MenuItem value={20}>20</MenuItem>
-            </Select>
-          </FormControl>
-          <Typography
-            sx={{ color: theme.palette.text.primary, whiteSpace: "nowrap" }}
-          >
-            All city: {data.totalCities}
-          </Typography>
-          <Typography
-            sx={{ color: theme.palette.text.primary, whiteSpace: "nowrap" }}
-          >
-            Display: {data?.cities.length}
-          </Typography>
-        </Box>
+              <FormControl
+                size="small"
+                sx={{ m: 1, minWidth: 80, color: theme.palette.text.primary }}
+              >
+                <InputLabel>Count</InputLabel>
+                <Select
+                  label="Count"
+                  value={limit}
+                  onChange={(e) => handleChangeLimit(Number(e.target.value))}
+                >
+                  <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={5}>5</MenuItem>
+                  <MenuItem value={10}>10</MenuItem>
+                  <MenuItem value={20}>20</MenuItem>
+                </Select>
+              </FormControl>
+              <Typography
+                sx={{ color: theme.palette.text.primary, whiteSpace: "nowrap" }}
+              >
+                All city: {data.totalCities}
+              </Typography>
+              <Typography
+                sx={{ color: theme.palette.text.primary, whiteSpace: "nowrap" }}
+              >
+                Display: {data?.cities.length}
+              </Typography>
+            </Box>
+          )}
 
-        <Box
-          sx={{
-            display: "flex",
-            gap: "2rem",
-            width: "100%",
-          }}
-        >
-          <CustomAutocompleteOfCountries
-            label="Set Country"
-            value={countriesFilter}
-            options={allCountries}
-            onChangeFunc={setCountriesFilter}
-            isLoading={isLoading}
-          />
+          <Box
+            sx={{
+              display: "flex",
+              gap: "2rem",
+              width: "100%",
+            }}
+          >
+            <CustomAutocompleteOfCountries
+              label="Set Country"
+              value={countriesFilter}
+              options={allCountries}
+              onChangeFunc={setCountriesFilter}
+              isLoading={isLoading}
+            />
 
-          <CustomAutocompleteOfCities
-            label="Set Cities"
-            value={citiesFilter}
-            options={allCities}
-            onChangeFunc={setCitiesFilter}
-            isLoading={isLoading}
-          />
+            <CustomAutocompleteOfCities
+              label="Set Cities"
+              value={citiesFilter}
+              options={allCities}
+              onChangeFunc={setCitiesFilter}
+              isLoading={isLoading}
+            />
+          </Box>
         </Box>
+      </Container>
+
+      <Box>
+        <Container maxWidth="xl">
+          <MenuNavigation
+            list={[
+              { title: "Home", path: "/", iconName: "home" },
+              { title: "Cities", path: "", iconName: "city" },
+            ]}
+          />
+        </Container>
       </Box>
 
-      <Box sx={{ padding: "0 1rem" }}>
-        <MenuNavigation
-          list={[
-            { title: "Home", path: "/", iconName: "home" },
-            { title: "Cities", path: "", iconName: "city" },
-          ]}
-        />
-      </Box>
-
-      {data.cities?.length > 0 && (
-        <CityList data={data.cities} totalCities={Number(data.totalCities)} />
+      {data && data.cities?.length > 0 && (
+        <Container maxWidth="xl">
+          <CityList data={data.cities} totalCities={Number(data.totalCities)} />
+        </Container>
       )}
 
-      {data.cities?.length < data.totalCities && (
+      {data && data.cities?.length < data.totalCities && (
         <>
           <Box
             sx={{
@@ -181,6 +217,7 @@ const EvantsPage = (): JSX.Element => {
           </Box>
         </>
       )}
+      {!error && <Typography color="error">{error}</Typography>}
     </Box>
   );
 };
