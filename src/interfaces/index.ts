@@ -9,9 +9,24 @@ export interface ISigninArg {
   password: string;
 }
 
-export interface ICountry {
+export interface IQueryParams {
+  page?: number;
+  limit?: number;
+  countries?: string;
+  cities?: string;
+  showOnHomePage?: boolean;
+  showInCityHome?: boolean;
+}
+
+export interface ICategoryItem {
   label: string;
+  color: string;
+}
+
+export interface ICountry {
   code: string;
+  label: string;
+  phone: string;
 }
 
 export interface ICity {
@@ -20,29 +35,41 @@ export interface ICity {
   population: number;
 }
 
+export interface ISpeaker {
+  id: string;
+  firstname: string;
+  lastname: string;
+  age: number;
+  about: string;
+  email: string;
+  topic: string;
+  telephone: string;
+}
+
 export interface ICityItem {
   _id: string;
   country: ICountry;
   city: ICity;
-  events: [];
+  description: string;
   imagePath: string;
-  population: number;
-  showOnHomePage: boolean;
-  title: string;
   totalEvents: number;
-  __v: number;
+  showOnHomePage: boolean;
+  isHidden: boolean;
+  events: IEventItem[] | [];
 }
 
 export interface IEventItem {
   _id: string;
-  city: string;
-  country: string;
-  events: [];
-  imagePath: string;
-  population: number;
-  showOnHomePage: boolean;
   title: string;
+  description: string;
+  date: string;
+  seats: number;
+  price: number;
+  imagePath: string;
+  categories: ICategoryItem[];
+  speakers: ISpeaker[];
+  showOnHomePage: boolean;
+  showInCityHome: boolean;
   totalEvents: number;
-  upcomingEvent: any;
-  __v: number;
+  isHidden: boolean;
 }
