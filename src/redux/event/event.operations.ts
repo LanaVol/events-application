@@ -4,11 +4,11 @@ import { EventService } from "../../services";
 export class EventOperations {
   static getCity = createAsyncThunk(
     "city/getCity",
-    async ({ limit = 10 }: any, { rejectWithValue }) => {
+    async ({ params }: any, { rejectWithValue }) => {
       try {
-        const { data } = await EventService.getCity({ limit });
+        const { data } = await EventService.getCity({ params });
         return data;
-      } catch (err : any) {
+      } catch (err: any) {
         return rejectWithValue(err.message);
       }
     }
@@ -16,9 +16,9 @@ export class EventOperations {
 
   static addCity = createAsyncThunk(
     "city/addCity",
-    async (formData: any, { rejectWithValue }) => {
+    async ({formData, params}: any, { rejectWithValue }) => {
       try {
-        const { data } = await EventService.addCity(formData);
+        const { data } = await EventService.addCity({formData, params});
         return data;
       } catch (err: any) {
         return rejectWithValue(err.message);
@@ -28,9 +28,9 @@ export class EventOperations {
 
   static updateCity = createAsyncThunk(
     "city/updateCity",
-    async (formData: any, { rejectWithValue }) => {
+    async ({formData}: any, { rejectWithValue }) => {
       try {
-        const { data } = await EventService.updateCity(formData);
+        const { data } = await EventService.updateCity({formData});
         return data;
       } catch (err: any) {
         return rejectWithValue(err.message);
@@ -40,9 +40,9 @@ export class EventOperations {
 
   static deleteCity = createAsyncThunk(
     "city/deleteCity",
-    async (cityId:string, { rejectWithValue }) => {
+    async ({cityId, params}:any, { rejectWithValue }) => {
       try {
-        const { data } = await EventService.deleteCity(cityId);
+        const { data } = await EventService.deleteCity({cityId, params});
         return data;
       } catch (err: any) {
         return rejectWithValue(err.message);
@@ -52,9 +52,9 @@ export class EventOperations {
 
   static getEvent = createAsyncThunk(
     "city/getEvent",
-    async (cityName:string, { rejectWithValue }) => {
+    async ({cityName, params}: any, { rejectWithValue }) => {
       try {
-        const { data } = await EventService.getEvent(cityName);
+        const { data } = await EventService.getEvents({cityName, params});
         return data;
       } catch (err: any) {
         return rejectWithValue(err.message);

@@ -1,14 +1,17 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { EventOperations } from "./event.operations";
+import { ICityItem } from "../../interfaces";
 
 export interface IEventState {
-  cities: any;
+  cities: ICityItem[];
+  totalCities: number | null;
   isLoading: boolean;
   error: string | null;
 }
 
 const initialState: IEventState = {
   cities: [],
+  totalCities: null,
   isLoading: false,
   error: null,
 };
@@ -20,14 +23,17 @@ export const eventSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(EventOperations.getCity.pending, (state) => {
       state.isLoading = true;
+      state.totalCities = null;
       state.error = null;
     });
     builder.addCase(EventOperations.getCity.fulfilled, (state, action) => {
       state.cities = action.payload.cities;
+      state.totalCities = action.payload.totalCities;
       state.isLoading = false;
     });
     builder.addCase(EventOperations.getCity.rejected, (state, action:PayloadAction<any>) => {
       state.error = action.payload;
+      state.totalCities = null;
       state.isLoading = false;
     });
     builder.addCase(EventOperations.addCity.pending, (state) => {
@@ -35,7 +41,8 @@ export const eventSlice = createSlice({
       state.error = null;
     });
     builder.addCase(EventOperations.addCity.fulfilled, (state, action) => {
-      state.cities = [...state.cities, action.payload];
+      state.cities = action.payload.cities;
+      state.totalCities = action.payload.totalCities;
       state.isLoading = false;
     });
     builder.addCase(EventOperations.addCity.rejected, (state, action:PayloadAction<any>) => {
@@ -65,7 +72,8 @@ export const eventSlice = createSlice({
       state.error = null;
     });
     builder.addCase(EventOperations.deleteCity.fulfilled, (state, action) => {
-      state.cities = state.cities.filter((city:any) => city._id !== action.payload);
+      state.cities = action.payload.cities;
+      state.totalCities = action.payload.totalCities;
       state.isLoading = false;
     });
     builder.addCase(EventOperations.deleteCity.rejected, (state, action:PayloadAction<any>) => {
@@ -100,7 +108,7 @@ export const eventSlice = createSlice({
       const { cityId, events } = action.payload;
       const cityIndex = state.cities.findIndex((city:any) => city._id === cityId);
       if (cityIndex !== -1) {
-        state.cities[cityIndex].events.push(...events);
+        state.cities[cityIndex].events = events;
       }
       state.isLoading = false;
     });
