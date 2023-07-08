@@ -15,11 +15,11 @@ export const HomeCityList = ({ cities }: IHomeCityListProps): JSX.Element => {
   }, []);
 
   return (
-    <Grid container rowSpacing={1} sx={{ paddingBottom: "5rem" }}>
+    <Grid container rowSpacing={2} sx={{ paddingBottom: "5rem" }}>
       {cities.map((city: ICityItem, index: number) => (
-        <Box key={index} data-aos="fade-up" data-aos-duration="2000">
+        <Grid item key={index} data-aos="fade-up" data-aos-duration="2000">
           <HomeCItyItem data={city} index={index} />
-        </Box>
+        </Grid>
       ))}
     </Grid>
   );

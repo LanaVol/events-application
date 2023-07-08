@@ -1,13 +1,16 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import texture from "../image/texture.jpg";
+import bg2 from "../image/bg2.jpg";
 
 interface IMainTitleProps {
   title: string;
+  subtitle?: string;
   showArrow?: boolean;
 }
 
 export const MainTitle = ({
   title,
+  subtitle,
   showArrow = true,
 }: IMainTitleProps): JSX.Element => {
   const theme = useTheme();
@@ -28,8 +31,7 @@ export const MainTitle = ({
           textTransform: "uppercase",
           color: "transparent",
           WebkitTextStroke: `1px ${theme.palette.text.primary}`,
-          backgroundImage:
-            "url('https://www.fonstola.ru/images/201202/fonstola.ru_74847.jpg')",
+          backgroundImage: `url(${bg2.src})`,
           WebkitBackgroundClip: "text",
           backgroundPosition: "0 0",
           animation: "back 30s linear infinite",
@@ -50,14 +52,7 @@ export const MainTitle = ({
           marginBottom: "50px",
         }}
       >
-        Welcome to our website, where you can find information about various
-        exciting events happening around the world. Here, you can explore a
-        diverse range of events, from concerts and exhibitions to sports
-        competitions and cultural festivals. On our website, you will discover
-        an up-to-date event calendar featuring detailed descriptions, dates,
-        venues, and other valuable information. Browse through our event
-        listings, choose what interests you, and join in on the thrilling
-        experiences that will leave a lasting impression.
+        {subtitle ? subtitle : null}
       </Typography>
 
       {showArrow && (
