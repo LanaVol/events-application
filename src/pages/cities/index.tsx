@@ -45,6 +45,7 @@ const EvantsPage = (): JSX.Element => {
   const handleChangeLimit = (nevLimit: number) => {
     setPage(1);
     setLimit(nevLimit);
+    // @ts-ignore
     fetchData({ ...params, page: 1, limit: nevLimit });
   };
 

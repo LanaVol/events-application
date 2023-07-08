@@ -30,7 +30,11 @@ export default function Home(): JSX.Element {
       <BannerHero />
 
       <Container maxWidth="xl">
-        <MainTitle title="Join the World of Events" showArrow={true} />
+        <MainTitle
+          title="Join the World of Events"
+          showArrow={true}
+          subtitle="Welcome to our website, where you can find information about various exciting events happening around the world. Here, you can explore a diverse range of events, from concerts and exhibitions to sports competitions and cultural festivals. On our website, you will discover an up-to-date event calendar featuring detailed descriptions? dates, venues, and other valuable information. Browse through our event listings, choose what interests you, and join in on the thrilling experiences that will leave a lasting impression."
+        />
 
         {citiesResult && !citiesIsLoading && !!citiesResult.cities.length && (
           <HomeCityList cities={citiesResult.cities} />
@@ -49,7 +53,7 @@ export default function Home(): JSX.Element {
 
         {eventsResult && !eventsIsLoading && eventsResult.events.length > 0 && (
           <>
-            <MainTitle title="This Es Best Events" showArrow={false} />
+            <MainTitle title="These Are The Best Events" showArrow={false} />
             <HomeEventList events={eventsResult.events} />
           </>
         )}

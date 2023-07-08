@@ -11,92 +11,87 @@ import {
   Pagination,
   Select,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { FilterEvent } from "../../../components/FilterEvent";
 import { EventList } from "@/src/components/EventList/EventList";
+import { useFetchEvents } from "@/src/hooks";
+import { TypeFetchEventsResult } from "@/src/hooks/useFetchEvents";
+import { IQueryParams } from "../../../interfaces";
 
 const EventsCatPage = (): JSX.Element => {
-  const [events, setEvents] = useState([]);
-  const [params, setParams] = useState<any>({});
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(3);
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const router = useRouter();
-  const { cat } = router.query;
+  // const [params, setParams] = useState<any>({});
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(3);
+  const { query } = useRouter();
+  const { cat } = query;
+  const theme = useTheme();
 
   const cityName = cat ? String(cat).toLowerCase() : null;
 
-  useEffect(() => {
-    async function fetch() {
-      console.log("fetch", "cityName", cityName);
-      const { data } = await EventService.getEvent({
-        cityName,
-        params: { page: 1, limit: 5 },
-      });
-      if (data) {
-        setEvents(data.events);
-        setParams(data.eventsParams);
-      }
-    }
-    if (cat) fetch();
-  }, [cat]);
+  const params: IQueryParams = { page, limit };
+  const [data, isLoading, error, fetchData]: TypeFetchEventsResult =
+    useFetchEvents();
 
   useEffect(() => {
-    if (cat) fetchDataEvents({ page });
-  }, [limit]);
+    if (cityName) fetchData({ cityName, params });
+  }, [cityName]);
 
-  const handleChangeLimit = (value: number) => {
+  const handleChangeLimit = (newLimit: number) => {
     setPage(1);
-    setLimit(value);
+    setLimit(newLimit);
+    if (cityName) {
+      fetchData({
+        cityName,
+        params: { ...params, page: 1, limit: newLimit },
+      });
+    }
   };
 
   const handleChangePage = (_: any, newPageValue: number) => {
     setPage(newPageValue);
-    fetchDataEvents({ page: newPageValue });
+    if (cityName) {
+      fetchData({
+        cityName,
+        params: { ...params, page: newPageValue },
+      });
+    }
   };
 
   const handleLoadMore = () => {
     const newPageValue = page + 1;
     setPage(newPageValue);
-    fetchDataEvents({ page: newPageValue, isLoadingMore: true });
+    if (cityName) {
+      fetchData({
+        cityName,
+        params: { ...params, page: newPageValue },
+        loadMore: true,
+      });
+    }
   };
 
   const handleFetchByFilter = (queryParams: any) => {
-    fetchDataEvents({ page, isLoadingMore: false, queryParams });
+    // fetchDataEvents({ page, isLoadingMore: false, queryParams });
   };
 
   const handleClearFilter = () => {
-    fetchDataEvents({ queryParams: {} });
+    // fetchDataEvents({ queryParams: {} });
   };
 
-  async function fetchDataEvents({
-    page,
-    isLoadingMore = false,
-    queryParams,
-  }: any) {
-    setIsLoading(true);
-    try {
-      const { data } = await EventService.getEvent({
-        cityName: cat,
-        params: { page, limit, ...queryParams },
-      });
-      if (data.events || data.eventsParams) {
-        const newEventsList = isLoadingMore
-          ? [...events, ...data.events]
-          : data.events;
-        setEvents(newEventsList);
-        setParams(data.eventsParams);
-      }
-    } catch (err: any) {
-      setError(err?.response?.data.message || "Network error");
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  const list = cityName
+    ? [
+        { title: "Home", path: "/", iconName: "home" },
+        { title: "Cities", path: "/cities", iconName: "cities" },
+        {
+          title:
+            cityName && cityName[0].toLocaleUpperCase() + cityName.slice(1),
+          path: "",
+          iconName: "city",
+        },
+      ]
+    : null;
 
   return (
     <Box>
@@ -109,51 +104,39 @@ const EventsCatPage = (): JSX.Element => {
             gap: "1.5rem",
           }}
         >
-          <MenuNavigation
-            list={[
-              { title: "Home", path: "/", iconName: "home" },
-              { title: "Cities", path: "/cities", iconName: "cities" },
-              {
-                title:
-                  cityName &&
-                  cityName[0].toLocaleUpperCase() + cityName.slice(1),
-                path: "",
-                iconName: "city",
-              },
-            ]}
-          />
+          {list && <MenuNavigation list={list} />}
 
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1.5rem",
-              padding: "0.5rem",
-            }}
-          >
-            <Typography>
-              All Events: {params.totalEvents ? params.totalEvents : null}
-            </Typography>
-            <Typography>Displayed: {events?.length}</Typography>
+          {data && (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1.5rem",
+                padding: "0.5rem",
+                color: theme.palette.text.primary,
+              }}
+            >
+              <Typography>All Events: {data.totalEvents}</Typography>
+              <Typography>Displayed: {data.events.length}</Typography>
 
-            <FormControl sx={{ minWidth: 80 }} size="small">
-              <InputLabel>Events</InputLabel>
-              <Select
-                value={limit}
-                label="Count"
-                onChange={(e) => handleChangeLimit(Number(e.target.value))}
-              >
-                <MenuItem value={3}>3</MenuItem>
-                <MenuItem value={5}>5</MenuItem>
-                <MenuItem value={10}>10</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
+              <FormControl sx={{ minWidth: "5rem" }} size="small">
+                <InputLabel>Count</InputLabel>
+                <Select
+                  value={limit}
+                  label="Count"
+                  onChange={(e) => handleChangeLimit(Number(e.target.value))}
+                >
+                  <MenuItem value={3}>3</MenuItem>
+                  <MenuItem value={5}>5</MenuItem>
+                  <MenuItem value={10}>10</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          )}
         </Box>
       </Box>
-
       <Box sx={{ display: "flex" }}>
-        {params && events.length > 0 && (
+        {params && data && (
           <FilterEvent
             data={params}
             handleFetchByFilter={handleFetchByFilter}
@@ -161,7 +144,6 @@ const EventsCatPage = (): JSX.Element => {
             isLoading={isLoading}
           />
         )}
-
         <Box
           sx={{
             display: "flex",
@@ -171,11 +153,15 @@ const EventsCatPage = (): JSX.Element => {
             width: "100%",
           }}
         >
-          {events?.length > 0 ? (
-            <EventList data={events} cityNameLink={cat} isLoading={isLoading} />
-          ) : null}
+          {data && data.events?.length > 0 && (
+            <EventList
+              data={data.events}
+              cityNameLink={cat}
+              isLoading={isLoading}
+            />
+          )}
 
-          {events?.length < params.totalEvents && (
+          {data && data.events?.length < data.totalEvents && (
             <LoadingButton
               variant="text"
               loadingPosition="start"
@@ -188,7 +174,7 @@ const EventsCatPage = (): JSX.Element => {
             </LoadingButton>
           )}
 
-          {events?.length < params.totalEvents && (
+          {data && data.events?.length < data.totalEvents && (
             <Box
               sx={{
                 display: "flex",
@@ -198,7 +184,7 @@ const EventsCatPage = (): JSX.Element => {
               }}
             >
               <Pagination
-                count={Math.ceil(params.totalEvents / limit)}
+                count={Math.ceil(data.totalEvents / limit)}
                 page={page}
                 onChange={handleChangePage}
                 disabled={isLoading}
@@ -207,6 +193,7 @@ const EventsCatPage = (): JSX.Element => {
           )}
         </Box>
       </Box>
+      {error && <Typography color="error">{error}</Typography>}
     </Box>
   );
 };
