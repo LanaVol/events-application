@@ -1,10 +1,21 @@
 import { useEffect } from "react";
-import { Box, Chip, Typography } from "@mui/material";
+import { Box, Chip, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import AOS from "aos";
-import { Place } from "@mui/icons-material";
+import {
+  CalendarMonth,
+  Chair,
+  Description,
+  Place,
+  Public,
+  Title,
+} from "@mui/icons-material";
+import { CalendarIcon } from "@mui/x-date-pickers";
+import { ItemIconText } from "../ItemIconText";
 
 export const HomeEventList = ({ events }: any): JSX.Element => {
+  const theme = useTheme();
+
   useEffect(() => {
     AOS.init();
   }, []);
@@ -42,10 +53,12 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
               flexDirection: index % 2 === 0 ? "row" : "row-reverse",
               justifyContent: index % 2 === 0 ? "start" : "end",
               padding: "1rem 0",
-              gap: "1rem",
+              gap: "0.5rem",
             }}
           >
-            <Box sx={{ width: "40%" }}>
+            <Box
+              sx={{ width: "40%", borderRadius: "10px", overflow: "hidden" }}
+            >
               <Image
                 src={imagePath}
                 alt={title}
@@ -62,39 +75,70 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
 
             <Box
               sx={{
-                border: "1px solid red",
+                // border: "1px solid red",
                 display: "flex",
-                flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
                 padding: "1rem",
+                borderRadius: "10px",
               }}
             >
-              <Box sx={{ border: "1px solid red", borderRadius: "10px" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.5rem",
+                  // border: "1px solid red",
+                  borderRadius: "10px",
+                  background: theme.palette.background.blueGreyBg,
+                  padding: "1rem",
+                  color: theme.palette.text.main,
+                }}
+              >
                 <img
                   loading="lazy"
                   width="80"
                   src={`https://flagcdn.com/w80/${country.code.toLowerCase()}.png`}
                   srcSet={`https://flagcdn.com/w160/${country.code.toLowerCase()}.png 2x`}
                   alt=""
+                  style={{
+                    margin: "0 auto",
+                    display: "block",
+                    padding: "3px",
+                    borderRadius: "7px",
+                    overflow: "hidden",
+                  }}
                 />
-                <Box
-                  sx={{ display: "flex", gap: "1rem", alignItems: "center" }}
-                >
-                  <Box
-                    sx={{
-                      padding: "3px 5px",
-                      border: "1px solid red",
-                      borderRadius: "50%",
-                    }}
-                  >
-                    <Place fontSize="medium" />
-                  </Box>
 
-                  <Typography>{city.label}</Typography>
-                </Box>
+                <ItemIconText
+                  text={city.label}
+                  Component={
+                    <Place
+                      fontSize="medium"
+                      sx={{
+                        border: `1px solid ${theme.palette.text.main}`,
+                        borderRadius: "50%",
+                        padding: "3px 5px",
+                        fontSize: "2.5rem",
+                      }}
+                    />
+                  }
+                />
 
-                <Typography>Country: {country.label}</Typography>
+                <ItemIconText
+                  text={country.label}
+                  Component={
+                    <Public
+                      fontSize="medium"
+                      sx={{
+                        border: `1px solid ${theme.palette.text.main}`,
+                        borderRadius: "50%",
+                        padding: "3px 5px",
+                        fontSize: "2.5rem",
+                      }}
+                    />
+                  }
+                />
               </Box>
             </Box>
 
@@ -104,15 +148,66 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                 flexDirection: "column",
                 gap: "0.5rem",
                 paddingLeft: "1rem",
-                border: "1px solid red",
+                border: `1px solid ${theme.palette.text.main}`,
                 justifyContent: "center",
                 // alignItems: "center",
+                color: theme.palette.text.main,
+                borderRadius: "10px",
+                padding: "1rem",
               }}
             >
-              <Typography>Title: {title}</Typography>
-              <Typography>Description: {description}</Typography>
-              <Typography>Date: {date}</Typography>
-              <Typography>Seats: {seats}</Typography>
+              <ItemIconText
+                text={title}
+                Component={
+                  <Title
+                    sx={{
+                      border: `1px solid ${theme.palette.text.main}`,
+                      borderRadius: "50%",
+                      padding: "3px 5px",
+                      fontSize: "2.5rem",
+                    }}
+                  />
+                }
+              />
+              <ItemIconText
+                text={description}
+                Component={
+                  <Description
+                    sx={{
+                      border: `1px solid ${theme.palette.text.main}`,
+                      borderRadius: "50%",
+                      padding: "3px 5px",
+                      fontSize: "2.5rem",
+                    }}
+                  />
+                }
+              />
+              <ItemIconText
+                text={date}
+                Component={
+                  <CalendarIcon
+                    sx={{
+                      border: `1px solid ${theme.palette.text.main}`,
+                      borderRadius: "50%",
+                      padding: "3px 5px",
+                      fontSize: "2.5rem",
+                    }}
+                  />
+                }
+              />
+              <ItemIconText
+                text={seats}
+                Component={
+                  <Chair
+                    sx={{
+                      border: `1px solid ${theme.palette.text.main}`,
+                      borderRadius: "50%",
+                      padding: "3px 5px",
+                      fontSize: "2.5rem",
+                    }}
+                  />
+                }
+              />
 
               {/* <Box>
                 <Box>

@@ -4,6 +4,7 @@ import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
 import { Event, PeopleAlt, Place, Public } from "@mui/icons-material";
 import { useState } from "react";
 import ScrollHandler from "react-scroll-wheel-handler";
+import { ItemIconText } from "../ItemIconText";
 // import { animateScroll as scroll } from "react-scroll";
 
 interface IHomeCItyItemProps {
@@ -100,13 +101,6 @@ export const HomeCItyItem = ({
           >
             {index < 10 ? `0${index + 1}` : `${index + 1}`}
           </Typography>
-          {/* <Typography
-            sx={{
-              transform: isHovered ? "translateY(0%)" : "translateY(-100%)",
-            }}
-          >
-            {description}
-          </Typography> */}
         </Link>
       </Box>
 
@@ -174,64 +168,53 @@ export const HomeCItyItem = ({
 
           <Box sx={{ width: "50%" }}>
             <Box sx={{ padding: "1rem" }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                }}
-              >
-                <Public
-                  sx={{
-                    fontSize: "2rem",
-                    color: theme.palette.text.primary,
-                  }}
-                />
-                <Typography variant="h6" sx={{ color: "inherit" }}>
-                  {city.country}
-                </Typography>
-              </Box>
+              <ItemIconText
+                Component={
+                  <Public
+                    sx={{
+                      fontSize: "2rem",
+                      color: theme.palette.text.primary,
+                    }}
+                  />
+                }
+                text={city.label}
+              />
 
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                }}
-              >
-                <Event
-                  sx={{
-                    fontSize: "2rem",
-                    color: theme.palette.text.primary,
-                  }}
-                />
-                <Typography variant="h6" sx={{ color: "inherit" }}>
-                  All events: {totalEvents}
-                </Typography>
-              </Box>
+              <ItemIconText
+                Component={
+                  <Event
+                    sx={{
+                      fontSize: "2rem",
+                      color: theme.palette.text.primary,
+                    }}
+                  />
+                }
+                text={`All events: ${totalEvents}`}
+              />
 
-              <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                <Place
-                  sx={{
-                    fontSize: "2rem",
-                    color: theme.palette.text.primary,
-                  }}
-                />
-                <Typography variant="h6" sx={{ color: "inherit" }}>
-                  Population: {population}
-                </Typography>
-              </Box>
-              <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                <PeopleAlt
-                  sx={{
-                    fontSize: "2rem",
-                    color: theme.palette.text.primary,
-                  }}
-                />
-                <Typography variant="h6" sx={{ color: "inherit" }}>
-                  Location: {country.label}
-                </Typography>
-              </Box>
+              <ItemIconText
+                Component={
+                  <Place
+                    sx={{
+                      fontSize: "2rem",
+                      color: theme.palette.text.primary,
+                    }}
+                  />
+                }
+                text={`Population: ${city.population}`}
+              />
+
+              <ItemIconText
+                Component={
+                  <PeopleAlt
+                    sx={{
+                      fontSize: "2rem",
+                      color: theme.palette.text.primary,
+                    }}
+                  />
+                }
+                text={`Location: ${country.label}`}
+              />
             </Box>
 
             <Typography
