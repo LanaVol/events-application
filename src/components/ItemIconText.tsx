@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 
 interface ItemIconTextProps {
   text: string;
-  Component: JSX.Element;
+  Component?: JSX.Element;
 }
 
 export const ItemIconText = ({ text, Component }: ItemIconTextProps) => {

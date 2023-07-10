@@ -7,7 +7,8 @@ import { BannerHero } from "../components/BannerHero";
 import { MainTitle } from "../components/MainTitle";
 import { MessageError } from "../components/MessageError";
 import { HomeCityList } from "../components/HomeCityList/HomeCityList";
-import { HomeEventList } from "../components/HomeEventList/HomeEventList";
+import { HEventList } from "../components/HomeEventList/HEventList";
+// import { HomeEventList } from "../components/HomeEventList/HomeEventList";
 import { Box, Container } from "@mui/material";
 
 export default function Home(): JSX.Element {
@@ -54,7 +55,8 @@ export default function Home(): JSX.Element {
         {eventsResult && !eventsIsLoading && eventsResult.events.length > 0 && (
           <>
             <MainTitle title="These Are The Best Events" showArrow={false} />
-            <HomeEventList events={eventsResult.events} />
+            <HEventList events={eventsResult.events} />
+            {/* <HomeEventList events={eventsResult.events} /> */}
           </>
         )}
 

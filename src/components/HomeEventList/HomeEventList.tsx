@@ -43,78 +43,177 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
           }: any,
           index: number
         ) => (
-          <Box
-            key={index}
-            data-aos="fade-up"
-            data-aos-duration="2000"
-            sx={{
-              // border: "1px solid red",
-              display: "flex",
-              flexDirection: index % 2 === 0 ? "row" : "row-reverse",
-              justifyContent: index % 2 === 0 ? "start" : "end",
-              padding: "1rem 0",
-              gap: "0.5rem",
-            }}
-          >
+          <Box>
             <Box
-              sx={{ width: "40%", borderRadius: "10px", overflow: "hidden" }}
-            >
-              <Image
-                src={imagePath}
-                alt={title}
-                width={800}
-                height={400}
-                priority={true}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  display: "block",
-                }}
-              />
-            </Box>
-
-            <Box
+              key={index}
+              data-aos="fade-up"
+              data-aos-duration="2000"
               sx={{
-                // border: "1px solid red",
+                border: "1px solid red",
+                borderColor: index % 2 === 0 ? "red" : "blue",
+
                 display: "flex",
+                flexDirection: index % 2 === 0 ? "row" : "row-reverse",
                 justifyContent: "center",
-                alignItems: "center",
-                padding: "1rem",
-                borderRadius: "10px",
+                // justifyContent: index % 2 === 0 ? "start" : "end",
+                padding: "1rem 0",
+                gap: "0.5rem",
+
+                animation: "6s linear 0s infinite alternate bounce",
+                animationName: index % 2 === 0 ? "bounce" : "bounceReverse",
+
+                "@keyframes bounce": {
+                  from: { transform: "translateX(-100px)" },
+                  to: { transform: "translateX(100px)" },
+                },
+                "@keyframes bounceReverse": {
+                  from: { transform: "translateX(100px)" },
+                  to: { transform: "translateX(-100px)" },
+                },
               }}
             >
+              <Box
+                sx={{ width: "40%", borderRadius: "10px", overflow: "hidden" }}
+              >
+                <Image
+                  src={imagePath}
+                  alt={title}
+                  width={800}
+                  height={400}
+                  priority={true}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    display: "block",
+                  }}
+                />
+              </Box>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "1rem",
+                  borderRadius: "10px",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.5rem",
+                    // border: "1px solid red",
+                    borderRadius: "10px",
+                    background: theme.palette.background.blueGreyBg,
+                    padding: "1rem",
+                    color: theme.palette.text.main,
+                  }}
+                >
+                  <img
+                    loading="lazy"
+                    width="80"
+                    src={`https://flagcdn.com/w80/${country.code.toLowerCase()}.png`}
+                    srcSet={`https://flagcdn.com/w160/${country.code.toLowerCase()}.png 2x`}
+                    alt="alt"
+                    style={{
+                      margin: "0 auto",
+                      display: "block",
+                      padding: "3px",
+                      borderRadius: "7px",
+                      overflow: "hidden",
+                    }}
+                  />
+
+                  <ItemIconText
+                    text={city.label}
+                    Component={
+                      <Place
+                        fontSize="medium"
+                        sx={{
+                          border: `1px solid ${theme.palette.text.main}`,
+                          borderRadius: "50%",
+                          padding: "3px 5px",
+                          fontSize: "2.5rem",
+                        }}
+                      />
+                    }
+                  />
+
+                  <ItemIconText
+                    text={country.label}
+                    Component={
+                      <Public
+                        fontSize="medium"
+                        sx={{
+                          border: `1px solid ${theme.palette.text.main}`,
+                          borderRadius: "50%",
+                          padding: "3px 5px",
+                          fontSize: "2.5rem",
+                        }}
+                      />
+                    }
+                  />
+                </Box>
+              </Box>
+
               <Box
                 sx={{
                   display: "flex",
                   flexDirection: "column",
                   gap: "0.5rem",
-                  // border: "1px solid red",
-                  borderRadius: "10px",
-                  background: theme.palette.background.blueGreyBg,
-                  padding: "1rem",
+                  paddingLeft: "1rem",
+                  border: `1px solid ${theme.palette.text.main}`,
+                  justifyContent: "center",
+                  // alignItems: "center",
                   color: theme.palette.text.main,
+                  borderRadius: "10px",
+                  padding: "1rem",
                 }}
               >
-                <img
-                  loading="lazy"
-                  width="80"
-                  src={`https://flagcdn.com/w80/${country.code.toLowerCase()}.png`}
-                  srcSet={`https://flagcdn.com/w160/${country.code.toLowerCase()}.png 2x`}
-                  alt=""
-                  style={{
-                    margin: "0 auto",
-                    display: "block",
-                    padding: "3px",
-                    borderRadius: "7px",
-                    overflow: "hidden",
-                  }}
-                />
-
                 <ItemIconText
-                  text={city.label}
+                  text={title}
                   Component={
-                    <Place
-                      fontSize="medium"
+                    <Title
+                      sx={{
+                        border: `1px solid ${theme.palette.text.main}`,
+                        borderRadius: "50%",
+                        padding: "3px 5px",
+                        fontSize: "2.5rem",
+                      }}
+                    />
+                  }
+                />
+                <ItemIconText
+                  text={description}
+                  Component={
+                    <Description
+                      sx={{
+                        border: `1px solid ${theme.palette.text.main}`,
+                        borderRadius: "50%",
+                        padding: "3px 5px",
+                        fontSize: "2.5rem",
+                      }}
+                    />
+                  }
+                />
+                <ItemIconText
+                  text={date}
+                  Component={
+                    <CalendarIcon
+                      sx={{
+                        border: `1px solid ${theme.palette.text.main}`,
+                        borderRadius: "50%",
+                        padding: "3px 5px",
+                        fontSize: "2.5rem",
+                      }}
+                    />
+                  }
+                />
+                <ItemIconText
+                  text={seats}
+                  Component={
+                    <Chair
                       sx={{
                         border: `1px solid ${theme.palette.text.main}`,
                         borderRadius: "50%",
@@ -125,91 +224,7 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                   }
                 />
 
-                <ItemIconText
-                  text={country.label}
-                  Component={
-                    <Public
-                      fontSize="medium"
-                      sx={{
-                        border: `1px solid ${theme.palette.text.main}`,
-                        borderRadius: "50%",
-                        padding: "3px 5px",
-                        fontSize: "2.5rem",
-                      }}
-                    />
-                  }
-                />
-              </Box>
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "0.5rem",
-                paddingLeft: "1rem",
-                border: `1px solid ${theme.palette.text.main}`,
-                justifyContent: "center",
-                // alignItems: "center",
-                color: theme.palette.text.main,
-                borderRadius: "10px",
-                padding: "1rem",
-              }}
-            >
-              <ItemIconText
-                text={title}
-                Component={
-                  <Title
-                    sx={{
-                      border: `1px solid ${theme.palette.text.main}`,
-                      borderRadius: "50%",
-                      padding: "3px 5px",
-                      fontSize: "2.5rem",
-                    }}
-                  />
-                }
-              />
-              <ItemIconText
-                text={description}
-                Component={
-                  <Description
-                    sx={{
-                      border: `1px solid ${theme.palette.text.main}`,
-                      borderRadius: "50%",
-                      padding: "3px 5px",
-                      fontSize: "2.5rem",
-                    }}
-                  />
-                }
-              />
-              <ItemIconText
-                text={date}
-                Component={
-                  <CalendarIcon
-                    sx={{
-                      border: `1px solid ${theme.palette.text.main}`,
-                      borderRadius: "50%",
-                      padding: "3px 5px",
-                      fontSize: "2.5rem",
-                    }}
-                  />
-                }
-              />
-              <ItemIconText
-                text={seats}
-                Component={
-                  <Chair
-                    sx={{
-                      border: `1px solid ${theme.palette.text.main}`,
-                      borderRadius: "50%",
-                      padding: "3px 5px",
-                      fontSize: "2.5rem",
-                    }}
-                  />
-                }
-              />
-
-              {/* <Box>
+                {/* <Box>
                 <Box>
                   <Box>
                     <img
@@ -225,20 +240,21 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                 <Typography>Country: {country.label}</Typography>
               </Box> */}
 
-              <Box sx={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {categories?.map(({ label, color }: any, index: number) => (
-                  <Chip
-                    key={index}
-                    label={label}
-                    variant="outlined"
-                    style={{
-                      color: "white",
-                      backgroundColor: color,
-                      marginRight: "5px",
-                      border: "none",
-                    }}
-                  />
-                ))}
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                  {categories?.map(({ label, color }: any, index: number) => (
+                    <Chip
+                      key={index}
+                      label={label}
+                      variant="outlined"
+                      style={{
+                        color: "white",
+                        backgroundColor: color,
+                        marginRight: "5px",
+                        border: "none",
+                      }}
+                    />
+                  ))}
+                </Box>
               </Box>
             </Box>
           </Box>
