@@ -274,26 +274,12 @@ export const EventItem = ({ data }: any) => {
                 fontWeight: "400",
                 color: theme.palette.text.grey,
                 textAlign: "justify",
-                // lineHeight: "1.5rem",
               }}
             >
               {data.description +
                 "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore possimus incidunt similique voluptates ipsum aperiam saepe minima consequatur deleniti sunt adipisci nulla repudiandae laborum, consequuntur itaque neque a. Minus, facilis."}
             </Typography>
           </Grid>
-          {/* <Box>
-            <Button
-              variant="contained"
-              sx={{
-                borderRadius: "24px",
-                margin: "0 auto",
-                display: "block",
-                padding: "10px 24px",
-              }}
-            >
-              Register On Event
-            </Button>
-          </Box> */}
         </Grid>
       </Grid>
 

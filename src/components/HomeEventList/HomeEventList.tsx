@@ -158,28 +158,14 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                   borderRadius: "10px",
                   padding: "0.5rem",
                   color: theme.palette.text.main,
-                  // border: "1px solid red",
                   position: "absolute",
-                  top: 5,
+                  top: 10,
                   left: 25,
                   right: 25,
                   transition: "all 400ms ease-in-out",
                 }}
               >
-                <ItemIconText
-                  text={city.label}
-                  // Component={
-                  //   <Place
-                  //     fontSize="medium"
-                  //     sx={{
-                  //       border: `1px solid ${theme.palette.text.main}`,
-                  //       borderRadius: "50%",
-                  //       padding: "3px 5px",
-                  //       fontSize: "2rem",
-                  //     }}
-                  //   />
-                  // }
-                />
+                <ItemIconText text={city.label} />
 
                 <Box>
                   <img
@@ -198,20 +184,7 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                     }}
                   />
                 </Box>
-                <ItemIconText
-                  text={country.label}
-                  // Component={
-                  //   <Public
-                  //     fontSize="medium"
-                  //     sx={{
-                  //       border: `1px solid ${theme.palette.text.main}`,
-                  //       borderRadius: "50%",
-                  //       padding: "3px 5px",
-                  //       fontSize: "2rem",
-                  //     }}
-                  //   />
-                  // }
-                />
+                <ItemIconText text={country.label} />
               </Box>
 
               <Box

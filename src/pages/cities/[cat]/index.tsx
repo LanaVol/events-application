@@ -168,7 +168,11 @@ const EventsCatPage = (): JSX.Element => {
               startIcon={<RefreshIcon />}
               loading={isLoading}
               onClick={handleLoadMore}
-              sx={{ p: "0.75rem 2rem", fontSize: "0.8rem", color: "inherit" }}
+              sx={{
+                p: "0.75rem 2rem",
+                fontSize: "0.8rem",
+                color: theme.palette.text.primary,
+              }}
             >
               <span>Load more cities!</span>
             </LoadingButton>

@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import texture from "../image/texture.jpg";
 import bg2 from "../image/bg2.jpg";
 
@@ -14,6 +14,7 @@ export const MainTitle = ({
   showArrow = true,
 }: IMainTitleProps): JSX.Element => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Box
@@ -26,7 +27,7 @@ export const MainTitle = ({
         sx={{
           fontWeight: "800",
           textAlign: "center",
-          fontSize: "120px",
+          fontSize: isMobile ? "80px" : "120px",
           marginBottom: "46px",
           textTransform: "uppercase",
           color: "transparent",

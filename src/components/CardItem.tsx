@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { Place, Celebration as CelebrationIcon } from "@mui/icons-material";
-import { useState } from "react";
-import { blue } from "@mui/material/colors";
 
 export const CardItem = ({
   imagePath,
@@ -13,28 +11,33 @@ export const CardItem = ({
   description,
 }: any): JSX.Element => {
   const theme = useTheme();
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
 
   return (
     <Box
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       sx={{
         borderRadius: "10px",
-        overflow: "hidden",
+
         background: theme.palette.background.gradientCard,
+        position: "relative",
+
         transition: "transform 300ms linear",
+
+        "&:hover::before": {
+          content: `''`,
+          borderRadius: "0 10px 0 10px",
+          position: "absolute",
+          transform: "skew(2deg,2deg)",
+          width: "101%",
+          height: "101%",
+          background: theme.palette.background.gradientBtn,
+        },
+
         "&:hover": {
           transform: "scale(1.03)",
-          boxShadow: " 0px 1px 7px 0px rgba(36,188,196,0.75)",
+        },
+        "&:hover .cardDescription": {
+          opacity: 1,
+          color: theme.palette.text.white,
         },
       }}
     >
@@ -42,8 +45,9 @@ export const CardItem = ({
         sx={{
           width: "100%",
           height: "500px",
-          overflow: "hidden",
           position: "relative",
+          borderRadius: "10px",
+          overflow: "hidden",
         }}
       >
         <Image
@@ -59,7 +63,7 @@ export const CardItem = ({
             top: "100%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            zIndex: 1,
+            zIndex: 2,
           }}
           sizes="(max-width: 768px) 25vw, (max-width: 1800px) 40vw, 33vw"
         />
@@ -80,6 +84,7 @@ export const CardItem = ({
             sx={{
               borderRadius: "10px",
               background: theme.palette.background.gradientCard,
+              color: theme.palette.text.light,
             }}
           >
             <Box
@@ -134,6 +139,7 @@ export const CardItem = ({
         </Box>
         {description ? (
           <Typography
+            className="cardDescription"
             variant="h6"
             sx={{
               position: "absolute",
@@ -142,9 +148,9 @@ export const CardItem = ({
               right: "0",
               zIndex: 10,
               padding: "7px",
-              color: isHovered ? "white" : "",
+              // color: "",
               transition: "opacity 200ms linear, color 200ms linear",
-              opacity: isHovered ? 1 : 0,
+              opacity: 0,
               backgroundColor: "#00000050",
               textAlign: "center",
             }}
