@@ -12,6 +12,7 @@ declare module "@mui/material" {
     glassBg: string,
     gradientBg1: string,
     gradientBg2: string,
+    gradientBg3: string,
     gradientBtn: string,
     blueGrey100: string,
     gradientGlass: string,
@@ -51,11 +52,14 @@ export const themeSettings = (mode: PaletteMode) => {
         blueGreyBg: "#455a64",
         blueGrey100: '#eceff170',
         lightBlue:'#CCF8FA70',
-        // glassBg:'linear-gradient(135deg. rgba(255, 255, 0.1), rgba(255, 255, 0))',
         gradientHeaderBg:
           mode === "light"
-            ? "radial-gradient(circle at 10% 20%, rgb(166, 226, 229) 0%, rgb(198, 232, 221) 100%)"
+            ? "linear-gradient(109.6deg, rgb(104, 183, 249) 31.3%, rgb(176, 248, 200) 100.2%)"
             : "linear-gradient(109.6deg, rgb(23, 32, 34) 11.2%, rgb(11, 132, 145) 91.1%)",
+        // gradientHeaderBg:
+        //   mode === "light"
+        //     ? "radial-gradient(circle at 10% 20%, rgb(166, 226, 229) 0%, rgb(198, 232, 221) 100%)"
+        //     : "linear-gradient(109.6deg, rgb(23, 32, 34) 11.2%, rgb(11, 132, 145) 91.1%)",
         
         gradientCard:
           mode === "light"
@@ -64,9 +68,13 @@ export const themeSettings = (mode: PaletteMode) => {
         gradientBg1: mode === "light"
             ? "linear-gradient(108.1deg, rgb(167, 220, 225) 11.2%, rgb(217, 239, 242) 88.9%)"
           : "linear-gradient(79.8deg, rgb(101, 132, 154) 3.2%, rgb(160, 197, 201) 89.1%)",
+        
         gradientBg2:mode === "light"
             ? "linear-gradient(108.1deg, rgb(167, 220, 225) 11.2%, rgb(217, 239, 242) 88.9%)"
           : "linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(74, 98, 110) 131%)",
+        gradientBg3:mode === "light"
+            ? "linear-gradient(89.2deg, rgb(191, 241, 236) 22.3%, rgb(109, 192, 236) 84.1%)"
+          : "linear-gradient(109.6deg, rgb(23, 32, 34) 11.2%, rgb(11, 132, 145) 91.1%)",
         gradientBtn: 'radial-gradient(circle at 10% 20%, rgb(0, 93, 133) 0%, rgb(0, 181, 149) 90%)',
         // gradientBg2:mode === "light"
         //     ? "linear-gradient(108.1deg, rgba(44, 100, 118, 1) 11.2%, rgb(217, 239, 242) 88.9%)"
@@ -78,7 +86,7 @@ export const themeSettings = (mode: PaletteMode) => {
         main: mode === "dark" ? "#26a69a" : "#26a69a",
         primary: mode === "dark" ? "#fff" : "rgba(0, 0, 0, 0.87)",
         light: mode === "dark" ? "#fff" : "#5f6769",
-        dark: mode === "dark" ? "#616161" : "#757575",
+        dark: mode === "dark" ? "#222831" : "#393e46",
         white: '#fff',
         grey:'#bdbdbd'
       },

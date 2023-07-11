@@ -45,6 +45,7 @@ export const MenuNavigationLink = () => {
               sx={{
                 fontSize: "1.2rem",
                 color: theme.palette.text.primary,
+                fontWeight: "600px",
 
                 "&::after": {
                   content: "''",
@@ -54,7 +55,7 @@ export const MenuNavigationLink = () => {
                   bottom: "-5px",
                   left: "50%",
                   transform: "translateX(-50%)",
-                  background: theme.palette.primary.main,
+                  background: theme.palette.text.primary,
                   transition: "width 200ms linear",
                 },
                 "&:hover::after": {

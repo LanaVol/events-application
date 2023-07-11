@@ -107,7 +107,7 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                 },
                 "&:hover .eventTitle": {
                   transform: "translateY(-70px)",
-                  color: theme.palette.text.light,
+                  color: theme.palette.text.white,
                   textShadow: `-2px -2px 5px ${theme.palette.text.main}, 5px 5px 5px ${theme.palette.text.main}`,
                   background: theme.palette.background.gradientHeaderBg,
                 },
@@ -115,7 +115,7 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                   transform: "translateY(200px)",
                   background: theme.palette.background.gradientHeaderBg,
                   textShadow: `-2px -2px 5px ${theme.palette.text.main}, 5px 5px 5px ${theme.palette.text.main}`,
-                  color: theme.palette.text.light,
+                  color: theme.palette.text.white,
                 },
               }}
             >
@@ -196,7 +196,8 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                   flexDirection: "column",
                   gap: "0.3rem",
                   padding: "0.3rem 1rem",
-                  background: theme.palette.background.gradientCard,
+                  background: theme.palette.background.gradientBg3,
+                  // background: theme.palette.background.lightBlue,
                   borderRadius: "0 0 10px 10px",
                   justifyContent: "center",
                   color: theme.palette.text.disabled,
@@ -213,7 +214,7 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                     width: "50%",
                     background: theme.palette.background.gradientBg1,
                     opacity: "0.67",
-                    zIndex: -1,
+                    zIndex: 0,
                     borderRadius: "0 0 0 10px",
                   },
                 }}
@@ -230,6 +231,7 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                     color: theme.palette.text.disabled,
                     transition: "all 400ms linear",
                     background: theme.palette.background.gradientCard,
+                    zIndex: 1,
                   }}
                 >
                   {title}
@@ -243,6 +245,7 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                     textAlign: "center",
                     maxHeight: "50px",
                     overflow: "hidden",
+                    zIndex: 1,
                   }}
                 >
                   {description}
@@ -255,6 +258,7 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                     alignItems: "center",
                     flexWrap: "wrap",
                     gap: "1rem",
+                    zIndex: 1,
                   }}
                 >
                   <ItemIconText
@@ -292,6 +296,7 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                     gap: "0.5rem",
                     justifyContent: "center",
                     alignItems: "center",
+                    zIndex: 1,
                   }}
                 >
                   {categories?.map(({ label, color }: any, index: number) => (

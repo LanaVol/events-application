@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { Place, Celebration as CelebrationIcon } from "@mui/icons-material";
+import { ItemIconText } from "./ItemIconText";
 
 export const CardItem = ({
   imagePath,
@@ -16,7 +17,6 @@ export const CardItem = ({
     <Box
       sx={{
         borderRadius: "10px",
-
         background: theme.palette.background.gradientCard,
         position: "relative",
 
@@ -34,7 +34,9 @@ export const CardItem = ({
 
         "&:hover": {
           transform: "scale(1.03)",
+          color: theme.palette.text.white,
         },
+
         "&:hover .cardDescription": {
           opacity: 1,
           color: theme.palette.text.white,
@@ -84,10 +86,11 @@ export const CardItem = ({
             sx={{
               borderRadius: "10px",
               background: theme.palette.background.gradientCard,
-              color: theme.palette.text.light,
+              color: theme.palette.text.dark,
             }}
           >
             <Box
+              className="cardDescription"
               sx={{
                 display: "flex",
                 flexWrap: "wrap",
@@ -98,34 +101,18 @@ export const CardItem = ({
                 padding: "10px",
               }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                }}
-              >
-                <Place fontSize="medium" />
-                <Typography variant="h5" sx={{ fontSize: "inherit" }}>
-                  {leftPoint}
-                </Typography>
-              </Box>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                }}
-              >
-                <CelebrationIcon fontSize="medium" />
-                <Typography variant="h5" sx={{ fontSize: "inherit" }}>
-                  {rightPoint}
-                </Typography>
-              </Box>
+              <ItemIconText
+                text={leftPoint}
+                Component={<Place fontSize="medium" />}
+              />
+              <ItemIconText
+                text={rightPoint}
+                Component={<CelebrationIcon fontSize="medium" />}
+              />
             </Box>
 
             <Typography
+              className="cardDescription"
               variant="h3"
               sx={{
                 padding: "7px",
@@ -137,6 +124,7 @@ export const CardItem = ({
             </Typography>
           </Box>
         </Box>
+
         {description ? (
           <Typography
             className="cardDescription"
@@ -148,7 +136,6 @@ export const CardItem = ({
               right: "0",
               zIndex: 10,
               padding: "7px",
-              // color: "",
               transition: "opacity 200ms linear, color 200ms linear",
               opacity: 0,
               backgroundColor: "#00000050",

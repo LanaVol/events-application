@@ -48,7 +48,8 @@ export const HomeCItyItem = ({
         justifyContent: "space-between",
         flexWrap: "wrap",
         gap: "1rem",
-        background: theme.palette.background.gradientBg1,
+        background: theme.palette.background.gradientBg3,
+
         width: "100%",
         padding: isMobile ? "1rem" : "2rem",
         borderRadius: "10px",
