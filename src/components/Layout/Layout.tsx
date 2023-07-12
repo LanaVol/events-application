@@ -6,6 +6,10 @@ import { Footer } from "../Footer/Footer";
 import { Box, Container, ThemeProvider, createTheme } from "@mui/material";
 import CanvasBackground from "../Cursor";
 
+// interface ILayoutProps {
+//   children: ReactNode;
+// }
+
 export const Layout = ({ children }: any) => {
   const mode = useSelector((state: any) => state.theme.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
@@ -14,7 +18,6 @@ export const Layout = ({ children }: any) => {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          // position: "absolute",
           display: "flex",
           flexDirection: "column",
           minHeight: "100vh",
@@ -23,12 +26,8 @@ export const Layout = ({ children }: any) => {
       >
         <Header />
 
-        <Container
-          maxWidth="xl"
-          sx={{ flexGrow: 1, border: "1px solid green" }}
-        >
-          {children}
-        </Container>
+        {children}
+
         <Footer />
         {/* <CanvasBackground /> */}
       </Box>

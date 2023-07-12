@@ -8,7 +8,7 @@ module.exports = {
             loader: "file-loader",
             options: {
               name: "[name].[ext]",
-              outputPath: "video/", // Вкажіть шлях, куди будуть копіюватися відеофайли
+              outputPath: "../src/video/", // Вкажіть шлях, куди будуть копіюватися відеофайли
             },
           },
         ],
