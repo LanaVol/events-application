@@ -49,7 +49,6 @@ export const HomeCItyItem = ({
         flexWrap: "wrap",
         gap: "1rem",
         background: theme.palette.background.gradientBg3,
-
         width: "100%",
         padding: isMobile ? "1rem" : "2rem",
         borderRadius: "10px",
@@ -125,6 +124,7 @@ export const HomeCItyItem = ({
             flexDirection: index % 2 === 0 ? "row-reverse" : "row",
             justifyContent: "space-between",
             alignItems: "start",
+            color: "#ffffffd9",
           }}
         >
           <Box sx={{ width: isMobile ? "100%" : "50%" }}>
@@ -134,8 +134,8 @@ export const HomeCItyItem = ({
                 fontWeight: "700",
                 fontSize: "42px",
                 textAlign: "center",
-                color: theme.palette.text.primary,
-                borderBottom: `2px solid ${theme.palette.text.primary}`,
+                // color: theme.palette.text.white,
+                borderBottom: `2px solid ${theme.palette.text.white}`,
                 padding: "20px 10px",
                 marginBottom: "30px",
               }}
@@ -178,7 +178,7 @@ export const HomeCItyItem = ({
                 display: isMobile ? "flex" : "block",
                 justifyContent: "space-between",
                 flexWrap: "wrap",
-                color: theme.palette.text.light,
+                // color: theme.palette.text.light,
               }}
             >
               <Box>
@@ -187,7 +187,7 @@ export const HomeCItyItem = ({
                     <Public
                       sx={{
                         fontSize: "2rem",
-                        color: theme.palette.text.primary,
+                        // color: theme.palette.text.primary,
                       }}
                     />
                   }
@@ -199,7 +199,7 @@ export const HomeCItyItem = ({
                     <Event
                       sx={{
                         fontSize: "2rem",
-                        color: theme.palette.text.primary,
+                        // color: theme.palette.text.primary,
                       }}
                     />
                   }
@@ -213,7 +213,7 @@ export const HomeCItyItem = ({
                     <Place
                       sx={{
                         fontSize: "2rem",
-                        color: theme.palette.text.primary,
+                        // color: theme.palette.text.primary,
                       }}
                     />
                   }
@@ -225,7 +225,7 @@ export const HomeCItyItem = ({
                     <PeopleAlt
                       sx={{
                         fontSize: "2rem",
-                        color: theme.palette.text.primary,
+                        // color: theme.palette.text.primary,
                       }}
                     />
                   }
@@ -238,7 +238,7 @@ export const HomeCItyItem = ({
               variant="h6"
               sx={{
                 textAlign: "justify",
-                color: theme.palette.text.light,
+                // color: theme.palette.text.light,
                 padding: "1rem",
               }}
             >
