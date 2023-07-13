@@ -33,9 +33,9 @@ export default function Home(): JSX.Element {
 
       <Container maxWidth="xl">
         <MainTitle
-          title="Join the World of Events"
+          title="Choose the best city"
           showArrow={true}
-          subtitle="Welcome to our website, where you can find information about various exciting events happening around the world. Here, you can explore a diverse range of events, from concerts and exhibitions to sports competitions and cultural festivals. On our website, you will discover an up-to-date event calendar featuring detailed descriptions? dates, venues, and other valuable information. Browse through our event listings, choose what interests you, and join in on the thrilling experiences that will leave a lasting impression."
+          // subtitle="Welcome to our website, where you can find information about various exciting events happening around the world. Here, you can explore a diverse range of events, from concerts and exhibitions to sports competitions and cultural festivals. On our website, you will discover an up-to-date event calendar featuring detailed descriptions? dates, venues, and other valuable information. Browse through our event listings, choose what interests you, and join in on the thrilling experiences that will leave a lasting impression."
         />
 
         {citiesResult && !citiesIsLoading && !!citiesResult.cities.length && (

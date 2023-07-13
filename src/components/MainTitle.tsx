@@ -1,6 +1,6 @@
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
-import texture from "../image/texture.jpg";
-import bg2 from "../image/bg2.jpg";
+
+import bg3 from "../image/bg3.jpg";
 
 interface IMainTitleProps {
   title: string;
@@ -27,15 +27,15 @@ export const MainTitle = ({
         sx={{
           fontWeight: "800",
           textAlign: "center",
-          fontSize: isMobile ? "80px" : "120px",
+          fontSize: isMobile ? "70px" : "90px",
           marginBottom: "46px",
           textTransform: "uppercase",
           color: "transparent",
           WebkitTextStroke: `1px ${theme.palette.text.primary}`,
-          backgroundImage: `url(${bg2.src})`,
+          backgroundImage: `url(${bg3.src})`,
           WebkitBackgroundClip: "text",
           backgroundPosition: "0 0",
-          animation: "back 30s linear infinite",
+          animation: "back 15s linear infinite",
 
           "@keyframes back": {
             "100%": { backgroundPosition: "2000px 0" },
@@ -44,7 +44,7 @@ export const MainTitle = ({
       >
         {title}
       </Typography>
-      <Typography
+      {/* <Typography
         variant="subtitle1"
         sx={{
           textAlign: "center",
@@ -54,7 +54,7 @@ export const MainTitle = ({
         }}
       >
         {subtitle ? subtitle : null}
-      </Typography>
+      </Typography> */}
 
       {showArrow && (
         <Box
