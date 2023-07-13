@@ -1,3 +1,4 @@
+import React, { useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -8,8 +9,9 @@ import {
   TextField,
   ListItem,
   List,
-  useTheme,
   Divider,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import {
   Instagram,
@@ -23,120 +25,170 @@ import { CustomButton } from "../CustomButton";
 
 export const Footer = (): JSX.Element => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const betweenMdLg = useMediaQuery(theme.breakpoints.between("md", "lg"));
+
+  const videoRef = useRef();
+
+  useEffect(() => {
+    setTimeout(() => {
+      //@ts-ignore
+      videoRef.current.play();
+    }, 1000);
+  }, []);
 
   return (
     <footer>
-      <Box
-        sx={{
-          backgroundColor: "#C49D5E",
-          padding: "20px 0",
-        }}
-      >
-        <Container
-          maxWidth="xl"
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+      <Box sx={{ position: "relative" }}>
+        <video
+          //@ts-ignore
+          ref={videoRef}
+          loop
+          muted
+          style={{
+            position: "relative",
+            width: "100%",
+            height: isMobile ? "50rem" : "25rem",
+            left: 0,
+            top: 0,
+            objectFit: "cover",
+            transform: "rotate(180deg)",
           }}
         >
-          <Typography variant="h4" fontWeight="700">
-            Want to know the latest events
-          </Typography>
-          <TextField
-            fullWidth
-            id="outlined-basic"
-            variant="outlined"
-            sx={{
-              backgroundColor: "#fff",
-              borderRadius: "5px",
-              maxWidth: "500px",
-            }}
-          />
-          <CustomButton text="Join" startIcon={<Send />} />
-        </Container>
-      </Box>
-
-      <Container maxWidth="xl">
+          <source src="video/discolight2.mp4" type="video/mp4" />
+        </video>
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "start",
-            alignItems: "center",
-            gap: "460px",
-            marginBottom: "30px",
-            padding: "20px 0",
-            fontFamily: "Roboto, Arial, sans-serif",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
           }}
         >
-          <Typography
-            variant="h5"
-            sx={{
-              fontSize: "2rem",
-              fontWeight: 700,
-              color: theme.palette.text.primary,
-            }}
-          >
-            EVENTS
-          </Typography>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "start",
-              gap: "20px",
+              background: theme.palette.background.gradientGlassHeader,
+              padding: "20px 0",
+              color: theme.palette.text.white,
             }}
           >
-            <List
+            <Container
+              maxWidth="xl"
               sx={{
-                color: theme.palette.text.primary,
+                display: "flex",
+                justifyContent: isMobile ? "center" : "space-between",
+                alignItems: "center",
+                gap: "1rem",
+                flexWrap: "wrap",
               }}
             >
-              <ListItem>Email</ListItem>
-              <ListItem>Support</ListItem>
-              <ListItem>Ticketing</ListItem>
-              <ListItem>Guest Management</ListItem>
-            </List>
-            <List sx={{ color: theme.palette.text.primary }}>
-              <ListItem>Partners</ListItem>
-              <ListItem>Carreers</ListItem>
-              <ListItem>Management team</ListItem>
-            </List>
+              <Typography variant="h4" fontWeight="700">
+                Want to know the latest events
+              </Typography>
+
+              <TextField
+                fullWidth
+                id="outlined-basic"
+                variant="outlined"
+                sx={{
+                  borderRadius: "20px",
+                  maxWidth: "400px",
+                  // color: theme.palette.text.white,
+                  outlineColor: "white",
+                }}
+              />
+              <CustomButton text="Join" startIcon={<Send />} />
+            </Container>
           </Box>
+          <Divider />
+
+          <Container maxWidth="xl">
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "center",
+                gap: "460px",
+                marginBottom: "30px",
+                padding: "20px 0",
+                fontFamily: "Roboto, Arial, sans-serif",
+                color: theme.palette.text.white,
+                flexWrap: "wrap",
+              }}
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  fontSize: "2rem",
+                  fontWeight: 700,
+                  color: "inherit",
+                }}
+              >
+                EVENTS
+              </Typography>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "start",
+                  gap: "20px",
+                }}
+              >
+                <List>
+                  <ListItem>Email</ListItem>
+                  <ListItem>Support</ListItem>
+                  <ListItem>Ticketing</ListItem>
+                  <ListItem>Guest Management</ListItem>
+                </List>
+                <List>
+                  <ListItem>Partners</ListItem>
+                  <ListItem>Carreers</ListItem>
+                  <ListItem>Management team</ListItem>
+                </List>
+              </Box>
+            </Box>
+          </Container>
+          <Divider />
+          <Container maxWidth="xl">
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "0.75rem 0",
+                color: theme.palette.text.white,
+              }}
+            >
+              <Typography>
+                &#169; 2022 - A Project Built with Next.js
+              </Typography>
+
+              <Stack direction="row" spacing={1}>
+                <IconButton color="inherit">
+                  <Instagram />
+                </IconButton>
+
+                <IconButton color="inherit">
+                  <Twitter />
+                </IconButton>
+
+                <IconButton color="inherit">
+                  <Telegram />
+                </IconButton>
+
+                <IconButton color="inherit">
+                  <LinkedIn />
+                </IconButton>
+
+                <IconButton color="inherit">
+                  <Facebook />
+                </IconButton>
+              </Stack>
+            </Box>
+          </Container>
         </Box>
-      </Container>
-      <Divider />
-      <Container maxWidth="xl">
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "0.75rem 0",
-          }}
-        >
-          <Typography sx={{ color: theme.palette.text.primary }}>
-            &#169; 2022 - A Project Built with Next.js
-          </Typography>
-          <Stack direction="row" spacing={1}>
-            <IconButton>
-              <Instagram />
-            </IconButton>
-            <IconButton>
-              <Twitter />
-            </IconButton>
-            <IconButton>
-              <Telegram />
-            </IconButton>
-            <IconButton>
-              <LinkedIn />
-            </IconButton>
-            <IconButton>
-              <Facebook />
-            </IconButton>
-          </Stack>
-        </Box>
-      </Container>
+      </Box>
     </footer>
   );
 };
