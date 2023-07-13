@@ -24,7 +24,7 @@ export const Layout = ({ children }: any) => {
           backgroundColor: theme.palette.background.default,
         }}
       >
-        <Header />
+        {/* <Header /> */}
 
         {children}
 

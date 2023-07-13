@@ -51,7 +51,12 @@ export const MobileMenu = (): JSX.Element => {
       <ListItem disablePadding sx={{ padding: "1rem" }}>
         <Typography
           variant="h4"
-          sx={{ fontWeight: 500, color: theme.palette.text.dark }}
+          sx={{
+            fontWeight: 500,
+            color: theme.palette.text.light,
+            textTransform: "uppercase",
+            padding: "10px 0px",
+          }}
         >
           Events
         </Typography>
@@ -125,11 +130,21 @@ export const MobileMenu = (): JSX.Element => {
       >
         <IconButton
           onClick={toggleDrawer("left", true)}
-          sx={{ color: theme.palette.text.primary }}
+          sx={{ color: theme.palette.text.white }}
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h5">Events</Typography>
+        <Typography
+          variant="h5"
+          sx={{
+            fontWeight: 500,
+            color: theme.palette.text.white,
+            textTransform: "uppercase",
+            fontSize: "2.2rem",
+          }}
+        >
+          Events
+        </Typography>
       </Box>
 
       <Box>
