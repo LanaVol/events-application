@@ -48,7 +48,7 @@ export const Footer = (): JSX.Element => {
           style={{
             position: "relative",
             width: "100%",
-            height: isMobile ? "50rem" : "25rem",
+            height: isMobile ? "25rem" : "16rem",
             left: 0,
             top: 0,
             objectFit: "cover",
@@ -93,7 +93,6 @@ export const Footer = (): JSX.Element => {
                 sx={{
                   borderRadius: "20px",
                   maxWidth: "400px",
-                  // color: theme.palette.text.white,
                   outlineColor: "white",
                 }}
               />
@@ -106,9 +105,9 @@ export const Footer = (): JSX.Element => {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "start",
+                justifyContent: isMobile ? "center" : "space-between",
                 alignItems: "center",
-                gap: "460px",
+                gap: "1rem",
                 marginBottom: "30px",
                 padding: "20px 0",
                 fontFamily: "Roboto, Arial, sans-serif",
@@ -125,43 +124,6 @@ export const Footer = (): JSX.Element => {
                 }}
               >
                 EVENTS
-              </Typography>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "start",
-                  gap: "20px",
-                }}
-              >
-                <List>
-                  <ListItem>Email</ListItem>
-                  <ListItem>Support</ListItem>
-                  <ListItem>Ticketing</ListItem>
-                  <ListItem>Guest Management</ListItem>
-                </List>
-                <List>
-                  <ListItem>Partners</ListItem>
-                  <ListItem>Carreers</ListItem>
-                  <ListItem>Management team</ListItem>
-                </List>
-              </Box>
-            </Box>
-          </Container>
-          <Divider />
-          <Container maxWidth="xl">
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                padding: "0.75rem 0",
-                color: theme.palette.text.white,
-              }}
-            >
-              <Typography>
-                &#169; 2022 - A Project Built with Next.js
               </Typography>
 
               <Stack direction="row" spacing={1}>
@@ -185,7 +147,35 @@ export const Footer = (): JSX.Element => {
                   <Facebook />
                 </IconButton>
               </Stack>
+
+              {/* <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "start",
+                  gap: "20px",
+                }}
+              >
+                <List>
+                  <ListItem>Email</ListItem>
+                  <ListItem>Support</ListItem>
+                  <ListItem>Ticketing</ListItem>
+                  <ListItem>Guest Management</ListItem>
+                </List>
+                <List>
+                  <ListItem>Partners</ListItem>
+                  <ListItem>Carreers</ListItem>
+                  <ListItem>Management team</ListItem>
+                </List>
+              </Box> */}
             </Box>
+          </Container>
+          <Divider />
+          <Container
+            maxWidth="xl"
+            sx={{ color: theme.palette.text.white, textAlign: "center" }}
+          >
+            <Typography>&#169; 2022 - A Project Built with Next.js</Typography>
           </Container>
         </Box>
       </Box>
