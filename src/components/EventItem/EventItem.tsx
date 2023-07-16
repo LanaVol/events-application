@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import { IEventItem } from "../../interfaces";
+import { SpeakersLine } from "./SpeakersLine";
+import { EventInfoItem } from "./EventInfoItem";
 import {
   Box,
   Chip,
@@ -10,8 +11,7 @@ import {
   Button,
   useMediaQuery,
 } from "@mui/material";
-import { SpeakersLine } from "../SpeakersLine";
-import { EventInfoItem } from "../EventInfoItem";
+
 import {
   Event,
   Chair,
@@ -26,10 +26,18 @@ import {
   Place,
 } from "@mui/icons-material";
 
-export const EventItem = ({ data }: any) => {
-  const inputEmail = useRef();
-  const router = useRouter();
-  const [message, setMessage] = useState("");
+interface IEventItemProps {
+  event: IEventItem;
+  isLoading?: boolean;
+}
+
+export const EventItem = ({
+  event,
+  isLoading = false,
+}: IEventItemProps): JSX.Element => {
+  // const { title, description, imagePath, date, seats, categories, speakers } =
+  //   event;
+
   const theme = useTheme();
 
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
@@ -48,7 +56,7 @@ export const EventItem = ({ data }: any) => {
           textAlign: isMobile ? "center" : "left",
         }}
       >
-        {data.title}
+        {event.title}
       </Typography>
 
       <Grid
@@ -57,13 +65,13 @@ export const EventItem = ({ data }: any) => {
           marginBottom: "30px",
         }}
       >
-        {data.imagePath ? (
+        {event.imagePath ? (
           <Grid item lg={6} md={12} sm={12} sx={{ padding: "1rem 0" }}>
             <Image
-              src={data.imagePath}
+              src={event.imagePath}
               width={400}
               height={300}
-              alt={data.title}
+              alt={event.title}
               style={{
                 width: "100%",
                 height: "auto",
@@ -110,7 +118,7 @@ export const EventItem = ({ data }: any) => {
 
           <EventInfoItem
             text="When: "
-            info={data.date}
+            info={event.date}
             ComponentIcon={
               <Event
                 fontSize="medium"
@@ -121,7 +129,7 @@ export const EventItem = ({ data }: any) => {
 
           <EventInfoItem
             text="Seats: "
-            info={data.seats}
+            info={event.seats}
             ComponentIcon={
               <Chair
                 fontSize="medium"
@@ -132,7 +140,7 @@ export const EventItem = ({ data }: any) => {
 
           <EventInfoItem
             text="Price: "
-            info={data.price}
+            info={event.price}
             ComponentIcon={
               <Sell
                 fontSize="medium"
@@ -155,8 +163,8 @@ export const EventItem = ({ data }: any) => {
           <EventInfoItem
             text="Speakers: "
             info={
-              data.speakers
-                ? data.speakers.map((speaker: any) => (
+              event.speakers
+                ? event.speakers.map((speaker: any) => (
                     <Typography
                       variant="subtitle2"
                       sx={{
@@ -239,8 +247,8 @@ export const EventItem = ({ data }: any) => {
                 gap: "3px 7px",
               }}
             >
-              {data.categories
-                ? data.categories.map((cat: any) => (
+              {event.categories
+                ? event.categories.map((cat: any) => (
                     <Chip
                       label={cat.label}
                       sx={{
@@ -276,7 +284,7 @@ export const EventItem = ({ data }: any) => {
                 textAlign: "justify",
               }}
             >
-              {data.description +
+              {event.description +
                 "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Labore possimus incidunt similique voluptates ipsum aperiam saepe minima consequatur deleniti sunt adipisci nulla repudiandae laborum, consequuntur itaque neque a. Minus, facilis."}
             </Typography>
           </Grid>
@@ -312,7 +320,7 @@ export const EventItem = ({ data }: any) => {
         Speakers and hosts of this event:
       </Typography>
 
-      <SpeakersLine speakers={data.speakers} />
+      <SpeakersLine speakers={event.speakers} />
     </Box>
   );
 };

@@ -1,6 +1,6 @@
 import { Typography, Grid, useTheme } from "@mui/material";
 
-export const EventInfoItem = ({ text, info, ComponentIcon }) => {
+export const EventInfoItem = ({ text, info, ComponentIcon }: any) => {
   const theme = useTheme();
 
   return (
