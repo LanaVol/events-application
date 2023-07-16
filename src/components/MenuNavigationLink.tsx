@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { List, ListItem, Typography, useTheme } from "@mui/material";
-import { wrap } from "module";
 
 const linkValues = [
   { href: "/", text: "Home" },
@@ -21,8 +20,6 @@ export const MenuNavigationLink = () => {
         justifyContent: "space-between",
         alignItems: "center",
         flexWrap: "wrap",
-        // paddingTop: "100px",
-        // paddingBottom: "10px",
       }}
     >
       {linkValues.map((item, index) => (

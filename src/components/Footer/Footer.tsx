@@ -147,27 +147,6 @@ export const Footer = (): JSX.Element => {
                   <Facebook />
                 </IconButton>
               </Stack>
-
-              {/* <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "start",
-                  gap: "20px",
-                }}
-              >
-                <List>
-                  <ListItem>Email</ListItem>
-                  <ListItem>Support</ListItem>
-                  <ListItem>Ticketing</ListItem>
-                  <ListItem>Guest Management</ListItem>
-                </List>
-                <List>
-                  <ListItem>Partners</ListItem>
-                  <ListItem>Carreers</ListItem>
-                  <ListItem>Management team</ListItem>
-                </List>
-              </Box> */}
             </Box>
           </Container>
           <Divider />

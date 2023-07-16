@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { Place, Celebration as CelebrationIcon } from "@mui/icons-material";

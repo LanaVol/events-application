@@ -2,14 +2,7 @@ import { useEffect, Component } from "react";
 import { Box, Chip, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import AOS from "aos";
-import {
-  CalendarMonth,
-  Chair,
-  Description,
-  Place,
-  Public,
-  Title,
-} from "@mui/icons-material";
+import { Chair } from "@mui/icons-material";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import { ItemIconText } from "../ItemIconText";
 import Slider from "react-slick";
@@ -126,9 +119,9 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                   borderRadius: "10px 10px 0 0",
                   overflow: "hidden",
                   margin: "0 auto",
-                  position: "relative",
                   zIndex: 0,
                   marginBottom: "5px",
+                  position: "relative",
                 }}
               >
                 <Image
@@ -174,7 +167,7 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                     height="50"
                     src={`https://flagcdn.com/w80/${country.code.toLowerCase()}.png`}
                     srcSet={`https://flagcdn.com/w160/${country.code.toLowerCase()}.png 2x`}
-                    alt="alt"
+                    alt=""
                     style={{
                       margin: "0 auto",
                       display: "block",
@@ -197,7 +190,6 @@ export const HomeEventList = ({ events }: any): JSX.Element => {
                   gap: "0.3rem",
                   padding: "0.3rem 1rem",
                   background: theme.palette.background.gradientBg3,
-                  // background: theme.palette.background.lightBlue,
                   borderRadius: "0 0 10px 10px",
                   justifyContent: "center",
                   color: theme.palette.text.disabled,

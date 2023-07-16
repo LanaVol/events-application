@@ -7,8 +7,6 @@ import { BannerHero } from "../components/BannerHero";
 import { MainTitle } from "../components/MainTitle";
 import { MessageError } from "../components/MessageError";
 import { HomeCityList } from "../components/HomeCityList/HomeCityList";
-
-// import { HomeEventList } from "../components/HomeEventList/HomeEventList";
 import { HomeEventList } from "../components/HomeEventList/HomeEventList";
 import { Box, Container } from "@mui/material";
 

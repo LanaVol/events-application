@@ -68,13 +68,13 @@ export const HomeCItyItem = ({
         <Link href={`/cities/${city.label.toLowerCase()}`}>
           <Image
             src={imagePath}
-            alt={title}
+            alt={city.label}
             fill={true}
             priority={true}
             style={{
               objectFit: "cover",
               display: "block",
-              position: "absolute",
+              // position: "absolute",
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
@@ -134,7 +134,6 @@ export const HomeCItyItem = ({
                 fontWeight: "700",
                 fontSize: "42px",
                 textAlign: "center",
-                // color: theme.palette.text.white,
                 borderBottom: `2px solid ${theme.palette.text.white}`,
                 padding: "20px 10px",
                 marginBottom: "30px",
@@ -148,20 +147,20 @@ export const HomeCItyItem = ({
                 width: "90%",
                 height: "250px",
                 overflow: "hidden",
-                position: "relative",
                 margin: "0 auto",
+                position: "relative",
               }}
             >
               <Link href={`/cities/${city.label.toLowerCase()}`}>
                 <Image
                   src={imagePath}
-                  alt={title}
+                  alt={city.label}
                   fill={true}
                   priority={true}
                   style={{
                     objectFit: "contain",
                     display: "block",
-                    position: "absolute",
+                    // position: "absolute",
                     top: "50%",
                     left: "50%",
                     transform: "translate(-50%, -50%)",
@@ -178,7 +177,6 @@ export const HomeCItyItem = ({
                 display: isMobile ? "flex" : "block",
                 justifyContent: "space-between",
                 flexWrap: "wrap",
-                // color: theme.palette.text.light,
               }}
             >
               <Box>
@@ -187,7 +185,6 @@ export const HomeCItyItem = ({
                     <Public
                       sx={{
                         fontSize: "2rem",
-                        // color: theme.palette.text.primary,
                       }}
                     />
                   }
@@ -199,7 +196,6 @@ export const HomeCItyItem = ({
                     <Event
                       sx={{
                         fontSize: "2rem",
-                        // color: theme.palette.text.primary,
                       }}
                     />
                   }
@@ -213,7 +209,6 @@ export const HomeCItyItem = ({
                     <Place
                       sx={{
                         fontSize: "2rem",
-                        // color: theme.palette.text.primary,
                       }}
                     />
                   }
@@ -225,7 +220,6 @@ export const HomeCItyItem = ({
                     <PeopleAlt
                       sx={{
                         fontSize: "2rem",
-                        // color: theme.palette.text.primary,
                       }}
                     />
                   }
@@ -238,7 +232,7 @@ export const HomeCItyItem = ({
               variant="h6"
               sx={{
                 textAlign: "justify",
-                // color: theme.palette.text.light,
+
                 padding: "1rem",
               }}
             >

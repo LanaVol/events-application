@@ -23,6 +23,7 @@ import { IQueryParams } from "../../../interfaces";
 
 const EventsCatPage = (): JSX.Element => {
   // const [params, setParams] = useState<any>({});
+
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(3);
   const { query } = useRouter();

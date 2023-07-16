@@ -47,21 +47,21 @@ export const CardItem = ({
         sx={{
           width: "100%",
           height: "500px",
-          position: "relative",
           borderRadius: "10px",
           overflow: "hidden",
+          position: "relative",
         }}
       >
         <Image
           src={imagePath}
-          alt={title}
+          alt={`Here is ${title}`}
           fill={true}
           priority={true}
           style={{
             margin: "auto",
             display: "block",
             objectFit: "cover",
-            position: "absolute",
+            // position: "absolute",
             top: "100%",
             left: "50%",
             transform: "translate(-50%, -50%)",

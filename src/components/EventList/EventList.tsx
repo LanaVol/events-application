@@ -39,6 +39,7 @@ export const EventList = ({
             categories,
           }: any) => (
             <Grid
+              key={id}
               item
               xs={12}
               sm={6}
