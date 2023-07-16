@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CategoryOperations } from "../category/category.operations";
+import { CategoryOperations } from "./category.operations";
 import { ICountry } from "../../interfaces";
 
 export interface ICategoryState {

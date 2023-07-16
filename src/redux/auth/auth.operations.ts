@@ -1,35 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ISignupArg, ISigninArg } from "../../interfaces";
+import { ISigninProps } from "../../interfaces";
 import { AuthService } from "../../services";
+import { AxiosError } from "axios";
 
 export class AuthOperations {
   static signin = createAsyncThunk(
     "auth/signin",
-    async ({ email, password }: ISigninArg, { rejectWithValue }) => {
+    async ({ email, password }: ISigninProps, { rejectWithValue }) => {
       try {
         const { data } = await AuthService.signin({ email, password });
         return data;
-      } catch (err: any) {
+      } catch (error) {
+        const err = error as AxiosError;
         return rejectWithValue(
-          err?.response?.data?.message || "An error occurred with the network"
-        );
-      }
-    }
-  );
-
-  static signup = createAsyncThunk(
-    "auth/signup",
-    async ({ username, email, password }: ISignupArg, { rejectWithValue }) => {
-      try {
-        const { data } = await AuthService.signup({
-          username,
-          email,
-          password,
-        });
-        return data;
-      } catch (err: any) {
-        return rejectWithValue(
-          err?.response?.data?.message || "An error occurred with the network"
+          err.message || "An error occurred with the network"
         );
       }
     }
@@ -38,13 +22,13 @@ export class AuthOperations {
   static logout = createAsyncThunk(
     "auth/logout",
     async (_, { rejectWithValue }) => {
-      console.log("this is login");
       try {
         const { data } = await AuthService.logout();
         return data;
-      } catch (err: any) {
+      } catch (error) {
+        const err = error as AxiosError;
         return rejectWithValue(
-          err?.response?.data?.message || "An error occurred with the network"
+          err.message || "An error occurred with the network"
         );
       }
     }
@@ -56,9 +40,10 @@ export class AuthOperations {
       try {
         const { data } = await AuthService.refresh();
         return data;
-      } catch (err: any) {
+      } catch (error) {
+        const err = error as AxiosError;
         return rejectWithValue(
-          err?.response?.data?.message || "An error occurred with the network"
+          err.message || "An error occurred with the network"
         );
       }
     }
