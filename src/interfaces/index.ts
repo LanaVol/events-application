@@ -1,21 +1,39 @@
-export interface ISignupArg {
-  username: string;
-  email: string;
-  password: string;
-}
-
-export interface ISigninArg {
-  email: string;
-  password: string;
-}
-
-export interface IQueryParams {
+export interface IQueryCityParams {
   page?: number;
   limit?: number;
   countries?: string;
   cities?: string;
   showOnHomePage?: boolean;
   showInCityHome?: boolean;
+  isHidden?: boolean;
+}
+
+export interface IQueryEventParams {
+  page?: number;
+  limit?: number;
+  showOnHomePage?: boolean;
+}
+
+export interface ICityDataResponse {
+  cities: ICityItem[];
+  totalCities: number;
+  searchParams: any;
+}
+
+export interface IEventDataResponse {
+  events: IEventItemResponse[];
+  totalEvents: number;
+  searchParams: any;
+  cityId?: string;
+}
+
+export interface ISigninProps {
+  email: string;
+  password: string;
+}
+
+export interface IAuthDataResponse {
+  accessToken: string;
 }
 
 export interface ICategoryItem {
@@ -23,16 +41,26 @@ export interface ICategoryItem {
   color: string;
 }
 
-export interface ICountry {
-  code: string;
-  label: string;
-  phone: string;
-}
-
 export interface ICity {
+  id: string;
   label: string;
   country: string;
   population: number;
+}
+
+export interface ICountry {
+  _id: string;
+  code: string;
+  label: string;
+  phone: string;
+  cities: ICity[];
+}
+
+export interface INewCountry {
+  code: string;
+  label: string;
+  phone: string;
+  cities: ICity[];
 }
 
 export interface ISpeaker {
@@ -46,20 +74,8 @@ export interface ISpeaker {
   telephone: string;
 }
 
-export interface ICityItem {
-  _id: string;
-  country: ICountry;
-  city: ICity;
-  description: string;
-  imagePath: string;
-  totalEvents: number;
-  showOnHomePage: boolean;
-  isHidden: boolean;
-  events: IEventItem[] | [];
-}
-
 export interface IEventItem {
-  _id: string;
+  id: string;
   title: string;
   description: string;
   date: string;
@@ -70,6 +86,22 @@ export interface IEventItem {
   speakers: ISpeaker[];
   showOnHomePage: boolean;
   showInCityHome: boolean;
-  totalEvents: number;
   isHidden: boolean;
+}
+
+export interface IEventItemResponse extends IEventItem {
+  country: ICountry;
+  city: ICity;
+}
+
+export interface ICityItem {
+  _id: string;
+  country: ICountry;
+  city: ICity;
+  description: string;
+  imagePath: string;
+  totalEvents: number;
+  showOnHomePage: boolean;
+  isHidden: boolean;
+  events: IEventItem[];
 }

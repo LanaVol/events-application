@@ -1,6 +1,13 @@
-import { PaletteMode, createTheme } from "@mui/material";
+import {  PaletteMode,
+  PaletteOptions,
+  createTheme,
+  TypographyProps, } from "@mui/material";
 
 declare module "@mui/material" {
+  interface PaletteOptions {
+    typography?: TypographyProps;
+  }
+
   interface TypeBackground {
     light: string;
     main: string;
@@ -67,7 +74,6 @@ export const themeSettings = (mode: PaletteMode) => {
         gradientBg1: mode === "light"
             ? "linear-gradient(108.1deg, rgb(167, 220, 225) 11.2%, rgb(217, 239, 242) 88.9%)"
           : "linear-gradient(79.8deg, rgb(101, 132, 154) 3.2%, rgb(160, 197, 201) 89.1%)",
-        
         gradientBg2:mode === "light"
             ? "linear-gradient(108.1deg, rgb(167, 220, 225) 11.2%, rgb(217, 239, 242) 88.9%)"
           : "linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(74, 98, 110) 131%)",
@@ -85,7 +91,6 @@ export const themeSettings = (mode: PaletteMode) => {
         light: mode === "dark" ? "#fff" : "#5f6769",
         dark: mode === "dark" ? "#222831" : "#393e46",
         white: '#fff',
-        
         grey:'#bdbdbd'
       },
     },

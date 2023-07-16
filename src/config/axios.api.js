@@ -1,5 +1,5 @@
 import axios from "axios";
-import AuthActions from "../redux/auth/auth.operations";
+import { AuthOperations } from "../redux/auth/auth.operations";
 import { resetRefreshAttempts } from "../redux/auth/auth.slice";
 
 let store;
@@ -8,7 +8,7 @@ export const injectStore = (_store) => {
 };
 
 const API = axios.create({
-  withCreedentials: true,
+  withCredentials: true,
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
 
@@ -32,7 +32,7 @@ API.interceptors.response.use(
         if (refreshAttempts < 1) {
           store.dispatch({ type: "auth/incrementRefreshAttempts" });
 
-          await store.dispatch(AuthActions.refresh());
+          await store.dispatch(AuthOperations.refresh());
 
           return API(originalRequest);
         } else {
