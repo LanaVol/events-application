@@ -15,20 +15,25 @@ import {
   Delete as DeleteIcon,
   ExpandMore as ExpandMoreIcon,
   Home as HomeIcon,
+  HideSource as HideSourceIcon,
 } from "@mui/icons-material";
 import { AppDispatch } from "../../redux/store";
 import { EventOperations } from "../../redux/event/event.operations";
 import { ICityItem } from "../../interfaces";
 
 interface IAdminCityListProps {
+  page: number;
+  limit: number;
   data: ICityItem[];
-  handleUpdateCity: any;
-  handleAddEvent: any;
-  handleEditEvent: any;
+  handleUpdateCity: (value: string) => void;
+  handleAddEvent: (value: string) => void;
+  handleEditEvent: (obj: { cityId: string; eventId: string }) => void;
   isLoading?: boolean;
 }
 
 export const AdminCityList = ({
+  page,
+  limit,
   data,
   handleUpdateCity,
   handleAddEvent,
@@ -38,17 +43,13 @@ export const AdminCityList = ({
   const [expanded, setExpanded] = useState<string | boolean>(false);
   const dispatch: AppDispatch = useDispatch();
 
-  console.log("expanded", expanded);
-
   const handleChange =
     (panel: string) => (_: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
 
   const handleDeleteCity = (cityId: string) =>
-    dispatch(EventOperations.deleteCity(cityId));
-
-  console.log("data", data);
+    dispatch(EventOperations.deleteCity({ cityId, params: { page, limit } }));
 
   return (
     <Box>
@@ -72,16 +73,24 @@ export const AdminCityList = ({
                 <Typography sx={{ fontWeight: 500 }}>
                   {CityItem.city.label}
                 </Typography>
-                {CityItem.showOnHomePage ? (
-                  <Tooltip
-                    title="This City Is Shown On The Main Page"
-                    placement="top"
-                  >
-                    <HomeIcon />
-                  </Tooltip>
-                ) : null}
+                <Box>
+                  {CityItem.showOnHomePage && (
+                    <Tooltip
+                      title="This City Is Shown On The Main Page"
+                      placement="top"
+                    >
+                      <HomeIcon />
+                    </Tooltip>
+                  )}
+                  {CityItem.isHidden && (
+                    <Tooltip title="Not Displayed On The Site" placement="top">
+                      <HideSourceIcon color="error" />
+                    </Tooltip>
+                  )}
+                </Box>
               </Box>
-              <Box sx={{ display: "flex", gap: "0.5rem" }}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+                <Typography>(events: {CityItem.totalEvents})</Typography>
                 <Tooltip title="Update City" placement="top">
                   <IconButton
                     onClick={(e) => {
