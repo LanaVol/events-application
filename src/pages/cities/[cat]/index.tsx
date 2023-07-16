@@ -1,38 +1,38 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { EventService } from "../../../services/event.service";
-import { Box } from "@mui/system";
-import { MenuNavigation } from "../../../components/MenuNavigation";
 import {
-  Container,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Pagination,
-  Select,
+  FilterEvent,
+  ButtonLoadMore,
+  DataDisplay,
+  PaginationPage,
+  MenuNavigation,
+} from "../../../components";
+import { EventList } from "../../../components/EventList/EventList";
+import { useFetchEvents } from "../../../hooks";
+import { TypeFetchEventsResult } from "../../../hooks/useFetchEvents";
+import {
+  Box,
   Typography,
   useTheme,
+  Container,
+  useMediaQuery,
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import RefreshIcon from "@mui/icons-material/Refresh";
-import { FilterEvent } from "../../../components/FilterEvent";
-import { EventList } from "@/src/components/EventList/EventList";
-import { useFetchEvents } from "@/src/hooks";
-import { TypeFetchEventsResult } from "@/src/hooks/useFetchEvents";
-import { IQueryParams } from "../../../interfaces";
+import { Header } from "../../../components/Header/Header";
 
 const EventsCatPage = (): JSX.Element => {
-  // const [params, setParams] = useState<any>({});
-
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(3);
+  const [params, setParams] = useState<any>({ page, limit });
   const { query } = useRouter();
   const { cat } = query;
   const theme = useTheme();
 
-  const cityName = cat ? String(cat).toLowerCase() : null;
+  const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isDesktopScreen = useMediaQuery(theme.breakpoints.down("md"));
+  console.log("isMobileScreen", isMobileScreen);
 
-  const params: IQueryParams = { page, limit };
+  const cityName = cat ? String(cat).toLowerCase() : "";
+
   const [data, isLoading, error, fetchData]: TypeFetchEventsResult =
     useFetchEvents();
 
@@ -67,18 +67,19 @@ const EventsCatPage = (): JSX.Element => {
     if (cityName) {
       fetchData({
         cityName,
-        params: { ...params, page: newPageValue },
+        params: { ...params, page: newPageValue, limit },
         loadMore: true,
       });
     }
   };
 
   const handleFetchByFilter = (queryParams: any) => {
-    // fetchDataEvents({ page, isLoadingMore: false, queryParams });
+    setParams(queryParams);
+    fetchData({ cityName, params: { ...queryParams, page, limit } });
   };
 
   const handleClearFilter = () => {
-    // fetchDataEvents({ queryParams: {} });
+    fetchData({ cityName, params: { page, limit } });
   };
 
   const list = cityName
@@ -95,111 +96,101 @@ const EventsCatPage = (): JSX.Element => {
     : null;
 
   return (
-    <Box>
-      <Box>
+    <>
+      <Header />
+      <Container
+        maxWidth="xl"
+        sx={{
+          color: theme.palette.text.primary,
+        }}
+      >
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
             gap: "1.5rem",
+            padding: "0.5rem 0",
           }}
         >
           {list && <MenuNavigation list={list} />}
 
-          {data && (
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1.5rem",
-                padding: "0.5rem",
-                color: theme.palette.text.primary,
-              }}
-            >
-              <Typography>All Events: {data.totalEvents}</Typography>
-              <Typography>Displayed: {data.events.length}</Typography>
-
-              <FormControl sx={{ minWidth: "5rem" }} size="small">
-                <InputLabel>Count</InputLabel>
-                <Select
-                  value={limit}
-                  label="Count"
-                  onChange={(e) => handleChangeLimit(Number(e.target.value))}
-                >
-                  <MenuItem value={3}>3</MenuItem>
-                  <MenuItem value={5}>5</MenuItem>
-                  <MenuItem value={10}>10</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
+          {!!data?.totalEvents && !!data.events.length && (
+            <DataDisplay
+              label="Count"
+              values={[
+                { name: "All Events:", value: data.totalEvents },
+                { name: "Displayed:", value: data.events.length },
+              ]}
+              valuesCount={[3, 5, 15]}
+              limit={limit}
+              limitChangeFunc={handleChangeLimit}
+            />
           )}
         </Box>
-      </Box>
-      <Box sx={{ display: "flex" }}>
-        {params && data && (
-          <FilterEvent
-            data={params}
-            handleFetchByFilter={handleFetchByFilter}
-            handleClearFilter={handleClearFilter}
-            isLoading={isLoading}
-          />
-        )}
+
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            border: "1px solid red",
-            width: "100%",
+            flexDirection: isMobileScreen ? "column" : "row",
+            height: "100%",
           }}
         >
-          {data && data.events?.length > 0 && (
-            <EventList
-              data={data.events}
-              cityNameLink={cat}
-              isLoading={isLoading}
-            />
-          )}
-
-          {data && data.events?.length < data.totalEvents && (
-            <LoadingButton
-              variant="text"
-              loadingPosition="start"
-              startIcon={<RefreshIcon />}
-              loading={isLoading}
-              onClick={handleLoadMore}
-              sx={{
-                p: "0.75rem 2rem",
-                fontSize: "0.8rem",
-                color: theme.palette.text.primary,
-              }}
-            >
-              <span>Load more cities!</span>
-            </LoadingButton>
-          )}
-
-          {data && data.events?.length < data.totalEvents && (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: "1rem",
-              }}
-            >
-              <Pagination
-                count={Math.ceil(data.totalEvents / limit)}
-                page={page}
-                onChange={handleChangePage}
-                disabled={isLoading}
+          <Box
+            sx={{
+              paddingBottom: "2rem",
+              paddingRight: isMobileScreen ? 0 : "2rem",
+              width: isMobileScreen ? "100%" : isDesktopScreen ? "45%" : "25%",
+            }}
+          >
+            {data && false && (
+              <FilterEvent
+                data={data.searchParams}
+                handleFetchByFilter={handleFetchByFilter}
+                handleClearFilter={handleClearFilter}
+                isLoading={isLoading}
               />
-            </Box>
-          )}
+            )}
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              paddingTop: isMobileScreen ? "2rem" : 0,
+              paddingBottom: "1rem",
+              width: isMobileScreen ? "100%" : "75%",
+            }}
+          >
+            {data && data.events?.length > 0 && (
+              <EventList cityName={cityName} events={data.events} />
+            )}
+
+            {data &&
+              data.totalEvents &&
+              data.events?.length < data.totalEvents && (
+                <ButtonLoadMore
+                  handleLoadMore={handleLoadMore}
+                  isLoading={isLoading}
+                />
+              )}
+
+            {data &&
+              data.totalEvents &&
+              data.events?.length < data.totalEvents && (
+                <PaginationPage
+                  page={page}
+                  limit={limit}
+                  totalCount={data.totalEvents}
+                  handleChangePage={handleChangePage}
+                  isLoading={isLoading}
+                />
+              )}
+          </Box>
         </Box>
-      </Box>
-      {error && <Typography color="error">{error}</Typography>}
-    </Box>
+        {error && <Typography color="error">{error}</Typography>}
+      </Container>
+    </>
   );
 };
 

@@ -1,52 +1,81 @@
 import { useEffect, useState } from "react";
-import { CityList } from "@/src/components/CityList/CityList";
 import { useFetchCities } from "../../hooks";
 import { TypeFetchCitiesResult } from "../../hooks/useFetchCities";
+import { CityList } from "../../components/CityList/CityList";
 import {
   Box,
-  Pagination,
   Typography,
-  Select,
-  FormControl,
-  MenuItem,
-  InputLabel,
   useTheme,
   Container,
+  useMediaQuery,
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import { MenuNavigation } from "@/src/components/MenuNavigation";
-import { Refresh as RefreshIcon } from "@mui/icons-material";
-import { CustomAutocompleteOfCountries } from "@/src/components/CustomAutocompleteOfCountries";
-import { DataConfigInformation as Data } from "../../data";
-import { CustomAutocompleteOfCities } from "@/src/components/CustomAutocompleteOfCities";
-import { ICountry, ICity, IQueryParams } from "../../interfaces";
-import { LoaderLinearProgress } from "@/src/components";
+import {
+  DataDisplay,
+  ButtonLoadMore,
+  MenuNavigation,
+  PaginationPage,
+  CustomAutocompleteOfCities,
+  CustomAutocompleteOfCountries,
+} from "../../components";
+import { IQueryCityParams, ICountry, ICity } from "../../interfaces";
+import { Header } from "@/src/components/Header/Header";
 
 const arrToStr = (items: ICountry[] | ICity[]) => {
   return items.map(({ label }) => label).join(",");
 };
 
-const EvantsPage = (): JSX.Element => {
-  const [allCities, setAllCities] = useState<ICity[]>(Data.listCities);
-  const [countriesFilter, setCountriesFilter] = useState<ICountry[] | []>([]);
-  const [citiesFilter, setCitiesFilter] = useState<ICity[] | []>([]);
+const CitiesPage = (): JSX.Element => {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(5);
-  const allCountries = Data.listCountries;
+  const [allCountries, setAllCountries] = useState<any>([]);
+  const [allCities, setAllCities] = useState<any>([]);
+  const [countriesFilter, setCountriesFilter] = useState<any>([]);
+  const [citiesFilter, setCitiesFilter] = useState<any>([]);
   const theme = useTheme();
 
-  const params: IQueryParams = { page, limit };
+  const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTabletScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  const params: IQueryCityParams = { page, limit };
   if (countriesFilter.length > 0) params.countries = arrToStr(countriesFilter);
   if (citiesFilter.length > 0) params.cities = arrToStr(citiesFilter);
 
   const [data, isLoading, error, fetchData]: TypeFetchCitiesResult =
     useFetchCities({ params });
 
-  const handleChangeLimit = (nevLimit: number) => {
+  useEffect(() => {
+    if (countriesFilter.length === 0) {
+      setAllCities(data.searchParams || []);
+      setCitiesFilter([]);
+      return;
+    }
+
+    const allFilteredCountries = countriesFilter.map(
+      (country: ICountry) => country.label
+    );
+
+    const availableCities = data?.searchParams.cities.filter((city: ICity) => {
+      if (allFilteredCountries.includes(city.country)) return true;
+      return false;
+    });
+
+    setCitiesFilter([]);
+    setAllCities(availableCities);
+  }, [countriesFilter]);
+
+  useEffect(() => {
+    fetchData({ params });
+  }, [countriesFilter, citiesFilter]);
+
+  if (allCountries.length === 0 && data?.searchParams) {
+    setAllCountries(data.searchParams.countries);
+    setAllCities(data.searchParams.cities);
+  }
+
+  const handleChangeLimit = (newLimit: number) => {
     setPage(1);
-    setLimit(nevLimit);
-    // @ts-ignore
-    fetchData({ ...params, page: 1, limit: nevLimit });
+    setLimit(newLimit);
+    fetchData({ params: { ...params, page: 1, limit: newLimit } });
   };
 
   const handleChangePage = (_: any, newPageValue: number) => {
@@ -60,87 +89,19 @@ const EvantsPage = (): JSX.Element => {
     fetchData({ params: { ...params, page: newPageValue }, loadMore: true });
   };
 
-  useEffect(() => {
-    const countries = countriesFilter.map(({ label }) => label);
-
-    const updatedCitiesList =
-      countries.length > 0
-        ? Data.listCities.filter((city) => countries.includes(city.country))
-        : Data.listCities;
-
-    setCitiesFilter([]);
-
-    setAllCities(updatedCitiesList);
-
-    if (countries.length > 0) {
-      setPage(1);
-      fetchData({ params: { ...params, page: 1 } });
-    }
-    fetchData({ params });
-  }, [countriesFilter]);
-
   return (
-    <Box>
-      <Container maxWidth="xl">
-        {isLoading && (
-          <Box>
-            <LoaderLinearProgress />
-          </Box>
-        )}
-
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "start",
-            alignItems: "center",
-            gap: "2rem",
-            padding: "10px 0",
-          }}
-        >
-          {data && (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "start",
-                alignItems: "center",
-                gap: "2rem",
-                padding: "10px 0",
-              }}
-            >
-              <FormControl
-                size="small"
-                sx={{ m: 1, minWidth: 80, color: theme.palette.text.primary }}
-              >
-                <InputLabel>Count</InputLabel>
-                <Select
-                  label="Count"
-                  value={limit}
-                  onChange={(e) => handleChangeLimit(Number(e.target.value))}
-                >
-                  <MenuItem value={3}>3</MenuItem>
-                  <MenuItem value={5}>5</MenuItem>
-                  <MenuItem value={10}>10</MenuItem>
-                  <MenuItem value={20}>20</MenuItem>
-                </Select>
-              </FormControl>
-              <Typography
-                sx={{ color: theme.palette.text.primary, whiteSpace: "nowrap" }}
-              >
-                All city: {data.totalCities}
-              </Typography>
-              <Typography
-                sx={{ color: theme.palette.text.primary, whiteSpace: "nowrap" }}
-              >
-                Display: {data?.cities.length}
-              </Typography>
-            </Box>
-          )}
-
+    <>
+      <Header />
+      <Box sx={{ padding: "1rem 0", color: theme.palette.text.primary }}>
+        <Container maxWidth="xl">
           <Box
             sx={{
               display: "flex",
-              gap: "2rem",
-              width: "100%",
+              justifyContent: "center",
+              flexDirection: isMobileScreen ? "column" : "row",
+              gap: isMobileScreen ? "1rem" : "2rem",
+              width: isTabletScreen ? "100%" : "75%",
+              margin: "0 auto",
             }}
           >
             <CustomAutocompleteOfCountries
@@ -159,68 +120,66 @@ const EvantsPage = (): JSX.Element => {
               isLoading={isLoading}
             />
           </Box>
-        </Box>
-      </Container>
-
-      <Box>
-        <Container maxWidth="xl">
-          <MenuNavigation
-            list={[
-              { title: "Home", path: "/", iconName: "home" },
-              { title: "Cities", path: "", iconName: "city" },
-            ]}
-          />
         </Container>
-      </Box>
 
-      {data && data.cities?.length > 0 && (
-        <Container maxWidth="xl">
-          <CityList data={data.cities} totalCities={Number(data.totalCities)} />
-        </Container>
-      )}
-
-      {data && data.cities?.length < data.totalCities && (
-        <>
-          <Box
+        <Box>
+          <Container
+            maxWidth="xl"
             sx={{
               display: "flex",
-              justifyContent: "center",
-              p: "0.75rem",
-              color: theme.palette.text.primary,
-            }}
-          >
-            <LoadingButton
-              variant="text"
-              loadingPosition="start"
-              onClick={handleLoadMore}
-              loading={isLoading}
-              startIcon={<RefreshIcon />}
-              sx={{ p: "0.75rem 2rem", fontSize: "0.8rem", color: "inherit" }}
-            >
-              <span>Load more cities!</span>
-            </LoadingButton>
-          </Box>
-          <Box
-            sx={{
-              border: "1px solid gray",
-              display: "flex",
-              justifyContent: "center",
               alignItems: "center",
-              padding: "1rem",
+              justifyContent: "space-between",
             }}
           >
-            <Pagination
-              count={Math.ceil(data.totalCities / limit)}
-              page={page}
-              onChange={handleChangePage}
-              disabled={isLoading}
+            <MenuNavigation
+              list={[
+                { title: "Home", path: "/", iconName: "home" },
+                { title: "Cities", path: "", iconName: "city" },
+              ]}
             />
-          </Box>
-        </>
-      )}
-      {!error && <Typography color="error">{error}</Typography>}
-    </Box>
+
+            {data && data?.totalCities && (
+              <DataDisplay
+                values={[
+                  { name: "All city", value: data.totalCities },
+                  { name: "Display", value: data?.cities.length },
+                ]}
+                valuesCount={[3, 5, 15]}
+                limit={limit}
+                limitChangeFunc={handleChangeLimit}
+              />
+            )}
+          </Container>
+        </Box>
+
+        {data.cities.length > 0 && (
+          <Container maxWidth="xl">
+            <CityList cities={data.cities} />
+          </Container>
+        )}
+
+        {data && data.totalCities && data.cities?.length < data.totalCities && (
+          <>
+            <ButtonLoadMore
+              text="Load more cities!"
+              handleLoadMore={handleLoadMore}
+              isLoading={isLoading}
+            />
+
+            <PaginationPage
+              page={page}
+              limit={limit}
+              totalCount={data.totalCities}
+              handleChangePage={handleChangePage}
+              isLoading={isLoading}
+            />
+          </>
+        )}
+
+        {!error && <Typography color="error">{error}</Typography>}
+      </Box>
+    </>
   );
 };
 
-export default EvantsPage;
+export default CitiesPage;
