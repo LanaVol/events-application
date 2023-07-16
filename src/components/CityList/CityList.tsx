@@ -1,17 +1,15 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
 import { Place, Celebration as CelebrationIcon } from "@mui/icons-material";
-import { CardItem } from "../CardItem";
+import { ICityItem } from "../../interfaces";
+import { CityItem } from "./CityItem";
 
 interface ICityListProps {
-  data: any;
-  totalCities: number;
+  cities: ICityItem[];
 }
 
-export const CityList = ({
-  data,
-  totalCities,
-}: ICityListProps): JSX.Element => {
+export const CityList = ({ cities }: ICityListProps): JSX.Element => {
   const theme = useTheme();
 
   return (
@@ -28,10 +26,10 @@ export const CityList = ({
           width: "100%",
         }}
       >
-        {data?.map(({ _id, city, country, title, imagePath }: any) => (
+        {cities?.map((city: any) => (
           <Grid
             item
-            key={_id}
+            key={city._id}
             xs={12}
             sm={6}
             md={4}
@@ -41,7 +39,7 @@ export const CityList = ({
             }}
           >
             <Link
-              href={`/cities/${city.label.toLowerCase()}`}
+              href={`/cities/${city.city.label.toLowerCase()}`}
               style={{
                 display: "block",
                 textDecoration: "none",
@@ -49,13 +47,7 @@ export const CityList = ({
                 width: "100%",
               }}
             >
-              <CardItem
-                imagePath={imagePath}
-                title={title}
-                leftPoint={country.label}
-                rightPoint={`Events: ${totalCities}`}
-                mainTitle={city.label}
-              />
+              <CityItem cityItem={city} />
             </Link>
           </Grid>
         ))}

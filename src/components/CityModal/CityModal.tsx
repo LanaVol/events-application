@@ -1,78 +1,131 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Formik } from "formik";
-import {
-  FormikTextField,
-  FormikNumberField,
-  FormikCheckbox,
-  ImageItemCity,
-  DropzoneUploadImage,
-  CustomLoadingButton,
-} from "..";
-import { FormValidation } from "../../config";
-import { Box, useTheme, Typography } from "@mui/material";
-import { EventOperations } from "../../redux/event/event.operations";
-import { AppDispatch } from "../../redux/store";
+import { Formik, FormikHelpers } from "formik";
+import { Notify } from "notiflix/build/notiflix-notify-aio";
+import { isEqual } from "lodash";
+import { ImageItemCity, DropzoneUploadImage, CustomLoadingButton } from "..";
 import {
   FormikAutocompleteOfCities,
   FormikAutocompleteOfCountries,
 } from "../FormikElements";
-import { DataConfigInformation } from "@/src/data";
+import { FormikCheckbox, FormikText } from "../FormikElements";
+import { FormValidation } from "../../config";
+import { EventOperations } from "../../redux/event/event.operations";
+import { AppDispatch, RootState } from "../../redux/store";
+import { ICity, ICountry, ICityItem } from "../../interfaces";
+import { Box, useTheme, Typography, IconButton, Tooltip } from "@mui/material";
+import {
+  Home as HomeIcon,
+  HideSource as HideSourceIcon,
+  Info as InfoIcon,
+} from "@mui/icons-material";
 
 interface ICityModalProps {
+  page: number;
+  limit: number;
   cityId: string | null;
   isLoading?: boolean;
-  handleCloseModal: any;
+  error: string | null;
+  handleCloseModal: () => void;
+}
+
+interface IFormValues {
+  country: ICountry;
+  city: ICity;
+  description: string;
+  showOnHomePage: boolean;
+  isHidden: boolean;
 }
 
 export const CityModal = ({
+  page,
+  limit,
   cityId,
   isLoading = false,
+  error,
   handleCloseModal,
 }: ICityModalProps): JSX.Element => {
-  const [image, setImage] = useState<any | null>(null);
+  const { data: listCountries } = useSelector(
+    (state: RootState) => state.categories.country
+  );
+  const [listCities, setListCities] = useState<ICity[] | []>([]);
+  const [image, setImage] = useState<File | null>(null);
+  const [localError, setLocalError] = useState<string | null>(null);
   const dispatch: AppDispatch = useDispatch();
   const theme = useTheme();
 
-  const city = useSelector((state: any) => state.events.cities).find(
-    (city: any) => city._id === cityId
-  );
+  const city = cityId
+    ? useSelector((state: RootState) => state.events.cities).find(
+        (city: ICityItem) => city._id === cityId
+      )
+    : null;
 
-  const handleSubmitCity = async (values: any, { resetForm }: any) => {
-    const formData: any = new FormData();
+  const currentCity = city
+    ? {
+        country: city.country,
+        city: city.city,
+        description: city.description,
+        showOnHomePage: city.showOnHomePage,
+        isHidden: city.isHidden,
+      }
+    : null;
 
-    formData.append("country", JSON.stringify(values.country));
-    formData.append("city", JSON.stringify(values.city));
-    formData.append("title", values.title);
-    formData.append("population", values.population);
-    formData.append("showOnHomePage", values.showOnHomePage);
+  const handleSubmitCity = async (
+    values: IFormValues,
+    { resetForm }: FormikHelpers<IFormValues>
+  ) => {
+    const areEqual = isEqual(values, currentCity);
 
-    if (cityId) formData.append("_id", cityId);
-
-    // Object.keys(values).forEach((key) => {
-    //   formData.append(key, values[key]);
-    // });
-
-    if (image) formData.append("picture", image);
-
-    let response: any;
-    if (cityId) {
-      response = await dispatch(EventOperations.updateCity(formData));
-    } else {
-      response = await dispatch(EventOperations.addCity(formData));
+    if (areEqual) {
+      Notify.warning("Make changes to update the data");
+      return;
     }
 
-    if (!response.error && !isLoading) handleCloseModal();
+    const formData = new FormData();
+    if (cityId) formData.append("_id", cityId);
+    if (image) formData.append("picture", image);
 
-    setImage(null);
-    resetForm();
+    const { cities, ...countryWithoutCities }: any = values.country;
+    formData.append("country", JSON.stringify(countryWithoutCities));
+
+    formData.append(
+      "city",
+      JSON.stringify({ ...values.city, country: values.country.label })
+    );
+    formData.append("showOnHomePage", JSON.stringify(values.showOnHomePage));
+    formData.append("isHidden", JSON.stringify(values.isHidden));
+
+    formData.append("description", values.description);
+
+    try {
+      let res: any;
+      setLocalError(null);
+
+      if (cityId) res = await dispatch(EventOperations.updateCity(formData));
+      if (!cityId) {
+        res = await dispatch(
+          EventOperations.addCity({ formData, params: { page, limit } })
+        );
+      }
+
+      if (!res.error && !isLoading) {
+        handleCloseModal();
+        setImage(null);
+        resetForm();
+      }
+    } catch (err: any) {
+      setLocalError(err.message);
+    }
   };
 
   return (
-    <Box>
+    <Box sx={{ color: theme.palette.text.primary }}>
       <Formik
         onSubmit={handleSubmitCity}
-        initialValues={city ? city : FormValidation.initialValuesCity}
+        // @ts-ignore
+        initialValues={
+          currentCity ? currentCity : FormValidation.initialValuesCity
+        }
         validationSchema={FormValidation.citySchema}
       >
         {({
@@ -92,54 +145,82 @@ export const CityModal = ({
               gap: "1rem",
             }}
           >
-            <FormikAutocompleteOfCountries
-              label="Set Country"
-              changeFieldName="country"
-              value={values.country}
-              options={DataConfigInformation.listCountries}
-              changeFieldFunction={setFieldValue}
-              isLoading={isLoading}
-            />
+            <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <FormikAutocompleteOfCountries
+                label="Set Country"
+                changeFieldName="country"
+                options={listCountries}
+                formikFunc={{ values, errors, touched, setFieldValue }}
+                isLoading={isLoading}
+                setCitiesFunc={setListCities}
+              />
+              <Tooltip
+                title='If you want to add a new country, use the "Add new country" in "List countries"'
+                placement="top"
+              >
+                <IconButton>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
+            </Box>
 
-            <FormikAutocompleteOfCities
-              label="Set City"
-              changeFieldName="city"
-              value={values.city}
-              options={DataConfigInformation.listCities}
-              changeFieldFunction={setFieldValue}
-              isLoading={isLoading}
-            />
+            <Box sx={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              <FormikAutocompleteOfCities
+                label="Set City"
+                changeFieldName="city"
+                options={listCities}
+                formikFunc={{ values, errors, touched, setFieldValue }}
+                isLoading={isLoading}
+              />
+              <Tooltip
+                title='If you want to add a new city, use the "Add new city" in "List countries"'
+                placement="top"
+              >
+                <IconButton>
+                  <InfoIcon />
+                </IconButton>
+              </Tooltip>
+            </Box>
 
-            <FormikTextField
-              label="Title Event"
-              name="title"
+            <FormikText
+              label="Description"
+              name="description"
+              info="Please provide a description that is between 6 and 300 characters in length."
+              minRows={5}
               formikFunc={{ values, errors, touched, handleBlur, handleChange }}
               isLoading={isLoading}
             />
 
-            <FormikNumberField
-              label="Population"
-              name="population"
-              minValue={0}
-              formikFunc={{ values, errors, touched, handleBlur, handleChange }}
-              isLoading={isLoading}
-            />
+            <Box>
+              <FormikCheckbox
+                label="Show This City On Home Page"
+                name="showOnHomePage"
+                addNameChange="isHidden"
+                formikFunc={{ values, setFieldValue }}
+                isLoading={isLoading}
+              >
+                <HomeIcon
+                  sx={{
+                    fontSize: "1.8rem",
+                    color: theme.palette.background.main,
+                  }}
+                />
+              </FormikCheckbox>
 
-            <FormikCheckbox
-              label="Show This City On Home Page"
-              name="showOnHomePage"
-              formikFunc={{ values, setFieldValue }}
-              isLoading={isLoading}
-            />
+              <FormikCheckbox
+                label="Hide This City"
+                name="isHidden"
+                addNameChange="showOnHomePage"
+                hideStyle={true}
+                formikFunc={{ values, setFieldValue }}
+                isLoading={isLoading}
+              >
+                <HideSourceIcon sx={{ fontSize: "1.8rem", color: "red" }} />
+              </FormikCheckbox>
+            </Box>
 
             {city?.imagePath && !image ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "2rem",
-                }}
-              >
+              <Box sx={{ display: "flex", alignItems: "center", gap: "2rem" }}>
                 <ImageItemCity
                   imagePath={city.imagePath}
                   size="100px"
@@ -168,6 +249,7 @@ export const CityModal = ({
           </form>
         )}
       </Formik>
+      <Typography color="error">{error || localError}</Typography>
     </Box>
   );
 };

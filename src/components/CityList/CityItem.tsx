@@ -1,16 +1,11 @@
 import Image from "next/image";
-import { Box, Grid, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { Place, Celebration as CelebrationIcon } from "@mui/icons-material";
-import { ItemIconText } from "./ItemIconText";
+import { ItemIconText } from "../ItemIconText";
 
-export const CardItem = ({
-  imagePath,
-  title,
-  leftPoint,
-  rightPoint,
-  mainTitle,
-  description,
-}: any): JSX.Element => {
+export const CityItem = ({ cityItem }: any): JSX.Element => {
+  const { city, title, imagePath, country, totalEvents, description } =
+    cityItem;
   const theme = useTheme();
 
   return (
@@ -47,21 +42,21 @@ export const CardItem = ({
         sx={{
           width: "100%",
           height: "500px",
+          position: "relative",
           borderRadius: "10px",
           overflow: "hidden",
-          position: "relative",
         }}
       >
         <Image
           src={imagePath}
-          alt={`Here is ${title}`}
+          alt={title}
           fill={true}
           priority={true}
           style={{
             margin: "auto",
             display: "block",
             objectFit: "cover",
-            // position: "absolute",
+            position: "absolute",
             top: "100%",
             left: "50%",
             transform: "translate(-50%, -50%)",
@@ -102,11 +97,11 @@ export const CardItem = ({
               }}
             >
               <ItemIconText
-                text={leftPoint}
+                text={country.label}
                 Component={<Place fontSize="medium" />}
               />
               <ItemIconText
-                text={rightPoint}
+                text={`Events: ${totalEvents}`}
                 Component={<CelebrationIcon fontSize="medium" />}
               />
             </Box>
@@ -120,7 +115,7 @@ export const CardItem = ({
                 fontWeight: "600",
               }}
             >
-              {mainTitle}
+              {city.label}
             </Typography>
           </Box>
         </Box>
