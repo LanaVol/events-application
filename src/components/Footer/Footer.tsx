@@ -1,16 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   Box,
   Typography,
-  Button,
   Container,
   IconButton,
   Stack,
   TextField,
-  ListItem,
-  List,
-  Divider,
   useTheme,
+  Divider,
   useMediaQuery,
 } from "@mui/material";
 import {
@@ -38,7 +35,7 @@ export const Footer = (): JSX.Element => {
   }, []);
 
   return (
-    <footer>
+    <footer style={{ marginTop: "auto" }}>
       <Box sx={{ position: "relative" }}>
         <video
           //@ts-ignore

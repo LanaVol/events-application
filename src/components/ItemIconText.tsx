@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 
 interface ItemIconTextProps {
-  text: string;
+  text: string | number;
   Component?: JSX.Element;
 }
 

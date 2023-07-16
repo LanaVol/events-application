@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Box, Chip, Breadcrumbs } from "@mui/material";
-import { emphasize, styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import {
   Home as HomeIcon,
   Apartment as ApartmentIcon,
@@ -12,10 +12,6 @@ import {
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const background = theme.palette.background.gradientHeaderBg;
-  // const backgroundColor =
-  //   theme.palette.mode === "light"
-  //     ? theme.palette.grey[100]
-  //     : theme.palette.grey[800];
 
   return {
     padding: "16px",
@@ -25,13 +21,11 @@ const StyledBreadcrumb = styled(Chip)(({ theme }) => {
     color: theme.palette.text.primary,
     fontWeight: theme.typography.fontWeightRegular,
     "&:hover, &:focus": {
-      // backgroundColor: emphasize(backgroundColor, 0.06),
       background: theme.palette.primary.light,
       cursor: "pointer",
     },
     "&:active": {
       boxShadow: theme.shadows[1],
-      // backgroundColor: emphasize(backgroundColor, 0.12),
     },
   };
 });

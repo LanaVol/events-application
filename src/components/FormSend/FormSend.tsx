@@ -1,7 +1,7 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import * as Yup from "yup";
 import { Formik } from "formik";
-import { FormikTextField } from "../FormikTextField";
+import { FormikText } from "../FormikElements/FormikText";
 import { CustomLoadingButton } from "../CustomLoadingButton";
 import clip from "../../image/clip.svg";
 import waves from "../../image/waves.svg";
@@ -26,8 +26,6 @@ const userSchema = Yup.object().shape({
 export const FormSend = () => {
   const theme = useTheme();
   const isLoading = false;
-
-  console.log("ccccc", clip);
 
   const handleSubmitEvent = async (values: any) => {
     console.log("values", values);
@@ -76,35 +74,35 @@ export const FormSend = () => {
               gap: "1rem",
             }}
           >
-            <FormikTextField
+            <FormikText
               label="First Name"
               name="firstname"
               formikFunc={{ values, errors, touched, handleBlur, handleChange }}
               isLoading={isLoading}
             />
 
-            <FormikTextField
+            <FormikText
               label="Last Name"
               name="lastname"
               formikFunc={{ values, errors, touched, handleBlur, handleChange }}
               isLoading={isLoading}
             />
 
-            <FormikTextField
+            <FormikText
               label="Telephone"
               name="telephone"
               formikFunc={{ values, errors, touched, handleBlur, handleChange }}
               isLoading={isLoading}
             />
 
-            <FormikTextField
+            <FormikText
               label="Email"
               name="email"
               formikFunc={{ values, errors, touched, handleBlur, handleChange }}
               isLoading={isLoading}
             />
 
-            <FormikTextField
+            <FormikText
               label="Message"
               name="message"
               formikFunc={{ values, errors, touched, handleBlur, handleChange }}

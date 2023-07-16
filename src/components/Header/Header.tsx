@@ -1,17 +1,20 @@
 import { MobileMenu } from "./MobileMenu";
+import { ThemeToggle } from "../index";
+import { MenuNavigationLink } from "../MenuNavigationLink";
 import {
   Box,
   Container,
   Typography,
-  useTheme,
   useMediaQuery,
+  useTheme,
   Divider,
 } from "@mui/material";
-import { AccountCircle, Logout } from "@mui/icons-material";
-import { MenuNavigationLink } from "../MenuNavigationLink";
-import { ThemeToggle } from "../index";
 
-export const Header = (): JSX.Element => {
+interface IHeaderProps {
+  homePage?: boolean;
+}
+
+export const Header = ({ homePage }: IHeaderProps): JSX.Element => {
   const isNonMobileScreens = useMediaQuery("(max-width:600px)");
   const theme = useTheme();
 
@@ -19,12 +22,14 @@ export const Header = (): JSX.Element => {
     <header>
       <Box
         sx={{
-          position: "absolute",
+          position: homePage ? "absolute" : "static",
           top: 0,
           left: 0,
           right: 0,
           zIndex: 2,
-          background: theme.palette.background.gradientGlassHeader,
+          background: homePage
+            ? theme.palette.background.gradientGlassHeader
+            : theme.palette.background.gradientBg3,
           color: theme.palette.text.white,
           boxShadow: "0px 5px 2.9px rgba(12, 12, 12, 0.197)",
         }}

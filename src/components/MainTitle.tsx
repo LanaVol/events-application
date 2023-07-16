@@ -1,5 +1,4 @@
 import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
-
 import bg3 from "../image/bg3.jpg";
 
 interface IMainTitleProps {
@@ -44,17 +43,6 @@ export const MainTitle = ({
       >
         {title}
       </Typography>
-      {/* <Typography
-        variant="subtitle1"
-        sx={{
-          textAlign: "center",
-          padding: "0 50px",
-          color: theme.palette.text.primary,
-          marginBottom: "50px",
-        }}
-      >
-        {subtitle ? subtitle : null}
-      </Typography> */}
 
       {showArrow && (
         <Box

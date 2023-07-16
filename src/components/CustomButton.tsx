@@ -1,6 +1,6 @@
 import { Button, useTheme } from "@mui/material";
 
-export const CustomButton = ({ text, startIcon }: any) => {
+export const CustomButton = ({ text, styles, startIcon }: any) => {
   const theme = useTheme();
 
   return (

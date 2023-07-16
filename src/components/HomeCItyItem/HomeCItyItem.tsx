@@ -3,7 +3,6 @@ import Image from "next/image";
 import {
   Box,
   Button,
-  Grid,
   Typography,
   useMediaQuery,
   useTheme,

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -26,7 +26,7 @@ export const BannerHero = () => {
 
   return (
     <Box sx={{ position: "relative" }}>
-      <Header />
+      <Header homePage={true} />
       <video
         //@ts-ignore
         ref={videoRef}

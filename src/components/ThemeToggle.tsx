@@ -8,16 +8,11 @@ export const ThemeToggle = (): JSX.Element => {
   const theme = useTheme();
 
   return (
-    <IconButton onClick={() => dispatch(setModeTheme())}>
-      {theme.palette.mode === "dark" ? (
-        <DarkMode
-          sx={{ color: theme.palette.text.white, fontSize: "1.5rem" }}
-        />
-      ) : (
-        <LightMode
-          sx={{ color: theme.palette.text.white, fontSize: "1.5rem" }}
-        />
-      )}
+    <IconButton
+      onClick={() => dispatch(setModeTheme())}
+      sx={{ color: theme.palette.text.white }}
+    >
+      {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
     </IconButton>
   );
 };
