@@ -1,11 +1,11 @@
 import { Autocomplete, Box, Chip, TextField, Typography } from "@mui/material";
+import { ICity } from "../../interfaces";
 
 interface IFormikAutocompleteOfCitiesProps {
   label: string;
   changeFieldName: string;
-  options: Array<any>;
-  changeFieldFunction: (changeFieldName: string, selectedValues: any) => void;
-  value: any;
+  options: ICity[] | [];
+  formikFunc: any;
   isLoading?: boolean;
 }
 
@@ -13,24 +13,30 @@ export const FormikAutocompleteOfCities = ({
   label,
   changeFieldName,
   options,
-  changeFieldFunction,
-  value,
+  formikFunc: { values, errors, touched, setFieldValue },
   isLoading = false,
 }: IFormikAutocompleteOfCitiesProps): JSX.Element => {
   return (
     <Autocomplete
       fullWidth
-      value={value}
+      value={values[changeFieldName]}
       options={options}
       disabled={isLoading}
       getOptionLabel={(option) => option.label}
       isOptionEqualToValue={(option, value) => option.label === value.label}
-      onChange={(_, selectedValues) => {
+      onChange={(_: any, selectedValues) => {
         // @ts-ignore
-        changeFieldFunction(changeFieldName, selectedValues);
+        setFieldValue(changeFieldName, selectedValues);
       }}
-      renderInput={(params) => <TextField {...params} label={label} />}
-      renderOption={(props, option) => (
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label={label}
+          error={Boolean(touched[changeFieldName] && errors[changeFieldName])}
+          helperText={touched[changeFieldName] && errors[changeFieldName]}
+        />
+      )}
+      renderOption={(props: any, option) => (
         //@ts-ignore
         <Box
           {...props}
@@ -52,7 +58,7 @@ export const FormikAutocompleteOfCities = ({
             }}
             {...getTagProps({ index })}
             onDelete={() => {
-              changeFieldFunction(changeFieldName, null);
+              setFieldValue(changeFieldName, null);
             }}
           />
         ))

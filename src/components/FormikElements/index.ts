@@ -1,2 +1,9 @@
+export { FormikDate } from "./FormikDate";
+export { FormikText } from "./FormikText";
+export { FormikNumber } from "./FormikNumber";
+export { FormikSlider } from "./FormikSlider";
+export { FormikCheckbox } from "./FormikCheckbox";
+export { FormikTextPassword } from "./FormikTextPassword";
+export { FormikAutocomplete } from "./FormikAutocomplete";
 export { FormikAutocompleteOfCities } from "./FormikAutocompleteOfCities";
 export { FormikAutocompleteOfCountries } from "./FormikAutocompleteOfCountries";
