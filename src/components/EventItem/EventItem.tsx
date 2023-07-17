@@ -250,6 +250,7 @@ export const EventItem = ({
               {event.categories
                 ? event.categories.map((cat: any) => (
                     <Chip
+                      key={cat.color}
                       label={cat.label}
                       sx={{
                         backgroundColor: cat.color,

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { HomeCItyItem } from "../HomeCItyItem/HomeCItyItem";
+import { HomeCItyItem } from "./HomeCItyItem";
 import { ICityItem } from "../../interfaces";
 import { Box, Grid } from "@mui/material";
 import AOS from "aos";
@@ -15,12 +15,12 @@ export const HomeCityList = ({ cities }: IHomeCityListProps): JSX.Element => {
   }, []);
 
   return (
-    <Grid container rowSpacing={2} sx={{ paddingBottom: "5rem" }}>
+    <Box sx={{ paddingBottom: "5rem" }}>
       {cities.map((city: ICityItem, index: number) => (
-        <Grid item key={index} data-aos="fade-up" data-aos-duration="2000">
+        <Box key={index} data-aos="fade-up" data-aos-duration="2000">
           <HomeCItyItem data={city} index={index} />
-        </Grid>
+        </Box>
       ))}
-    </Grid>
+    </Box>
   );
 };

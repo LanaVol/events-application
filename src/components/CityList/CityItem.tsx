@@ -49,7 +49,7 @@ export const CityItem = ({ cityItem }: any): JSX.Element => {
       >
         <Image
           src={imagePath}
-          alt={title}
+          alt={city.label}
           fill={true}
           priority={true}
           style={{

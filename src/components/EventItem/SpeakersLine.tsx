@@ -51,6 +51,7 @@ export const SpeakersLine = ({ speakers }: any) => {
         {speakers &&
           speakers.map((speaker: any) => (
             <SpeakerItem
+              key={speaker.id}
               id={speaker.id}
               firstname={speaker.firstname}
               lastname={speaker.lastname}
