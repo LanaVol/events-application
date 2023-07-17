@@ -19,47 +19,41 @@ import {
   Send,
 } from "@mui/icons-material";
 import { CustomButton } from "../CustomButton";
+import { VideoBg } from "./VideoBg";
 
-export const Footer = (): JSX.Element => {
+interface IFooterProps {
+  homePage?: boolean;
+}
+
+export const Footer = ({ homePage }: IFooterProps): JSX.Element => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const betweenMdLg = useMediaQuery(theme.breakpoints.between("md", "lg"));
 
-  const videoRef = useRef();
-
-  useEffect(() => {
-    setTimeout(() => {
-      //@ts-ignore
-      videoRef.current.play();
-    }, 1000);
-  }, []);
-
   return (
     <footer style={{ marginTop: "auto" }}>
-      <Box sx={{ position: "relative" }}>
-        <video
-          //@ts-ignore
-          ref={videoRef}
-          loop
-          muted
-          style={{
-            position: "relative",
-            width: "100%",
-            height: isMobile ? "25rem" : "16rem",
-            left: 0,
-            top: 0,
-            objectFit: "cover",
-            transform: "rotate(180deg)",
-          }}
-        >
-          <source src="video/discolight2.mp4" type="video/mp4" />
-        </video>
+      <Box
+        sx={{
+          position: "relative",
+          minHeight: "20rem",
+          height: "fit-content",
+        }}
+      >
+        {homePage ? <VideoBg /> : null}
+
         <Box
           sx={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
             position: "absolute",
             top: 0,
             left: 0,
             right: 0,
+            // border: "1px solid red",
+            background: homePage
+              ? "none"
+              : theme.palette.background.gradientHeaderBg,
           }}
         >
           <Box
@@ -105,7 +99,6 @@ export const Footer = (): JSX.Element => {
                 justifyContent: isMobile ? "center" : "space-between",
                 alignItems: "center",
                 gap: "1rem",
-                marginBottom: "30px",
                 padding: "20px 0",
                 fontFamily: "Roboto, Arial, sans-serif",
                 color: theme.palette.text.white,
@@ -146,12 +139,16 @@ export const Footer = (): JSX.Element => {
               </Stack>
             </Box>
           </Container>
+
           <Divider />
+
           <Container
             maxWidth="xl"
             sx={{ color: theme.palette.text.white, textAlign: "center" }}
           >
-            <Typography>&#169; 2022 - A Project Built with Next.js</Typography>
+            <Typography variant="subtitle1" sx={{ padding: "1rem" }}>
+              &#169; 2022 - A Project Built with Next.js
+            </Typography>
           </Container>
         </Box>
       </Box>

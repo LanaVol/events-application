@@ -29,7 +29,7 @@ export const Header = ({ homePage }: IHeaderProps): JSX.Element => {
           zIndex: 2,
           background: homePage
             ? theme.palette.background.gradientGlassHeader
-            : theme.palette.background.gradientBg3,
+            : theme.palette.background.gradientHeaderBg,
           color: theme.palette.text.white,
           boxShadow: "0px 5px 2.9px rgba(12, 12, 12, 0.197)",
         }}

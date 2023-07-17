@@ -1,4 +1,10 @@
-import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Typography,
+  useTheme,
+  useMediaQuery,
+  Container,
+} from "@mui/material";
 import bg3 from "../image/bg3.jpg";
 
 interface IMainTitleProps {
@@ -16,10 +22,11 @@ export const MainTitle = ({
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Box
-      sx={{
-        padding: "20px 0",
-      }}
+    <Container
+      maxWidth="xl"
+      // sx={{
+      //   padding: "20px 0",
+      // }}
     >
       <Typography
         variant="h1"
@@ -80,6 +87,6 @@ export const MainTitle = ({
           }}
         ></Box>
       )}
-    </Box>
+    </Container>
   );
 };
