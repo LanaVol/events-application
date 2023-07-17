@@ -1,100 +1,94 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CategoryOperations } from "../category/category.operations";
-import { ICountry } from "../../interfaces";
+import { AuthOperations } from "./auth.operations";
 
-export interface ICategoryState {
-  country: { data: ICountry[]; isLoading: boolean; error: string | null };
+export interface IAuthState {
+  user: any;
+  isLogged: boolean;
+  isLoading: boolean;
+  accessToken: string | null;
+  error: string | null;
+  refreshAttempts: number;
 }
-const initialState: ICategoryState = {
-  country: {
-    data: [],
-    isLoading: false,
-    error: null,
-  },
+
+const initialState: IAuthState = {
+  user: {},
+  isLogged: false,
+  isLoading: false,
+  accessToken: null,
+  error: null,
+  refreshAttempts: 0,
 };
 
-export const categorySlice = createSlice({
-  name: "category",
+export const authSlice = createSlice({
+  name: "auth",
   initialState,
-  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(CategoryOperations.getCountries.pending, (state) => {
-      state.country.isLoading = true;
-      state.country.error = null;
+    builder.addCase(AuthOperations.signin.pending, (state) => {
+      state.error = null;
+      state.isLoading = true;
+    });
+    builder.addCase(AuthOperations.signin.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.accessToken = action.payload.accessToken;
+      state.isLogged = true;
+      state.isLoading = false;
     });
     builder.addCase(
-      CategoryOperations.getCountries.fulfilled,
-      (state, action) => {
-        state.country.data = action.payload;
-        state.country.isLoading = false;
-        state.country.error = null;
-      }
-    );
-    builder.addCase(
-      CategoryOperations.getCountries.rejected,
+      AuthOperations.signin.rejected,
       (state, action: PayloadAction<any>) => {
-        state.country.error = action.payload;
-        state.country.isLoading = false;
+        state.error = action.payload;
+        state.isLogged = false;
+        state.isLoading = false;
       }
     );
-    builder.addCase(CategoryOperations.addCountry.pending, (state) => {
-      state.country.isLoading = true;
-      state.country.error = null;
+    builder.addCase(AuthOperations.logout.pending, (state) => {
+      state.error = null;
+      state.isLoading = true;
+    });
+    builder.addCase(AuthOperations.logout.fulfilled, (state) => {
+      state.accessToken = null;
+      state.isLogged = false;
+      state.isLoading = false;
     });
     builder.addCase(
-      CategoryOperations.addCountry.fulfilled,
-      (state, action) => {
-        state.country.data = action.payload;
-        state.country.isLoading = false;
-        state.country.error = null;
-      }
-    );
-    builder.addCase(
-      CategoryOperations.addCountry.rejected,
+      AuthOperations.logout.rejected,
       (state, action: PayloadAction<any>) => {
-        state.country.error = action.payload;
-        state.country.isLoading = false;
+        state.error = action.payload;
+        state.accessToken = null;
+        state.isLogged = false;
+        state.isLoading = false;
       }
     );
-    builder.addCase(CategoryOperations.updateCountry.pending, (state) => {
-      state.country.isLoading = true;
-      state.country.error = null;
+    builder.addCase(AuthOperations.refresh.pending, (state) => {
+      state.error = null;
+      state.isLoading = true;
+    });
+    builder.addCase(AuthOperations.refresh.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.accessToken = action.payload.accessToken;
+      state.refreshAttempts = 0;
+      state.isLogged = true;
+      state.isLoading = false;
     });
     builder.addCase(
-      CategoryOperations.updateCountry.fulfilled,
-      (state, action) => {
-        state.country.data = action.payload;
-        state.country.isLoading = false;
-        state.country.error = null;
-      }
-    );
-    builder.addCase(
-      CategoryOperations.updateCountry.rejected,
+      AuthOperations.refresh.rejected,
       (state, action: PayloadAction<any>) => {
-        state.country.error = action.payload;
-        state.country.isLoading = false;
+        state.error = action.payload;
+        state.accessToken = null;
+        state.isLogged = false;
+        state.isLoading = false;
       }
     );
-    builder.addCase(CategoryOperations.deleteCountry.pending, (state) => {
-      state.country.isLoading = true;
-      state.country.error = null;
-    });
-    builder.addCase(
-      CategoryOperations.deleteCountry.fulfilled,
-      (state, action) => {
-        state.country.data = action.payload;
-        state.country.isLoading = false;
-        state.country.error = null;
-      }
-    );
-    builder.addCase(
-      CategoryOperations.deleteCountry.rejected,
-      (state, action: PayloadAction<any>) => {
-        state.country.error = action.payload;
-        state.country.isLoading = false;
-      }
-    );
+  },
+  reducers: {
+    incrementRefreshAttempts: (state) => {
+      state.refreshAttempts += 1;
+    },
+    resetRefreshAttempts: (state) => {
+      state.refreshAttempts = 0;
+    },
   },
 });
 
-export default categorySlice.reducer;
+export const { resetRefreshAttempts } = authSlice.actions;
+export default authSlice.reducer;

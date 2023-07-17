@@ -29,7 +29,6 @@ const EventsCatPage = (): JSX.Element => {
 
   const isMobileScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isDesktopScreen = useMediaQuery(theme.breakpoints.down("md"));
-  console.log("isMobileScreen", isMobileScreen);
 
   const cityName = cat ? String(cat).toLowerCase() : "";
 

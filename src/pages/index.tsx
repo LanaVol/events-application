@@ -6,7 +6,6 @@ import { MainTitle, MessageError, BannerHero } from "../components";
 import { HomeCityList } from "../components/HomeCityList/HomeCityList";
 import { HomeEventList } from "../components/HomeEventList/HomeEventList";
 import { Box, Container } from "@mui/material";
-import { Header } from "../components/Header/Header";
 
 const textValues = {
   citiesSubtitle:
@@ -33,7 +32,6 @@ const Home = (): JSX.Element => {
   return (
     <Box sx={{ flex: 1, paddingBottom: "3rem" }}>
       <BannerHero />
-
       <Container maxWidth="xl">
         {citiesResult.cities.length > 0 && (
           <>

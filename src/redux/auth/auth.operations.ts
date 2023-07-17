@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ISigninProps } from "../../interfaces";
-import { AuthService } from "../../services";
 import { AxiosError } from "axios";
+import { AuthService } from "../../services";
+import { ISigninProps } from "../../interfaces";
 
 export class AuthOperations {
   static signin = createAsyncThunk(
