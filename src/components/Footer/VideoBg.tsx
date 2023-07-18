@@ -14,7 +14,6 @@ export const VideoBg = () => {
   }, []);
 
   return (
-    // <Box sx={{ position: "relative", height: "100%" }}>
     <video
       //@ts-ignore
       ref={videoRef}
@@ -27,16 +26,17 @@ export const VideoBg = () => {
         // maxHeight: isMobile ? "33rem" : "25rem",
         // minHeight: "fit-content",
         height: "100%",
-        // left: 0,
-        // top: 0,
+        // border: "1px solid yellow",
+        left: 0,
+        top: 0,
         // bottom: 0,
-        // right: 0,
+        right: 0,
         objectFit: "cover",
         transform: "rotate(180deg)",
+        zIndex: 0,
       }}
     >
       <source src="video/discolight2.mp4" type="video/mp4" />
     </video>
-    // </Box>
   );
 };

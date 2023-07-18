@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import {
   Box,
   Typography,
@@ -34,33 +33,17 @@ export const Footer = ({ homePage }: IFooterProps): JSX.Element => {
     <footer style={{ marginTop: "auto" }}>
       <Box
         sx={{
-          position: "relative",
-          minHeight: "20rem",
           height: "fit-content",
+          // position: "relative",
+          background: theme.palette.background.gradientHeaderBg,
         }}
       >
-        {homePage ? <VideoBg /> : null}
+        {/* {homePage ? <VideoBg /> : null} */}
 
-        <Box
-          sx={{
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            // border: "1px solid red",
-            background: homePage
-              ? "none"
-              : theme.palette.background.gradientHeaderBg,
-          }}
-        >
+        <Box>
           <Box
             sx={{
               background: theme.palette.background.gradientGlassHeader,
-              padding: "20px 0",
-              color: theme.palette.text.white,
             }}
           >
             <Container
@@ -71,25 +54,43 @@ export const Footer = ({ homePage }: IFooterProps): JSX.Element => {
                 alignItems: "center",
                 gap: "1rem",
                 flexWrap: "wrap",
+                padding: "20px 0",
+                color: theme.palette.text.white,
+                position: "relative",
               }}
             >
-              <Typography variant="h4" fontWeight="700">
+              <Typography variant="h4" fontWeight="700" sx={{ zIndex: 5 }}>
                 Want to know the latest events
               </Typography>
 
-              <TextField
-                fullWidth
-                id="outlined-basic"
-                variant="outlined"
+              <Box
                 sx={{
-                  borderRadius: "20px",
-                  maxWidth: "400px",
-                  outlineColor: "white",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  gap: "1rem",
+                  flexWrap: "wrap",
+                  width: isMobile ? "100%" : "50%",
                 }}
-              />
-              <CustomButton text="Join" startIcon={<Send />} />
+              >
+                <TextField
+                  fullWidth
+                  id="outlined-basic"
+                  variant="outlined"
+                  sx={{
+                    borderRadius: "20px",
+                    maxWidth: "400px",
+                    outlineColor: "white",
+                  }}
+                />
+                <CustomButton
+                  text="Join"
+                  startIcon={<Send />}
+                  sx={{ margin: "0 auto" }}
+                />
+              </Box>
             </Container>
           </Box>
+
           <Divider />
 
           <Container maxWidth="xl">
@@ -144,9 +145,21 @@ export const Footer = ({ homePage }: IFooterProps): JSX.Element => {
 
           <Container
             maxWidth="xl"
-            sx={{ color: theme.palette.text.white, textAlign: "center" }}
+            sx={{
+              color: theme.palette.text.white,
+              zIndex: 100,
+            }}
           >
-            <Typography variant="subtitle1" sx={{ padding: "1rem" }}>
+            <Typography
+              variant="h6"
+              sx={{
+                padding: "1rem",
+                fontSize: "16px",
+                fontWeight: "400",
+                textAlign: "center",
+                zIndex: 100,
+              }}
+            >
               &#169; 2022 - A Project Built with Next.js
             </Typography>
           </Container>

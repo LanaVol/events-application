@@ -92,7 +92,9 @@ const CitiesPage = (): JSX.Element => {
   return (
     <>
       <Header />
-      <Box sx={{ padding: "1rem 0", color: theme.palette.text.primary }}>
+      <Box
+        sx={{ padding: "1rem 0", color: theme.palette.text.primary, flex: 1 }}
+      >
         <Container maxWidth="xl">
           <Box
             sx={{

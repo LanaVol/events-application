@@ -45,7 +45,7 @@ const EventPage = (): JSX.Element => {
   return (
     <>
       <Header />
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ flex: 1 }}>
         {list && (
           <Box sx={{ padding: "0.75rem 0" }}>
             <MenuNavigation list={list} />

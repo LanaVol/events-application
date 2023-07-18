@@ -101,6 +101,7 @@ const EventsCatPage = (): JSX.Element => {
         maxWidth="xl"
         sx={{
           color: theme.palette.text.primary,
+          flex: 1,
         }}
       >
         <Box
