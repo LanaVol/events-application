@@ -1,7 +1,6 @@
 export { MainTitle } from "./MainTitle";
 export { BannerHero } from "./BannerHero";
 export { FormikDate } from "./FormikElements/FormikDate";
-export { FilterEvent } from "./FilterEvent";
 export { DataDisplay } from "./DataDisplay";
 export { ThemeToggle } from "./ThemeToggle";
 export { ModalWindow } from "./ModalWindows";

@@ -1,13 +1,13 @@
 import { Formik } from "formik";
-import { CustomLoadingButton } from "./";
+import { isEqual } from "lodash";
+import { arrToStr } from "../../utils";
+import { FormValidation } from "../../config";
 import {
   FormikDate,
   FormikSlider,
   FormikText,
   FormikAutocomplete,
-} from "../components/FormikElements";
-import { ICategoryItem } from "../interfaces";
-import { FormValidation } from "../config";
+} from "../FormikElements";
 import {
   Box,
   Checkbox,
@@ -16,11 +16,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
-import { isEqual } from "lodash";
-
-const arrToStr = (items: ICategoryItem[]) => {
-  return items.map(({ label }) => label).join(",");
-};
+import { ICategoryItem, ISearchEventParams } from "../../interfaces";
 
 interface IFormikValues {
   query: string;
@@ -30,17 +26,17 @@ interface IFormikValues {
   priceMax: number;
   seatsMin: number;
   seatsMax: number;
-  categories: ICategoryItem[] | [];
+  categories: ICategoryItem[];
   hasFreePlaces: boolean;
 }
 interface IFilterEventProps {
-  data: any;
+  data: ISearchEventParams;
   handleFetchByFilter: any;
   handleClearFilter: any;
   isLoading?: boolean;
 }
 
-export const FilterEvent = ({
+export const EventFilter = ({
   data,
   handleFetchByFilter,
   handleClearFilter,
@@ -93,6 +89,7 @@ export const FilterEvent = ({
     <Box sx={{ color: theme.palette.text.primary }}>
       <Formik
         onSubmit={handleSubmitEvent}
+        //@ts-ignore
         initialValues={initialValuesFilter}
         validationSchema={FormValidation.searchSchema}
       >
@@ -194,23 +191,22 @@ export const FilterEvent = ({
             />
 
             <Box
+              className="flexCenter--gap-1rem"
               sx={{
-                display: "flex",
                 flexDirection: "column",
-                justifyContent: "center",
-                gap: "1rem",
                 padding: "0 3rem",
               }}
             >
-              <CustomLoadingButton text="Search Event" isLoading={isLoading} />
+              <LoadingButton loading={isLoading} sx={{ minWidth: "14rem" }}>
+                Search Events
+              </LoadingButton>
               <LoadingButton
                 type="button"
-                variant="contained"
-                loading={isLoading}
                 onClick={() => handleClearForm({ resetForm, setFieldValue })}
-                sx={{ textTransform: "none" }}
+                loading={isLoading}
+                sx={{ minWidth: "14rem" }}
               >
-                Clear Filter
+                Clear Events
               </LoadingButton>
             </Box>
           </form>

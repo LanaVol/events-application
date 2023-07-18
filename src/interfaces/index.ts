@@ -14,6 +14,18 @@ export interface IQueryEventParams {
   showOnHomePage?: boolean;
 }
 
+export interface ISearchEventParams {
+  query?: string;
+  dateStart?: string;
+  dateEnd?: string;
+  seatsMin: number;
+  seatsMax: number;
+  priceMin: number;
+  priceMax: number;
+  categories?: string | any;
+  hasFreePlaces?: boolean;
+}
+
 export interface ICityDataResponse {
   cities: ICityItem[];
   totalCities: number;

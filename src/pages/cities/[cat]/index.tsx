@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
-  FilterEvent,
   ButtonLoadMore,
   DataDisplay,
   PaginationPage,
   MenuNavigation,
 } from "../../../components";
+import { EventFilter } from "@/src/components/EventFilter/EventFilter";
 import { EventList } from "../../../components/EventList/EventList";
 import { useFetchEvents } from "../../../hooks";
 import { TypeFetchEventsResult } from "../../../hooks/useFetchEvents";
@@ -18,11 +18,12 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { Header } from "../../../components/Header/Header";
+import { IQueryEventParams } from "../../../interfaces";
 
 const EventsCatPage = (): JSX.Element => {
   const [page, setPage] = useState<number>(1);
   const [limit, setLimit] = useState<number>(3);
-  const [params, setParams] = useState<any>({ page, limit });
+  const [params, setParams] = useState<IQueryEventParams>({ page, limit });
   const { query } = useRouter();
   const { cat } = query;
   const theme = useTheme();
@@ -111,6 +112,7 @@ const EventsCatPage = (): JSX.Element => {
             alignItems: "center",
             gap: "1.5rem",
             padding: "0.5rem 0",
+            flexWrap: "wrap",
           }}
         >
           {list && <MenuNavigation list={list} />}
@@ -143,8 +145,8 @@ const EventsCatPage = (): JSX.Element => {
               width: isMobileScreen ? "100%" : isDesktopScreen ? "45%" : "25%",
             }}
           >
-            {data && false && (
-              <FilterEvent
+            {data && data.searchParams && (
+              <EventFilter
                 data={data.searchParams}
                 handleFetchByFilter={handleFetchByFilter}
                 handleClearFilter={handleClearFilter}
