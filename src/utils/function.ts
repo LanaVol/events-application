@@ -22,3 +22,7 @@ export function formatPopulation(population: number): string {
     suffixes[suffixIndex]
   );
 }
+
+export function arrToStr(items: Array<{ label: string }>): string {
+  return items.map(({ label }) => label).join(",");
+}

@@ -93,7 +93,11 @@ const CitiesPage = (): JSX.Element => {
     <>
       <Header />
       <Box
-        sx={{ padding: "1rem 0", color: theme.palette.text.primary, flex: 1 }}
+        sx={{
+          padding: "1rem 0",
+          color: theme.palette.text.primary,
+          flex: 1,
+        }}
       >
         <Container maxWidth="xl">
           <Box
@@ -131,6 +135,8 @@ const CitiesPage = (): JSX.Element => {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              gap: "1rem",
+              flexWrap: "wrap",
             }}
           >
             <MenuNavigation

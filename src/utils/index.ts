@@ -1,1 +1,1 @@
-export { formatDateString, formatPopulation } from "./function";
+export { arrToStr, formatDateString, formatPopulation } from "./function";

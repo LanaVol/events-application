@@ -26,7 +26,8 @@ interface IFooterProps {
 
 export const Footer = ({ homePage }: IFooterProps): JSX.Element => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
+  // const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const betweenMdLg = useMediaQuery(theme.breakpoints.between("md", "lg"));
 
   return (
@@ -50,7 +51,7 @@ export const Footer = ({ homePage }: IFooterProps): JSX.Element => {
               maxWidth="xl"
               sx={{
                 display: "flex",
-                justifyContent: isMobile ? "center" : "space-between",
+                justifyContent: betweenMdLg ? "center" : "space-between",
                 alignItems: "center",
                 gap: "1rem",
                 flexWrap: "wrap",
@@ -59,17 +60,24 @@ export const Footer = ({ homePage }: IFooterProps): JSX.Element => {
                 position: "relative",
               }}
             >
-              <Typography variant="h4" fontWeight="700" sx={{ zIndex: 5 }}>
+              <Typography
+                variant="h4"
+                fontWeight="700"
+                sx={{
+                  textAlign: isMobile ? "center" : "left",
+                  padding: "0.5rem",
+                }}
+              >
                 Want to know the latest events
               </Typography>
 
               <Box
                 sx={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: betweenMdLg ? "center" : "space-between",
                   gap: "1rem",
-                  flexWrap: "wrap",
                   width: isMobile ? "100%" : "50%",
+                  padding: "0.5rem",
                 }}
               >
                 <TextField

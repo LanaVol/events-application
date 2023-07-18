@@ -28,7 +28,14 @@ export const DataDisplay = ({
   limitChangeFunc,
 }: IDataDisplayProps): JSX.Element => {
   return (
-    <Box sx={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        gap: "2rem",
+        flexWrap: "wrap",
+      }}
+    >
       {values?.map(({ name, value }: ValueITem) => (
         <Typography key={name} noWrap>
           {name} {value}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Dropzone from "react-dropzone";
-import FlexBetween from "./FlexBetween";
+
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import {
   Box,
@@ -41,7 +41,7 @@ export const DropzoneUploadImage = ({ image, setImage }: any) => {
     <Dropzone multiple={false} onDrop={handleDrop}>
       {({ getRootProps, getInputProps }) => (
         <Box>
-          <FlexBetween>
+          <Box className="flexCenter--gap-1rem">
             <Box
               {...getRootProps()}
               sx={{
@@ -84,7 +84,7 @@ export const DropzoneUploadImage = ({ image, setImage }: any) => {
                   </Button>
                 </Box>
               ) : (
-                <FlexBetween>
+                <Box className="flexCenter--gap-1rem">
                   <Typography sx={{ color: theme.palette.text.primary }}>
                     {image.name}
                   </Typography>
@@ -93,7 +93,7 @@ export const DropzoneUploadImage = ({ image, setImage }: any) => {
                       <EditOutlined />
                     </IconButton>
                   </Tooltip>
-                </FlexBetween>
+                </Box>
               )}
             </Box>
 
@@ -107,7 +107,7 @@ export const DropzoneUploadImage = ({ image, setImage }: any) => {
                 </IconButton>
               </Tooltip>
             )}
-          </FlexBetween>
+          </Box>
 
           {error && (
             <Typography

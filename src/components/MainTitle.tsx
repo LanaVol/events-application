@@ -22,12 +22,7 @@ export const MainTitle = ({
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Container
-      maxWidth="xl"
-      // sx={{
-      //   padding: "20px 0",
-      // }}
-    >
+    <Container maxWidth="xl">
       <Typography
         variant="h1"
         sx={{

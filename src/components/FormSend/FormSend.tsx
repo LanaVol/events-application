@@ -37,7 +37,7 @@ export const FormSend = () => {
         padding: "3rem 2rem",
         borderRadius: "1rem",
         minWidth: "40%",
-        maxWidth: "50%",
+        // maxWidth: "50%",
         color: theme.palette.text.primary,
         backgroundColor: theme.palette.background.light,
         backgroundImage: `url(${waves.src})`,

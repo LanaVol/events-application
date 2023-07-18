@@ -64,10 +64,10 @@ export const MenuNavigation = ({ list }: IMenuNavigationProps) => {
     }
   };
   return (
-    <Box role="presentation" onClick={handleClick}>
+    <Box role="presentation" onClick={handleClick} sx={{ padding: "1rem 0" }}>
       <Breadcrumbs aria-label="breadcrumb">
         {list.map((link: any) => (
-          <Box key={link.path}>
+          <Box key={link.path} sx={{ padding: "0.2rem" }}>
             {link.path ? (
               <Link href={link.path} passHref>
                 <StyledBreadcrumb

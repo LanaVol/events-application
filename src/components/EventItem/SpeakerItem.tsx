@@ -148,7 +148,7 @@ export const SpeakerItem = ({
           {about && (
             <Box sx={{ padding: "10px 20px" }}>
               <Typography
-                variant="h6"
+                variant="subtitle1"
                 sx={{
                   fontSize: "16px",
                   fontWeight: "300",

@@ -166,6 +166,7 @@ export const EventItem = ({
               event.speakers
                 ? event.speakers.map((speaker: any) => (
                     <Typography
+                      key={speaker.id}
                       variant="subtitle2"
                       sx={{
                         margin: "0",
