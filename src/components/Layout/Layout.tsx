@@ -21,7 +21,6 @@ export const Layout = ({ children }: ILayoutProps): JSX.Element => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          // justifyContent: "space-between",
           minHeight: "100vh",
           backgroundColor: theme.palette.background.default,
           color: theme.palette.text.primary,
