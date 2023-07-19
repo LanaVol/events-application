@@ -47,7 +47,7 @@ export const HomeCItyItem = ({
         justifyContent: "space-between",
         flexWrap: "wrap",
         gap: "1rem",
-        background: theme.palette.background.gradientBg3,
+        background: theme.palette.background.gradientBgHomePageCard,
         width: "100%",
         padding: isMobile ? "1rem" : "2rem",
         borderRadius: "10px",
@@ -115,7 +115,7 @@ export const HomeCItyItem = ({
         <Box
           sx={{
             padding: "30px",
-            background: theme.palette.background.blueGrey100,
+            background: theme.palette.background.bgHomePageCityCardInfo,
             borderRadius: "20px",
             width: "100%",
             display: "flex",

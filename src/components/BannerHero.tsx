@@ -8,9 +8,6 @@ import {
 } from "@mui/material";
 import { Header } from "./Header/Header";
 
-// @ts-ignore
-// import videoBg from "../video/videoBg.mp4";
-
 export const BannerHero = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -61,7 +58,7 @@ export const BannerHero = () => {
             padding: "5px",
             marginBottom: "36px",
             textTransform: "uppercase",
-            color: theme.palette.background.whiteOpacity70,
+            color: theme.palette.background.whiteLight,
             WebkitTextStroke: `1px ${theme.palette.text.white}`,
           }}
         >

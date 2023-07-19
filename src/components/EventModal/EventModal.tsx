@@ -253,7 +253,7 @@ export const EventModal = ({
                 <HomeIcon
                   sx={{
                     fontSize: "1.8rem",
-                    color: theme.palette.background.main,
+                    color: theme.palette.primary.main,
                   }}
                 />
               </FormikCheckbox>
@@ -267,7 +267,7 @@ export const EventModal = ({
                 <AddHomeIcon
                   sx={{
                     fontSize: "1.8rem",
-                    color: theme.palette.background.main,
+                    color: theme.palette.primary.main,
                   }}
                 />
               </FormikCheckbox>

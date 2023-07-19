@@ -95,7 +95,7 @@ export const SpeakerModal = ({
         const newErrors: Record<string, string> = {};
         const newTouched: Record<string, boolean> = {};
 
-        console.log("validationErrors", validationErrors);
+        // console.log("validationErrors", validationErrors);
 
         validationErrors.inner.forEach((error: any) => {
           newErrors[error.path] = error.message;

@@ -27,7 +27,6 @@ interface IFooterProps {
 export const Footer = ({ homePage }: IFooterProps): JSX.Element => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
-  // const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const betweenMdLg = useMediaQuery(theme.breakpoints.between("md", "lg"));
 
   return (
@@ -36,7 +35,7 @@ export const Footer = ({ homePage }: IFooterProps): JSX.Element => {
         sx={{
           height: "fit-content",
           // position: "relative",
-          background: theme.palette.background.gradientHeaderBg,
+          background: theme.palette.background.gradientMainBackground,
         }}
       >
         {/* {homePage ? <VideoBg /> : null} */}
@@ -44,7 +43,7 @@ export const Footer = ({ homePage }: IFooterProps): JSX.Element => {
         <Box>
           <Box
             sx={{
-              background: theme.palette.background.gradientGlassHeader,
+              background: theme.palette.background.gradientGlassBgHeader,
             }}
           >
             <Container

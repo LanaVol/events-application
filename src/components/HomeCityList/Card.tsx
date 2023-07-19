@@ -32,7 +32,7 @@ export const Card = ({
       sx={{
         padding: "1rem",
         color: theme.palette.text.white,
-        background: theme.palette.background.gradientBg3,
+        background: theme.palette.background.gradientBgHomePageCard,
       }}
     >
       <Box>

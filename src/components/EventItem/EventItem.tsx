@@ -303,7 +303,7 @@ export const EventItem = ({
             padding: "14px 42px",
             fontSize: "28px",
             marginBottom: "40px",
-            background: theme.palette.background.gradientBtn,
+            background: theme.palette.background.gradientAccent,
             color: theme.palette.text.white,
           }}
         >

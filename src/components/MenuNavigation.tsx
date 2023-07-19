@@ -11,7 +11,7 @@ import {
 } from "@mui/icons-material";
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
-  const background = theme.palette.background.gradientHeaderBg;
+  const background = theme.palette.background.gradientMainBackground;
 
   return {
     padding: "16px",

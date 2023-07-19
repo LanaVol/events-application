@@ -23,8 +23,6 @@ export const EventSlider = ({
   events,
   cityName,
 }: IEventSliderProps): JSX.Element => {
-  const theme = useTheme();
-
   return (
     <Slider {...settings}>
       {events.map(({ title, imagePath }: IEventItem, index: number) => (

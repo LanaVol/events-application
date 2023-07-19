@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Box, Grid, Typography, useTheme } from "@mui/material";
-import { Place, Celebration as CelebrationIcon } from "@mui/icons-material";
+import { Box, Grid, useTheme } from "@mui/material";
 import { ICityItem } from "../../interfaces";
 import { CityItem } from "./CityItem";
 

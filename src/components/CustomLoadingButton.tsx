@@ -22,10 +22,10 @@ export const CustomLoadingButton = ({
       sx={{
         padding: "0.25rem 4rem",
         fontSize: "0.9rem",
-        color: "#fff",
+        color: theme.palette.text.white,
         textTransform: "none",
         whiteSpace: "nowrap",
-        backgroundColor: theme.palette.background.main,
+        backgroundColor: theme.palette.primary.main,
         "&:hover": {
           backgroundColor: theme.palette.background.mainHover,
         },

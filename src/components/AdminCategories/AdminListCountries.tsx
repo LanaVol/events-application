@@ -36,7 +36,7 @@ export const AdminListCountries = (): JSX.Element => {
   const dispatch: AppDispatch = useDispatch();
   const theme = useTheme();
 
-  console.log("isLoading", isLoading);
+  // console.log("isLoading", isLoading);
 
   useEffect(() => {
     dispatch(CategoryOperations.getCountries());

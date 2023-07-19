@@ -93,6 +93,8 @@ export interface IEventItem {
   date: string;
   seats: number;
   price: number;
+  language: string;
+  minAge: number;
   imagePath: string;
   categories: ICategoryItem[];
   speakers: ISpeaker[];

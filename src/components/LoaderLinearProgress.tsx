@@ -7,7 +7,7 @@ export const LoaderLinearProgress = (): JSX.Element => {
     <Box>
       <LinearProgress
         sx={{
-          backgroundColor: theme.palette.background.main,
+          backgroundColor: theme.palette.primary.main,
           "& .MuiLinearProgress-bar": {
             backgroundColor: theme.palette.background.mainHover,
           },

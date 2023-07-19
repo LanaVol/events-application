@@ -24,7 +24,6 @@ export const SpeakerItem = ({
           width: "fit-content",
           minHeight: "400px",
           height: "auto",
-          background: theme.palette.background.lightBlue,
           borderRadius: "0 20px 0 20px",
           overflow: "hidden",
           display: "flex",
@@ -38,7 +37,7 @@ export const SpeakerItem = ({
         <Box
           key={id}
           sx={{
-            background: theme.palette.background.gradientBg2,
+            background: theme.palette.background.gradientBgSpeakersCard,
             padding: "10px 15px",
             borderRadius: "0 20px 0 20px",
             color: theme.palette.text.primary,
@@ -155,7 +154,7 @@ export const SpeakerItem = ({
                   padding: "10px",
                   maxWidth: "300px",
                   borderRadius: "0 20px 0 20px",
-                  backgroundColor: theme.palette.background.light,
+                  background: theme.palette.background.gradientBgSpeakersCard,
                 }}
               >
                 {about}

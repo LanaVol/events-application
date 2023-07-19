@@ -12,7 +12,7 @@ export const CityItem = ({ cityItem }: any): JSX.Element => {
     <Box
       sx={{
         borderRadius: "10px",
-        background: theme.palette.background.gradientCard,
+        background: theme.palette.background.gradientBgCardInfo,
         position: "relative",
 
         transition: "transform 300ms linear",
@@ -24,7 +24,7 @@ export const CityItem = ({ cityItem }: any): JSX.Element => {
           transform: "skew(2deg,2deg)",
           width: "101%",
           height: "101%",
-          background: theme.palette.background.gradientBtn,
+          background: theme.palette.background.gradientAccent,
         },
 
         "&:hover": {
@@ -80,7 +80,7 @@ export const CityItem = ({ cityItem }: any): JSX.Element => {
           <Box
             sx={{
               borderRadius: "10px",
-              background: theme.palette.background.gradientCard,
+              background: theme.palette.background.gradientBgCardInfo,
               color: theme.palette.text.dark,
             }}
           >

@@ -202,7 +202,7 @@ export const CityModal = ({
                 <HomeIcon
                   sx={{
                     fontSize: "1.8rem",
-                    color: theme.palette.background.main,
+                    color: theme.palette.primary.main,
                   }}
                 />
               </FormikCheckbox>

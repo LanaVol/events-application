@@ -11,8 +11,11 @@ interface IHomeEventItemProps {
 
 export const HomeEventItem = ({ event }: IHomeEventItemProps): JSX.Element => {
   const theme = useTheme();
-  const { gradientBg1, gradientBg3, gradientHeaderBg } =
-    theme.palette.background;
+  const {
+    gradientBgEventCard,
+    gradientBgHomePageCard,
+    gradientMainBackground,
+  } = theme.palette.background;
 
   const {
     imagePath,
@@ -30,7 +33,6 @@ export const HomeEventItem = ({ event }: IHomeEventItemProps): JSX.Element => {
       sx={{
         cursor: "pointer",
         padding: "1rem 0.5rem 0 0.5rem",
-
         position: "relative",
         transition: "all 300ms ease-in-out",
 
@@ -39,7 +41,7 @@ export const HomeEventItem = ({ event }: IHomeEventItemProps): JSX.Element => {
         },
         "&:hover .HomeEventItem-location": {
           transform: "translateY(200px)",
-          background: gradientHeaderBg,
+          background: gradientMainBackground,
           color: theme.palette.text.white,
         },
         "&:hover .HomeEventItem-info": {
@@ -49,7 +51,7 @@ export const HomeEventItem = ({ event }: IHomeEventItemProps): JSX.Element => {
         "&:hover .HomeEventItem-title": {
           transform: "translateY(-70px)",
           color: theme.palette.text.white,
-          background: gradientHeaderBg,
+          background: gradientMainBackground,
         },
       }}
     >
@@ -83,7 +85,7 @@ export const HomeEventItem = ({ event }: IHomeEventItemProps): JSX.Element => {
           alignItems: "center",
           gap: "0.8rem",
           padding: "0.5rem",
-          color: theme.palette.text.main,
+          color: theme.palette.primary.main,
           borderRadius: "0.5rem",
           transition: "all 400ms ease-in-out",
         }}
@@ -109,8 +111,9 @@ export const HomeEventItem = ({ event }: IHomeEventItemProps): JSX.Element => {
       <Box
         className="HomeEventItem-info"
         sx={{
+          // перевірити колір
           color: theme.palette.text.disabled,
-          background: gradientBg1,
+          background: gradientBgEventCard,
           borderRadius: "0 0 0.5rem 0.5rem",
           transition: "all 300ms ease-in-out",
         }}
@@ -118,7 +121,7 @@ export const HomeEventItem = ({ event }: IHomeEventItemProps): JSX.Element => {
         <Box
           sx={{
             padding: "1rem 1rem",
-            background: `${gradientBg1} left, ${gradientBg3} right`,
+            background: `${gradientBgEventCard} left, ${gradientBgHomePageCard} right`,
             backgroundSize: "50%, 50%",
             backgroundPosition: "left, right",
             backgroundRepeat: "no-repeat",
@@ -133,8 +136,9 @@ export const HomeEventItem = ({ event }: IHomeEventItemProps): JSX.Element => {
               fontWeight: "500",
               textAlign: "center",
               borderRadius: "0.5rem",
+              // перевірити колір
               color: theme.palette.text.disabled,
-              background: theme.palette.background.gradientCard,
+              background: theme.palette.background.gradientBgCardInfo,
               transition: "all 400ms linear",
               zIndex: 5,
             }}
@@ -172,6 +176,7 @@ export const HomeEventItem = ({ event }: IHomeEventItemProps): JSX.Element => {
                   sx={{
                     padding: "0.2rem",
                     fontSize: "2rem",
+                    // перевірити колір
                     border: `1px solid ${theme.palette.text.disabled}`,
                     borderRadius: "50%",
                   }}
@@ -185,6 +190,7 @@ export const HomeEventItem = ({ event }: IHomeEventItemProps): JSX.Element => {
                   sx={{
                     padding: "0.2rem",
                     fontSize: "2rem",
+                    // перевірити колір
                     border: `1px solid ${theme.palette.text.disabled}`,
                     borderRadius: "50%",
                   }}
