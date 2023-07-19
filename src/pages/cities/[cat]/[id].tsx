@@ -83,9 +83,8 @@ const EventPage = (): JSX.Element => {
             variant="h4"
             id="formSend"
             sx={{
-              padding: "3rem 1rem",
+              padding: "3rem 1rem 10rem 1rem",
               textAlign: "center",
-              // color: "white",
             }}
           >
             Register for this event and receive details to your email
