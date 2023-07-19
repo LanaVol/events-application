@@ -21,6 +21,7 @@ export const SpeakerItem = ({
     >
       <Box
         sx={{
+          backgroundColor: theme.palette.background.default,
           width: "fit-content",
           minHeight: "400px",
           height: "auto",
@@ -112,6 +113,7 @@ export const SpeakerItem = ({
         <Box
           sx={{
             color: theme.palette.text.light,
+
             width: "100%",
           }}
         >

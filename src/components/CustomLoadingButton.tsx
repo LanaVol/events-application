@@ -21,11 +21,12 @@ export const CustomLoadingButton = ({
       type="submit"
       sx={{
         padding: "0.25rem 4rem",
-        fontSize: "0.9rem",
+        fontSize: "1rem",
         color: theme.palette.text.white,
         textTransform: "none",
         whiteSpace: "nowrap",
         backgroundColor: theme.palette.primary.main,
+
         "&:hover": {
           backgroundColor: theme.palette.background.mainHover,
         },

@@ -25,6 +25,7 @@ import {
   Public,
   Place,
 } from "@mui/icons-material";
+import { MainTitle } from "../MainTitle";
 
 interface IEventItemProps {
   event: IEventItem;
@@ -44,7 +45,7 @@ export const EventItem = ({
 
   return (
     <Box sx={{ overflow: "hidden", marginBottom: "100px" }}>
-      <Typography
+      {/* <Typography
         variant="h1"
         sx={{
           fontSize: "60px",
@@ -57,7 +58,8 @@ export const EventItem = ({
         }}
       >
         {event.title}
-      </Typography>
+      </Typography> */}
+      <MainTitle title={event.title} showArrow={false} />
 
       <Grid
         container
@@ -306,20 +308,24 @@ export const EventItem = ({
             background: theme.palette.background.gradientAccent,
             color: theme.palette.text.white,
           }}
+          onClick={() => {
+            const formElement = document.getElementById("formSend");
+            formElement?.scrollIntoView({ behavior: "smooth" });
+          }}
         >
           Register On Event
         </Button>
       </Box>
 
       <Typography
-        variant="h3"
+        variant="h4"
         sx={{
           padding: "2rem 1rem",
           marginBottom: "10px",
           color: theme.palette.text.primary,
         }}
       >
-        Speakers and hosts of this event:
+        Speakers and hosts of this event
       </Typography>
 
       <SpeakersLine speakers={event.speakers} />

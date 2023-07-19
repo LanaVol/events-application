@@ -1,4 +1,4 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { FormikText } from "../FormikElements/FormikText";
@@ -25,6 +25,9 @@ const userSchema = Yup.object().shape({
 
 export const FormSend = () => {
   const theme = useTheme();
+  const smallerScreen = useMediaQuery(theme.breakpoints.down("lg"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   const isLoading = false;
 
   const handleSubmitEvent = async (values: any) => {
@@ -36,8 +39,7 @@ export const FormSend = () => {
       sx={{
         padding: "3rem 2rem",
         borderRadius: "1rem",
-        minWidth: "40%",
-        // maxWidth: "50%",
+        width: isMobile ? "100%" : smallerScreen ? "80%" : "40%",
         color: theme.palette.text.primary,
         backgroundColor: theme.palette.background.light,
         backgroundImage: `url(${waves.src})`,
