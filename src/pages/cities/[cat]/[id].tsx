@@ -80,7 +80,7 @@ const EventPage = (): JSX.Element => {
       >
         <Container maxWidth="xl">
           <Typography
-            variant="h4"
+            variant="h5"
             id="formSend"
             sx={{
               padding: "3rem 1rem 10rem 1rem",
