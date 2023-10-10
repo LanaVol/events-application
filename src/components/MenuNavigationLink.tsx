@@ -5,7 +5,7 @@ const linkValues = [
   { href: "/", text: "Home" },
   { href: "/cities", text: "Cities" },
   { href: "/about-us", text: "About Us" },
-  { href: "/admin", text: "Admin" },
+  // { href: "/admin", text: "Admin" },
 ];
 
 export const MenuNavigationLink = () => {
@@ -20,6 +20,7 @@ export const MenuNavigationLink = () => {
         justifyContent: "space-between",
         alignItems: "center",
         flexWrap: "wrap",
+        maxWidth: "700px",
       }}
     >
       {linkValues.map((item, index) => (

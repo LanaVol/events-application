@@ -23,7 +23,7 @@ export const EventInfoItem = ({ text, info, ComponentIcon }: any) => {
       >
         {ComponentIcon}
         <Typography
-          variant="subtitle1"
+          // variant="h3"
           sx={{ fontSize: "18px", fontWeight: "300" }}
         >
           {text}
@@ -31,7 +31,7 @@ export const EventInfoItem = ({ text, info, ComponentIcon }: any) => {
       </Grid>
       <Grid item lg={8} md={8} sm={8} sx={{ padding: "0rem 1rem" }}>
         <Typography
-          variant="subtitle1"
+          // variant="h5"
           sx={{
             fontSize: "18px",
             fontWeight: "500",

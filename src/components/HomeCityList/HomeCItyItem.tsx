@@ -50,6 +50,7 @@ export const HomeCItyItem = ({
         background: theme.palette.background.gradientBgHomePageCard,
         width: "100%",
         padding: isMobile ? "1rem" : "2rem",
+        marginBottom: "1rem",
         borderRadius: "10px",
         "&:hover .cityNumberBg": {
           transform: "translate(0%)",

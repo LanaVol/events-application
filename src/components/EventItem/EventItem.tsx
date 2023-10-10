@@ -231,7 +231,7 @@ export const EventItem = ({
                 sx={{ color: theme.palette.primary.main }}
               />
               <Typography
-                variant="subtitle1"
+                variant="subtitle2"
                 sx={{ fontSize: "20px", fontWeight: "300" }}
               >
                 Category:
@@ -279,7 +279,7 @@ export const EventItem = ({
               }
             />
             <Typography
-              variant="subtitle1"
+              variant="subtitle2"
               sx={{
                 padding: "0.5rem",
                 fontSize: "18px",

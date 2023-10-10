@@ -95,7 +95,7 @@ export const SpeakerItem = ({
 
             <Box sx={{ margin: "0 auto" }}>
               <Typography
-                variant="subtitle1"
+                variant="subtitle2"
                 sx={{
                   width: "fit-content",
                   padding: "5px 10px",
@@ -133,7 +133,7 @@ export const SpeakerItem = ({
                 Main Topic:
               </Typography>
               <Typography
-                variant="subtitle1"
+                variant="subtitle2"
                 sx={{
                   textAlign: "center",
                   fontSize: "16px",
@@ -149,7 +149,7 @@ export const SpeakerItem = ({
           {about && (
             <Box sx={{ padding: "10px 20px" }}>
               <Typography
-                variant="subtitle1"
+                variant="subtitle2"
                 sx={{
                   fontSize: "16px",
                   fontWeight: "300",
