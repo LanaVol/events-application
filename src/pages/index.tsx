@@ -6,6 +6,7 @@ import { MainTitle, MessageError, BannerHero } from "../components";
 import { HomeCityList } from "../components/HomeCityList/HomeCityList";
 import { HomeEventList } from "../components/HomeEventList/HomeEventList";
 import { Box, Container } from "@mui/material";
+import Preloader from "../components/Preloader";
 
 const textValues = {
   citiesSubtitle:
@@ -33,11 +34,13 @@ const Home = (): JSX.Element => {
     <Box sx={{ flex: 1, paddingBottom: "3rem" }}>
       <BannerHero />
       <Container maxWidth="xl">
-        {citiesResult.cities.length > 0 && (
+        {citiesResult.cities.length > 0 ? (
           <>
             <MainTitle title="Choose the best city" showArrow={true} />
             <HomeCityList cities={citiesResult.cities} />
           </>
+        ) : (
+          <Preloader />
         )}
 
         {!citiesIsLoading && citiesResult.cities.length === 0 && (

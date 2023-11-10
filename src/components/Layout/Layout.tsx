@@ -25,6 +25,7 @@ export const Layout = ({ children }: ILayoutProps): JSX.Element => {
         }}
       >
         {children}
+
         <Footer
           homePage={children && children.type.name === "Home" ? true : false}
         />

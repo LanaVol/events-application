@@ -19,6 +19,7 @@ import {
 } from "../../components";
 import { IQueryCityParams, ICountry, ICity } from "../../interfaces";
 import { Header } from "@/src/components/Header/Header";
+import Preloader from "@/src/components/Preloader";
 
 const arrToStr = (items: ICountry[] | ICity[]) => {
   return items.map(({ label }) => label).join(",");
@@ -160,10 +161,12 @@ const CitiesPage = (): JSX.Element => {
           </Container>
         </Box>
 
-        {data.cities.length > 0 && (
+        {data.cities.length > 0 ? (
           <Container maxWidth="xl">
             <CityList cities={data.cities} />
           </Container>
+        ) : (
+          <Preloader />
         )}
 
         {data && data.totalCities && data.cities?.length < data.totalCities && (

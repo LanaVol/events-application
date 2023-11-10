@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import { Header } from "../../../components/Header/Header";
 import { IQueryEventParams } from "../../../interfaces";
+import Preloader from "@/src/components/Preloader";
 
 const EventsCatPage = (): JSX.Element => {
   const [page, setPage] = useState<number>(1);
@@ -131,65 +132,74 @@ const EventsCatPage = (): JSX.Element => {
           )}
         </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: isMobileScreen ? "column" : "row",
-            height: "100%",
-          }}
-        >
-          <Box
-            sx={{
-              paddingBottom: "2rem",
-              paddingRight: isMobileScreen ? 0 : "2rem",
-              width: isMobileScreen ? "100%" : isDesktopScreen ? "45%" : "25%",
-            }}
-          >
-            {data && data.searchParams && (
-              <EventFilter
-                data={data.searchParams}
-                handleFetchByFilter={handleFetchByFilter}
-                handleClearFilter={handleClearFilter}
-                isLoading={isLoading}
-              />
-            )}
-          </Box>
-
+        {data.totalEvents ? (
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
-              paddingTop: isMobileScreen ? "2rem" : 0,
-              paddingBottom: "1rem",
-              width: isMobileScreen ? "100%" : "75%",
+              flexDirection: isMobileScreen ? "column" : "row",
+              height: "100%",
             }}
           >
-            {data && data.events?.length > 0 && (
-              <EventList cityName={cityName} events={data.events} />
-            )}
-
-            {data &&
-              data.totalEvents &&
-              data.events?.length < data.totalEvents && (
-                <ButtonLoadMore
-                  handleLoadMore={handleLoadMore}
+            <Box
+              sx={{
+                paddingBottom: "2rem",
+                paddingRight: isMobileScreen ? 0 : "2rem",
+                width: isMobileScreen
+                  ? "100%"
+                  : isDesktopScreen
+                  ? "45%"
+                  : "25%",
+              }}
+            >
+              {data && data.searchParams && (
+                <EventFilter
+                  data={data.searchParams}
+                  handleFetchByFilter={handleFetchByFilter}
+                  handleClearFilter={handleClearFilter}
                   isLoading={isLoading}
                 />
               )}
+            </Box>
 
-            {data &&
-              data.totalEvents &&
-              data.events?.length < data.totalEvents && (
-                <PaginationPage
-                  page={page}
-                  limit={limit}
-                  totalCount={data.totalEvents}
-                  handleChangePage={handleChangePage}
-                  isLoading={isLoading}
-                />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                paddingTop: isMobileScreen ? "2rem" : 0,
+                paddingBottom: "1rem",
+                width: isMobileScreen ? "100%" : "75%",
+              }}
+            >
+              {data && data.events?.length > 0 && (
+                <EventList cityName={cityName} events={data.events} />
               )}
+
+              {data &&
+                data.totalEvents &&
+                data.events?.length < data.totalEvents && (
+                  <ButtonLoadMore
+                    handleLoadMore={handleLoadMore}
+                    isLoading={isLoading}
+                  />
+                )}
+
+              {data &&
+                data.totalEvents &&
+                data.events?.length < data.totalEvents && (
+                  <PaginationPage
+                    page={page}
+                    limit={limit}
+                    totalCount={data.totalEvents}
+                    handleChangePage={handleChangePage}
+                    isLoading={isLoading}
+                  />
+                )}
+            </Box>
           </Box>
-        </Box>
+        ) : (
+          <Preloader />
+        )}
+
         {error && <Typography color="error">{error}</Typography>}
       </Container>
     </>

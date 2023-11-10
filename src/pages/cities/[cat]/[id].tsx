@@ -8,6 +8,7 @@ import { Box, Typography, Container, Divider } from "@mui/material";
 import { Header } from "../../../components/Header/Header";
 import blob from "../../../image/blob.svg";
 import blurry from "../../../image/blurry.svg";
+import Preloader from "@/src/components/Preloader";
 
 const capitalizeFirstLetter = (str: string): string => {
   return str.charAt(0).toLocaleUpperCase() + str.slice(1);
